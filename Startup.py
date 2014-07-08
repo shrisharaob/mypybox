@@ -3,5 +3,8 @@ import pylab as plt
 import sys
 import os
 
-sys.path.append('/homecentral/srao/Documents/code/mypybox')
+def addpath(fb):
+    sys.path.append(fb)
+
+#sys.path.append('/homecentral/srao/Documents/code/mypybox')
 #sys.path.append('/homecentral/srao/Documents/code/pylabbox')
