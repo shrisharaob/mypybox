@@ -1,0 +1,5 @@
+import numpy as np
+import pylab as plt
+fldr = "~/cuda/cudanw/"
+cur = np.loadtxt("/home/dhansel//cuda/cudanw/currents.csv")
+
