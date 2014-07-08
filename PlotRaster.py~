@@ -1,3 +1,0 @@
-fldr = "~/cuda/cudanw/"
-st = loattxt(fldr + "spktimes.csv")
-plot(st[:, 0], st[:, 2], 'xk')
