@@ -3,6 +3,11 @@ import pylab as plt
 import sys
 import os
 
+import LoadSimResults as sim
+from PlotRaster import *
+from CVvsFR import *
+
+
 def addpath(fb):
     sys.path.append(fb)
 
