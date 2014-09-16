@@ -1,9 +1,9 @@
 from Startup import *
-fb = '/home/dhansel/cuda/cudanw/'
+fb = '/homecentral/srao/Documents/code/cuda/cudanw/'
 print fb
 def loadSpks():
 #    st = np.loadtxt(fb + 'spkTimes.csv', delimiter = ';')
-    st = np.loadtxt(fb + 'spkTimes_theta45.csv', delimiter = ';')
+    st = np.loadtxt(fb + 'spkTimes.csv', delimiter = ';')
     st.shape = -1, 2
     return st
 
