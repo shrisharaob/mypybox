@@ -20,11 +20,11 @@ def keyboard(banner=None):
     except SystemExit:
         return 
 
-dbName = "tstDb"
-N_NEURONS = np.arange(0, 10001, 1)
-thetaStart = 0
+dbName = "bidir" #"anatomic" #"tstDb"
+N_NEURONS = np.arange(0, 19600, 1)
+thetaStart = 1
 thetaStep = 45
-thetaEnd = 360
+thetaEnd = 3
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
 trialLength = 25.0 # in seconds
 db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
@@ -43,5 +43,5 @@ for idx, kNeuron in enumerate(N_NEURONS):
     print ' '
 dbCursor.close()
 db.close()
-np.save('tuningCurves', tuningCurve)
+np.save('tuningCurves_bidir', tuningCurve)
 keyboard()

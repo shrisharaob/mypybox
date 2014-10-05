@@ -1,0 +1,20 @@
+16705 109
+inside spkTime 2 vector
+109 4320.0 24218.55
+cmputing FFT
+computing IFFT
+DONE
+12812 1044
+inside spkTime 2 vector
+1044 41720.0 24989.85
+cmputing FFT
+computing IFFT
+DONE
+aceback (most recent call last):
+  File "CorrFuncs.py", line 81, in <module>
+    avgCorr = AvgAutoCorr(neuronsList)
+  File "CorrFuncs.py", line 68, in AvgAutoCorr
+    np.save('avgCorr050', out)
+  File "/usr/local/lib/python2.7/dist-packages/numpy/lib/npyio.py", line 456, in save
+    fid.close()
+KeyboardInterrupt

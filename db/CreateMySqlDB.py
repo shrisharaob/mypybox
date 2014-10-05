@@ -1,6 +1,6 @@
 import MySQLdb as mysql
 import numpy as np
-dbName = "tstDb"
+dbName = "bidir" #"anatomic" #"tstDb"
 db = mysql.connect(host = "localhost", user = "root", passwd = "toto123");
 db.autocommit(True)
 dbCursor = db.cursor()
