@@ -102,8 +102,8 @@ def AvgAutoCorr(neuronsList, dbName = "tstDb", theta = 0, simDT = 0.025, minSpks
     downSampleBinSize = 1
     spkBins = np.arange(0, simDuration + simDT, downSampleBinSize)
     nSpkBins = len(spkBins) ;
-    print "MEAN RATE E = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId < %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NE)
-    print "MEAN RATE I = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId > %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NI)
+    #print "MEAN RATE E = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId < %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NE)
+    #print "MEAN RATE I = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId > %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NI)
     avgRate = 0
     
     for i, kNeuron in enumerate(neuronsList):
@@ -152,15 +152,17 @@ def AvgAutoCorr(neuronsList, dbName = "tstDb", theta = 0, simDT = 0.025, minSpks
     bins = np.array(downSampleBinSize)
     print avgCorr.size, bins.size
     if(len(avgCorr) > 0):
-        np.save('avgCorr_bidir_inEE_E', avgCorr)
+        filename = 'avgCorr_' + dbName
+        print "saving as ", filename
+        np.save(filename, avgCorr)
         return avgCorr
     else :
         return 0
 
 if __name__ == "__main__":
     n = 1000
-    useDb =  "bidir"
-    N_NEURONS = 19600
+    useDb =  "biII_3"
+    N_NEURONS = 10000
     IF_UNIQUE = False
     neuronsList = np.unique(np.random.randint(0, N_NEURONS, size = n + 00))
     # while(not IF_UNIQUE):
@@ -173,18 +175,31 @@ if __name__ == "__main__":
                
     print "#neurons = ", len(neuronsList)
 #    neuronsList = [12]
-    ac = AvgAutoCorr(neuronsList, useDb, theta = 3, simDuration = 10000, simDT = 0.05, NE = 19600, NI = 19600)
+    ac = AvgAutoCorr(neuronsList, useDb, theta = 0, simDuration = 10000, simDT = 0.05, NE = 19600, NI = 19600)
     ac[np.argmax(ac)] = 0.0
     bins = np.arange(-100, 100, 1)
+    ac0 = ac;
     print bins.shape, ac.shape
-    plt.bar(bins, np.concatenate((np.flipud(ac[-1:-1-100:-1]), ac[0:100] )), fc = 'k', edgecolor = 'k')
+#    plt.bar(bins, np.concatenate((np.flipud(ac[-1:-1-100:-1]), ac[0:100] )), fc = 'k', edgecolor = 'k')
+
+    plt.plot(bins, np.concatenate((np.flipud(ac[-1:-1-100:-1]), ac[0:100] )), 'k') # E auto-corr
     plt.xlabel('Time lag (ms) ')
 #    plt.ylabel('raw correlation : IFFT{ S(f) x S(f)* }')
     plt.ylabel('Firing Rate (Hz)')
+
+    neuronsList = np.unique(np.random.randint(N_NEURONS, 2 * N_NEURONS, size = n + 00))
+    ac = AvgAutoCorr(neuronsList, useDb, theta = 0, simDuration = 10000, simDT = 0.05, NE = 19600, NI = 19600)
+    ac[np.argmax(ac)] = 0.0
+    plt.plot(bins, np.concatenate((np.flipud(ac[-1:-1-100:-1]), ac[0:100] )), 'r') # I auto-corr
+    plt.legend(('E', 'I'))
+    
 #    plt.xlim((min
 #    plt.show()
-    plt.savefig('avg_autocorr_bidir_inEE_E.png')
+    filename = "avg_autocorr_" + useDb
+    plt.savefig(filename + ".png")
  #   plt.waitforbuttonpress()
+    
+
 
 
         
