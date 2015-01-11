@@ -8,13 +8,22 @@ import os, sys
 
 def Populate(dbName, filebase, thetaStart = 0, thetaEnd = 360, thetaStep = 45):
     theta = np.arange(thetaStart, thetaEnd, thetaStep)
+    theta = np.array([10, 12, 24, 6, 8])
+    
+    theta = np.array([12111])
     tableName = "spikes"
     db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName, local_infile = 1)
     db.autocommit(True)
     dbCursor = db.cursor()
+    IF_FILE_LIST = True
+    # if(IF_FILE_LIST):
+    #     filenames = 
     for mTheta in theta:
 #        filename = filebase + "spkTimes_theta%s.csv" % (mTheta,) 
-        filename = filebase + "spkTimes_trial%s.csv" % (int(mTheta),) 
+#        filename = filebase + "spkTimes_trial%s.csv" % (int(mTheta),) 
+#        filename = filebase + "spkTimes_1.0_%s.0_50.csv" %(int(mTheta))
+        filename = filebase + "spkTimes_1.0_12_250001.csv"
+#        filename = filebase + "spkTimes_1.0_3.0_10.csv"
         print filename
         if(os.path.isfile(filename)):
             print "populating db: theta = %s" % (mTheta,)
@@ -22,9 +31,9 @@ def Populate(dbName, filebase, thetaStart = 0, thetaEnd = 360, thetaStep = 45):
         else:
             print "file does not exist (%s) :"  %(filename,)
 
-    print "Creating MSQL indices",
-    sys.stdout.flush()
-    dbCursor.execute("ALTER TABLE %s ADD KEY (neuronId, theta);" % (tableName, ))
+#    print "Creating MSQL indices",
+#    sys.stdout.flush()
+ #  dbCursor.execute("ALTER TABLE %s ADD KEY (neuronId, theta);" % (tableName, ))
     print "done"
     dbCursor.close()
     db.close()

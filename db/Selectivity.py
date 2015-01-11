@@ -24,19 +24,25 @@ def keyboard(banner=None):
 
 
 if __name__ == "__main__":
-    N = 19600
-    tc = np.load('tuningCurves_bidirEE.npy')
+    N = 10000
+#    tc = np.load('tuningCurves_bidirEE.npy')
+    tc = np.load('tuningCurves_bidirII_tmp666.npy')
+    print tc.shape
+    keyboard()
     theta = np.arange(0, 360, 45)
     circVariance = np.zeros((N,))
-    for i in np.arange(N):
-        circVariance[i] = CircVar(tc[i, :], theta)
+    neuronIdx = np.arange(10000, 20000, 1)
+    for i, kNeuron in enumerate(neuronIdx):
+        print kNeuron
+        circVariance[i] = CircVar(tc[kNeuron, :], theta)
 
     print "here"
-    keyboard()
+ #   keyboard()
     circVariance = circVariance[np.logical_not(np.isnan(circVariance))]
     plt.hist(circVariance, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance')
+    plt.xlabel('Circular vaiance, I neurons')
     plt.ylabel('Neuron count')
-    plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
-    plt.savefig('ori_cvDistr_bidirEE.png')
+    #plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
+    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.9, \; \xi = 1.2$')
+    plt.savefig('ori_cvDistr_bidirII_t3a9_tuning_I')
     

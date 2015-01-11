@@ -1,0 +1,8 @@
+ff_E_alpha0.0_a0t3bg2_1x.npy
+ff_E_alpha0.0_a0t3bg2_2x.npy
+ff_E_alpha0.0_a0t3_4x.npy
+ff_E_alpha0.0_a0t3_8x.npy
+ff_I_alpha0.0_a0t3bg2_1x.npy
+ff_I_alpha0.0_a0t3bg2_2x.npy
+ff_I_alpha0.0_a0t3_4x.npy
+ff_I_alpha0.0_a0t3_8x.npy
