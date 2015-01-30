@@ -1,10 +1,11 @@
 #script to compute fano factor as a function of bi-directional connectivity alpha
-import MySQLdb as mysql
+basefolder  = "/home/shrisha/Documents/code/mypybox"
+#import MySQLdb as mysql
 import numpy as np
 import scipy.stats as stat
 import code, sys, os
 import pylab as plt
-sys.path.append("/homecentral/srao/Documents/code/mypybox")
+sys.path.append(basefolder)
 import Keyboard as kb
 from enum import Enum
 from scipy.optimize import curve_fit
@@ -12,9 +13,9 @@ import scipy.stats as stats
 from multiprocessing import Pool
 from functools import partial 
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
-sys.path.append("/homecentral/srao/Documents/code/mypybox/nda/spkStats")
-import FanoFactorDynamics as ffd
-sys.path.append("/homecentral/srao/Documents/code/mypybox/utils")
+sys.path.append(basefolder + "/nda/spkStats")
+#import FanoFactorDynamics as ffd
+sys.path.append(basefolder + "/utils")
 from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 
@@ -147,24 +148,33 @@ if __name__ == "__main__":
 
     else:
         print "plotting ", "here"
-        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_bidirII_%s.npy'%((dbName, )))
-        filename = os.path.splitext(sys.argv[0])[0]
-        ff = np.load(filename + '_' + dbName + '.npy')
+        #tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_bidirII_%s.npy'%((dbName, ))); 
+        tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
+        #filename = os.path.splitext(sys.argv[0])[0]
+        #ff = np.load(filename + '_' + dbName + '.npy')
+        ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
         prefferedOri = np.argmax(tc, 1)
         ffMat = np.empty((NE+NI, len(thetas)))
         for kNeuron in np.arange(NE + NI):
             ffMat[kNeuron, :] = np.roll(ff[kNeuron, :], -1 * prefferedOri[kNeuron])
 
         plt.ion()
-
-        plt.plot(thetas, np.nanmean(ffMat[:10000], 0), 'ko-', label='E')
-        plt.plot(thetas, np.nanmean(ffMat[10000:], 0), 'ro-', label='I')
+        circVar = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/Selectivity_allAnglesa0T4xi12C100Tr100.npy')
+        nid = np.arange(NE + NI); plotId = np.logical_and(circVar < 0.3, np.max(tc, 1) > 10)
+        meanE = np.nanmean(ffMat[plotId[:NE], :], 0)
+        meanI = np.nanmean(ffMat[plotId[NE:], :], 0)
+        meanE = np.roll(meanE, 4)
+        meanI = np.roll(meanI, 4)
+        plt.plot(thetas, meanE, 'ko-', label='E')
+        plt.plot(thetas, meanI, 'ro-', label='I')
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
         plt.ylabel('Mean fano factor', fontsize = 20)
-        plt.title(r'$\alpha = 0.5,\; \tau = 3.0,\; \xi = 1.2$', fontsize = 20)
+        plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2$', fontsize = 20)
         plt.legend()
-        
-        kb.keyboard()
+        plt.ion()
+        plt.show()
+        plt.waitforbuttonpress()
+#        kb.keyboard()
 
         #f, ax = plt.subplots(2, 4)
         #f.set_size_inches(26.5,10.5)
