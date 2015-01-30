@@ -1,5 +1,6 @@
 #script to compute fano factor as a function of bi-directional connectivity alpha
 basefolder  = "/home/shrisha/Documents/code/mypybox"
+basefolder = "/homecentral/srao/Documents/code/mypybox"
 #import MySQLdb as mysql
 import numpy as np
 import scipy.stats as stat
@@ -148,11 +149,11 @@ if __name__ == "__main__":
 
     else:
         print "plotting ", "here"
-        #tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_bidirII_%s.npy'%((dbName, ))); 
-        tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
-        #filename = os.path.splitext(sys.argv[0])[0]
-        #ff = np.load(filename + '_' + dbName + '.npy')
-        ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
+        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_bidirII_%s.npy'%((dbName, ))); 
+        #tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
+        filename = os.path.splitext(sys.argv[0])[0]
+        ff = np.load(filename + '_' + dbName + '.npy')
+        #ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
         prefferedOri = np.argmax(tc, 1)
         ffMat = np.empty((NE+NI, len(thetas)))
         for kNeuron in np.arange(NE + NI):
