@@ -166,7 +166,7 @@ if __name__ == "__main__":
         meanI = np.nanmean(ffMat[plotId[NE:], :], 0)
         meanE = np.roll(meanE, 4)
         meanI = np.roll(meanI, 4)
-        thetas = np.arange(-90, 90)
+        thetas = np.arange(-90, 90, 22.5)
         plt.plot(thetas, meanE, 'ko-', label='E')
         plt.plot(thetas, meanI, 'ro-', label='I')
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
