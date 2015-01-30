@@ -152,7 +152,7 @@ if __name__ == "__main__":
         tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_%s.npy'%((dbName, ))); 
         #tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
         filename = os.path.splitext(sys.argv[0])[0]
-        ff = np.load(filename + '_' + dbName + '.npy')
+        ff = np.load('./data/' + filename + '_' + dbName + '.npy')
         #ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
         prefferedOri = np.argmax(tc, 1)
         ffMat = np.empty((NE+NI, len(thetas)))
