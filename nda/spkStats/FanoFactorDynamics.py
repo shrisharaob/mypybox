@@ -24,6 +24,9 @@ def MovingAverage(x, window_size):
     window = np.ones(int(window_size)) # window size in ms
     return np.convolve(x, window, 'valid')
 
+def ObjLin(x, a, b):
+    return a * x + b;
+    
 def LineSlopeFit(x, y):
     # returns slope (m)  for least sqares linear fit:  y = mx + c
     xMean = np.mean(x)
@@ -38,8 +41,10 @@ def MeanMatchedFano(spkCntMeans, spkCntVars, nResample = 50, nBins = 20):
     # spkCntMeans : nNeurons-by-nTimeWindos
     # spkCntVars :  nNeurons-by-nTimeWindos
     nNeurons, nTimeWindows = spkCntMeans.shape
+    bins = np.arange(nBins+1) + 0.5
+    bins = np.concatenate(([0.0], bins))
+    nBins = len(bins) - 1
     cntDistr = np.zeros((nTimeWindows, nBins))
-    bins = np.arange(nBins+1)
     neuronIdx = np.arange(nNeurons)
     histDataIdx = np.empty((nNeurons, nTimeWindows))
     histDataIdx[:] = np.nan
@@ -53,12 +58,12 @@ def MeanMatchedFano(spkCntMeans, spkCntVars, nResample = 50, nBins = 20):
     greatestCommonCntDistr = np.zeros((nBins, ))
     for lBin in np.arange(nBins):
         greatestCommonCntDistr[lBin] = np.min(cntDistr[:, lBin])
-        
     # MATCH THE DISTRIBUSTIONS
     # discard neurons so that the height of a given bin equals that of greatestCommonCntDistr
-    iterFano = np.empty((nResample, ))
+    iterFano = np.empty((nResample, nTimeWindows))
     iterFano[:] = np.nan
     for nIter in np.arange(nResample):
+        print "iter: ", nIter
         finalDiscardMask = np.empty((nNeurons, ), dtype = bool) # logical array nNeurons-by-1 with elements False to be discarded before computing the slope
         finalDiscardMask[:] = True
         for kWin in np.arange(nTimeWindows): # windows are the obs windows for computing the Fano Factor
@@ -67,21 +72,23 @@ def MeanMatchedFano(spkCntMeans, spkCntVars, nResample = 50, nBins = 20):
                 epsilon = 1e-4 # stop when heightDiffInBin <= eps
                 heightDiffInBin = kWinCntDistr[iBin] - greatestCommonCntDistr[iBin]                 
                 nTries = 0 
-                print iBin
-                print heightDiffInBin
                 resampledSpkMeans = spkCntMeans[:, kWin]
+                discardMask = np.empty((nNeurons, ), dtype = bool)
+                discardMask[:] = True
                 while((heightDiffInBin > epsilon) & (nTries < nNeurons)):
                     nTries += 1
+                    oldDiscardMask = discardMask
                     neuronsInThisBin = neuronIdx[histDataIdx[:, mWin] == (iBin + 1)]
                     neuronToDiscard = np.random.choice(neuronsInThisBin, int(np.floor(heightDiffInBin)))
                     discardMask = ~ np.in1d(neuronIdx, neuronToDiscard)
-                    resampledSpkMeans = resampledSpkMeans[discardMask]
-                    nIterDistr, _ = np.histogram(resampledSpkMeans, bins)
+                    oldDiscardMask = oldDiscardMask & discardMask
+                    nIterDistr, _ = np.histogram(resampledSpkMeans[oldDiscardMask], bins)
                     heightDiffInBin = nIterDistr[iBin] - greatestCommonCntDistr[iBin]
+                print "kBin: ", iBin, "ntries:", nTries
                 finalDiscardMask = finalDiscardMask & discardMask
-                iterFano[nIter] = LineSlopeFit(spkCntMeans[finalDiscardMask, kWin], spkCntVars[finalDiscardMask, kWin])
+                iterFano[nIter, kWin] = LineSlopeFit(spkCntMeans[finalDiscardMask, kWin], spkCntVars[finalDiscardMask, kWin])
 
-    return np.nanmean(iterFano)
+    return np.nanmean(iterFano, 0)
 
 
 
@@ -110,13 +117,13 @@ def FanoBeforeAndAfter(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronId):
     db.autocommit(True)
     fanoFactor = np.empty((1, ))
     fanoFactor[:] = np.nan
-    print "neuronId", neuronId
+#    print "neuronId", neuronId
     for kTrial in np.arange(nTrials):
         nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s AND theta = %s AND spkTimes > %s AND spkTimes < %s ", (neuronId, kTrial, float(spkTimeStart), float(spkTimeEnd)))
         avgSpkCnt[kTrial] = float(nSpks)
     dbCursor.close()
     db.close()
-    kb.keyboard()
+#    kb.keyboard()
     # ff = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
     #    return  np.var(avgSpkCnt) / np.mean(avgSpkCnt), np.var(avgSpkCnt), np.mean(avgSpkCnt)
     return  np.array([np.mean(avgSpkCnt, 0), np.var(avgSpkCnt, 0)])
@@ -151,11 +158,11 @@ def FanoInTime(dbName, spkTimeStart, spkTimeEnd, winSize, nTrials, neuronId):
     fanoFactor = np.empty((nBins, ))
     fanoFactor[:] = np.nan
 #    print "neuronId", neuronId
-    if(neuronId == 0):
-       nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE theta = %s AND spkTimes > %s AND spkTimes < %s ", (0, float(spkTimeStart), float(spkTimeEnd))) 
-       print "Mean FR: ", float(nSpks) / (10000. *  (spkTimeEnd - spkTimeStart) * 1e-3)
+    # if(neuronId == 0):
+    #    nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE theta = %s AND spkTimes > %s AND spkTimes < %s ", (0, float(spkTimeStart), float(spkTimeEnd))) 
+    #    print "Mean FR: ", float(nSpks) / (10000. *  (spkTimeEnd - spkTimeStart) * 1e-3)
     for kTrial in np.arange(nTrials):
-        nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s AND theta = %s AND spkTimes > %s AND spkTimes < %s ", (neuronId, kTrial, float(spkTimeStart), float(spkTimeEnd)))
+        nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s AND theta = %s AND spkTimes > %s AND spkTimes < %s ", (neuronId, kTrial+1, float(spkTimeStart), float(spkTimeEnd)))
         if(nSpks > 0):
             spkTimes = np.squeeze(np.asarray(dbCursor.fetchall()))
             avgSpkCnt[kTrial, :] = MovingSpkCnt(spkTimes, bins, winSize)
@@ -167,12 +174,12 @@ if __name__ == "__main__":
     alpha = 0.0
     NE = 5000
     NI = 5000
-    simDuration = 1000.0
-    spkTimeStart = 0.0
-    spkTimeEnd = 4000.0
+    simDuration = 6000.0
+    spkTimeStart = 4000.0
+    spkTimeEnd = 6000.0
     simDT = 0.05
     tau = 3.0
-    winSize = 50.0  # in ms fano factor observation window
+    winSize = 50  # in ms fano factor observation window
     dbName = 'a0t3T6xi12C0n1'
     computeType = 'compute'
 
@@ -180,30 +187,38 @@ if __name__ == "__main__":
     [dbName, computeType, alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI] = DefaultArgs(sys.argv[1:], [dbName, 'plot', alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI])
 #    thetas = np.arange(0., 180., 22.5)
 #    thetas = np.arange(20)
-    nTrials = 100
+    nTrials = 50
     nBins = spkTimeEnd - spkTimeStart + 1
     filetag = '_w%s_'%((winSize, )) 
-    if(computeType == 'compute'):
-        neuronsList = np.arange(NE + NI)
-#        p = Pool(16)
-        func0 = partial(FanoBeforeAndAfter, dbName, spkTimeStart, spkTimeEnd, nTrials)
-        ffunc = partial(FanoInTime, dbName, spkTimeStart, spkTimeEnd, winSize, nTrials)
- 
-        func0(0)
+    if(computeType == 'mm'):
+        y = np.load('FanoFactorDynamics_spkCnt_var' + filetag + dbName + '.npy')
+        sc = y[:, 0, :]
+        sv = y[:, 1, :]
+        meanMatchedFFE = MeanMatchedFano(sc, sv, 2, 10)
 
+    if(computeType == 'ba'):
+        neuronsList = np.arange(NE + NI)
+        p = Pool(22)
+        func0 = partial(FanoBeforeAndAfter, dbName, spkTimeStart, spkTimeEnd, nTrials)
         result = p.map(func0, neuronsList)
         result = np.asarray(result) # nNeurons-by-2-by-nTimeWindows
+        np.save('FanoFactorDynamics_spkCnt_var_chunk' + filetag + dbName, np.asarray(result))
+        
 
-        print result
-        kb.keyboard()
+    if(computeType == 'compute'):
+        neuronsList = np.arange(NE + NI)
+        p = Pool(24)
+        func0 = partial(FanoBeforeAndAfter, dbName, spkTimeStart, spkTimeEnd, nTrials)
+        ffunc = partial(FanoInTime, dbName, spkTimeStart, spkTimeEnd, winSize, nTrials)
+        result = p.map(ffunc, neuronsList)
+        result = np.asarray(result) # nNeurons-by-2-by-nTimeWindows
+        
 
-        #print "bEFORE "
         #result = p.map(ffunc, neuronsList)
-
-#        np.save('FanoFactorDynamics_spkCnt_var' + filetag + dbName, np.asarray(result))
-        # meanMatchedFFE = MeanMatchedFano(result[:NE, 0, :], result[:NE, 1, :])
-        # meanMatchedFFI = MeanMatchedFano(result[NE:, 0, :], result[NE:, 1, :])
-        # np.save('FanoFactorDynamics_meanMatchedFano_' + dbName, np.asarray([meanMatchedFFE, meanMatchedFFI]))
+        np.save('FanoFactorDynamics_spkCnt_var' + filetag + dbName, np.asarray(result))
+#        meanMatchedFFE = MeanMatchedFano(result[:NE, 0, :], result[:NE, 1, :])
+ #       meanMatchedFFI = MeanMatchedFano(result[NE:, 0, :], result[NE:, 1, :])
+  #      np.save('FanoFactorDynamics_meanMatchedFano_' + dbName, np.asarray([meanMatchedFFE, meanMatchedFFI]))
 
 
         # E neurons 
@@ -211,6 +226,7 @@ if __name__ == "__main__":
         spkCntVars = result[:NE, 1, :]
         print "msc, scv shapes: ", spkCntVars.shape, spkCntMeans.shape
         nNeurons, nTimeWindows = spkCntVars.shape
+#        popt, pcov = curve_fit(ObjLin, spkCntMeans, spkCntVars, p0 = (0.1, 0.1))
         FanoFuncRegFit = partial(LineSlopeFitForAllWindows, spkCntMeans, spkCntVars)
         outE =  p.map(FanoFuncRegFit, np.arange(nTimeWindows))
 #        outE = tmp[0]
@@ -221,6 +237,8 @@ if __name__ == "__main__":
         spkCntMeans = result[NE:, 0, :]
         spkCntVars = result[NE:, 1, :]
         _, nTimeWindows = spkCntVars.shape
+
+        
         FanoFuncRegFit = partial(LineSlopeFitForAllWindows, spkCntMeans, spkCntVars)
         outI = p.map(FanoFuncRegFit, np.arange(nTimeWindows))
         #outI = tmp[0]
@@ -232,26 +250,35 @@ if __name__ == "__main__":
  #       print "ffe: ", np.nanmean(x[:NE], 0), "ffi: ", np.nanmean(x[NE:], 0) 
         np.save('FanoFactorDynamics' + filetag + dbName, np.asarray([outE, outI]))
   #      kb.keyboard()
-    else:
+    if(computeType == 'plot'):
         filename = 'FanoFactorDynamics' + filetag + dbName + '.npy'
+#        filename = 'FanoFactorDynamics_' + dbName + '.npy'
+
         print "loading file", filename
         y = np.load(filename)
 #        kb.keyboard()
         plt.ioff()
         xLim = int(y.shape[1] * 0.5)
         xAxis = np.arange(-1 * (xLim + 1), xLim, 1.0)
+        #xAxis = np.arange(0, 2 * xLim + 1, 1.0)
         print y.shape, xAxis.shape, (y.shape[1] * 0.5) + 1, y.shape[1] * 0.5
         #plt.plot(xAxis, np.nanmean(y[:NE, :], 0), 'k', label='E')
         #plt.plot(xAxis, np.nanmean(y[NE:, :], 0), 'r', label='I')
         plt.plot(xAxis, y[0, :], 'k', label = 'E')
         plt.plot(xAxis, y[1, :], 'r', label = 'I')
-        plt.legend(loc = 0)
+
+#        plt.plot(xAxis, 0.5 * (y[1, :] +  y[0, :]), 'k')
+
+#        plt.legend(loc = 0)
         plt.xlabel('Time (ms)', fontsize = 20)
         plt.ylabel('Mean fano factor', fontsize = 20)
-        plt.title(r'$\alpha = %s, \; \tau = %s$'%((alpha, tau)), fontsize = 20)
+        plt.title(r'$\alpha = %s, \; \tau = %s$, window size = %sms'%((alpha, tau, winSize)), fontsize = 20)
+#        plt.title('Poisson spikes, window size = %sms'%(winSize), fontsize = 20)
         plt.grid()
-        plt.savefig('FanoFactorDynamics_' + dbName)
-        #kb.keyboard()
+        figname = 'FanoFactorDynamics_' + filetag + dbName + '.png'
+        print " saving figure as ", figname 
+        plt.savefig(figname, format = 'png')
+        kb.keyboard()
 
 
 

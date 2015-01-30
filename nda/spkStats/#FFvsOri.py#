@@ -127,6 +127,12 @@ if __name__ == "__main__":
         plt.title(r'Distribution of circular variance of Fano factor, $\alpha = %s$'%(alpha))
         plt.ion()
         plt.show()
+
+
+
+
+        po = 
+
         kb.keyboard()
     
     if(computeType == 'ff_po_scatter'):

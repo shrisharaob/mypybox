@@ -24,25 +24,41 @@ def keyboard(banner=None):
 
 
 if __name__ == "__main__":
-    N = 10000
+    NE = 10000
+    NI = 10000
 #    tc = np.load('tuningCurves_bidirEE.npy')
-    tc = np.load('tuningCurves_bidirII_tmp666.npy')
+#    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
+    dbName  = 'a0t3T3xi12tr15'
+    dbName = sys.argv[1]
+    tc = np.load('tuningCurves_' + dbName + '.npy')
     print tc.shape
-    keyboard()
-    theta = np.arange(0, 360, 45)
-    circVariance = np.zeros((N,))
-    neuronIdx = np.arange(10000, 20000, 1)
+    theta = np.arange(0, 180, 22.5)
+    theta = np.arange(0, 360, 45.0)
+    circVariance = np.zeros((NE + NI,))
+    neuronIdx = np.arange(NE + NI)
     for i, kNeuron in enumerate(neuronIdx):
         print kNeuron
         circVariance[i] = CircVar(tc[kNeuron, :], theta)
 
-    print "here"
- #   keyboard()
-    circVariance = circVariance[np.logical_not(np.isnan(circVariance))]
-    plt.hist(circVariance, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance, I neurons')
-    plt.ylabel('Neuron count')
+    np.save('Selectivity_' + dbName, circVariance)
+    cvE = circVariance[:NE]
+    cvI = circVariance[NE:]
+    cvE = cvE[np.logical_not(np.isnan(cvE))]
+    cvI = cvE[np.logical_not(np.isnan(cvI))]
+#    circVariance = circVariance[np.logical_not(np.isnan(circVariance))]
+
+    # PLOT
+    plt.hist(cvE, 25, fc = 'k', edgecolor = 'w')
+    plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
+    plt.ylabel('Neuron count', fontsize = 20)
+    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+    filename = 'ori_cvDistr_E_' + dbName 
+    plt.savefig(filename)
+    plt.clf()
+    plt.hist(cvI, 25, fc = 'k', edgecolor = 'w')
+    plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
+    plt.ylabel('Neuron count', fontsize = 20)
     #plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
-    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.9, \; \xi = 1.2$')
-    plt.savefig('ori_cvDistr_bidirII_t3a9_tuning_I')
-    
+    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+    filename = 'ori_cvDistr_I_' + dbName 
+    plt.savefig(filename)

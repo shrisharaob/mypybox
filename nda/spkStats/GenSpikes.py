@@ -2,7 +2,7 @@ import numpy as np
 import scipy.stats as stat
 import code, sys, os
 import pylab as plt
-sys.path.append("/home/shrisha/Documents/code/mypybox")
+sys.path.append("/homecentral/srao/Documents/code/mypybox")
 import Keyboard as kb
 from enum import Enum
 from scipy.optimize import curve_fit
@@ -10,9 +10,9 @@ import scipy.stats as stats
 from multiprocessing import Pool
 from functools import partial 
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
-sys.path.append("/home/shrisha/Documents/code/mypybox/nda/spkStats")
+sys.path.append("/homecentral/srao/Documents/code/mypybox/nda/spkStats")
 #import SpkStats
-sys.path.append("/home/shrisha/Documents/code/mypybox/utils")
+sys.path.append("/homecentral/srao/Documents/code/mypybox/utils")
 from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 import time
@@ -37,10 +37,10 @@ def SpikeTimesISI(rate, tStop, mNeuron):
     # rate in Hz ( 1 / sec)
     # RETURNS SPIKE TIMES in ms
     rate = float(rate)
-    print rate
+#    print rate
     st = np.empty((0))
     N = int(rate * tStop) # estimate number of spike expected
-    np.random.seed(int(time.clock() * float(mNeuron)))
+#    np.random.seed(int(time.clock() * float(mNeuron)))
     isi = (-1 * np.log(np.random.rand(N)) / rate)
     st = np.concatenate((st, np.cumsum(isi)), axis = 0)
     IF_LOOP = False
@@ -90,18 +90,18 @@ def PlotScatter(spkFilename, winsize):
     plt.hist(ff, 25)
 
 if __name__ == '__main__':
-    nTrials = 1
-    nNeurons = 100
-    rate = np.random.rand(nNeurons) * 10.0
+    nTrials = 50
+    nNeurons = 10000
+    rate = np.random.rand(nNeurons) * 10.0 + 1.0
     dt = 0.001 # 1ms
-    tStop = 500.0 # in seconds
+    tStop = 1.0 # in seconds
     t = np.arange(0.0, float(tStop), dt)
     runType = 'compute' 
-    runType = 'plot'
+#    runType = 'plot'
 
     if(runType == 'compute'):
         print 'generating spks'
-        p = Pool(4)
+        p = Pool(1)
         func = partial(Trials, nNeurons, rate)
         p.map(func, np.arange(nTrials))
         p.close()

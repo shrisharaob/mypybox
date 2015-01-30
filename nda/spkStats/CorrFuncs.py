@@ -18,51 +18,6 @@ from DefaultArgs import DefaultArgs
 def PadZeros(a, n):
     return np.concatenate((a, np.zeros((n,))))
 
-def autocorrelation(spike_times, bin_width=0.025, width=100, T=None):
-    """Given the sorted spike train 'spike_times' return the
-    autocorrelation histogram, as well as the bin edges (including the
-    rightmost one). The bin size is specified by 'bin_width', and lags are
-    required to fall within the interval [-width, width]. The algorithm is
-    partly inspired on the Brian function with the same name."""
-
-    d = []                    # Distance between any two spike times
-    n_sp = len(spike_times)  # Number of spikes in the input spike train
-
-    i, j = 0, 0
-    for t in spike_times:
-        # For each spike we only consider those spikes times that are at most
-        # at a 'width' time lag. This requires finding the indices
-        # associated with the limiting spikes.
-        while i < n_sp and spike_times[i] < t - width:
-            i += 1
-        while j < n_sp and spike_times[j] < t + width:
-            j += 1
-        # Once the relevant spikes are found, add the time differences
-        # to the list
-        d.extend(spike_times[i:j] - t)
-
-
-    n_b = int( np.ceil(width / bin_width) )  # Num. edges per side
-    # Define the edges of the bins (including rightmost bin)
-    b = np.linspace(-width, width, 2 * n_b, endpoint=True)
-#    h = np.histogram(d, bins=b, new=True)
-    h = np.histogram(d, bins=b)
-    H = h[0] # number of entries per bin
-
-    # Compute the total duration, if it was not given
-    # (spike trains are assumed to be sorted sequences)
-    if T is None:
-        T = spike_times[-1] - spike_times[0] # True for T >> 1/r
-
-    # The sample space gets smaller as spikes are closer to the boundaries.
-    # We have to take into account this effect.
-    W = T - bin_width * abs( np.arange(n_b - 1, -n_b, -1) )
-    tmp0 =  H / (bin_width * (T - width))
-    kb.keyboard()
- #   return ( H/W - n_sp**2 * bin_width / (T**2), b)
-#     return (H / (bin_width * (T - width)), b)
-    return (H / (bin_width), b)
-
 def AutoCorr(x, corrLength = "same"):
     # x : spike Times in ms
     N = len(x)
@@ -149,6 +104,58 @@ def AvgAutoCorr(neuronsList, dbName = "tstDb", simDT = 0.025, minSpks = 0, maxTi
     else :
         return 0
 
+
+def AvgAutoCorrInInterval(neuronsList, spkTimeStart, spkTimeEnd, dbName = "tstDb", simDT = 0.05, minSpks = 0, maxTimeLag = 100, NE = 10000, NI = 10000, fileTag = 'E', theta = 0):
+    N = len(neuronsList)
+#    print "theta = ", theta
+    db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
+    dbCursor = db.cursor()
+    db.autocommit(True)
+    pcDone = 0
+    simDuration = spkTimeEnd - spkTimeStart
+    nTimeLagBins = int(2 * maxTimeLag) # works if downsample bin size = 1ms otherwise divide by value
+    avgCorr = np.zeros((int(np.power(2, np.ceil(np.log2(simDuration + simDT)))), ))
+    binFlag = 0;
+    nValidNeurons = 0;
+    downSampleBinSize = 1
+    spkBins = np.arange(spkTimeStart, spkTimeEnd + simDT, downSampleBinSize)
+    nSpkBins = len(spkBins) ;
+    if(theta == 0):
+        print "MEAN RATE E = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId < %s AND theta = %s AND spkTimes > %s AND spkTimes < %s", (NE, theta, spkTimeStart, spkTimeEnd))) / (simDuration * 1e-3 * NE)
+        print "MEAN RATE I = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId > %s AND theta = %s AND spkTimes > %s AND spkTimes < %s", (NE, theta, spkTimeStart, spkTimeEnd))) / (simDuration * 1e-3 * NI)
+    avgRate = 0
+    
+    for i, kNeuron in enumerate(neuronsList):
+        spkTimes = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s AND theta = %s AND spkTimes > %s AND spkTimes < %s", (kNeuron, theta, spkTimeStart,spkTimeEnd))
+        meanRate = float(spkTimes) / float(simDuration * 1e-3)
+        nValidNeurons += 1
+        avgRate += meanRate
+        if(spkTimes > minSpks):
+            st = np.squeeze(np.asarray(dbCursor.fetchall()))
+            st = np.histogram(np.squeeze(st), spkBins)
+            tmpCorr = AutoCorr(st[0])
+            avgCorr += tmpCorr / ((downSampleBinSize * 1e-3) **2 * nSpkBins * meanRate)
+            # if(len(neuronsList) > 10):
+            #     if(not bool(np.mod(i, 200))):
+            #         pcDone = 100.0 * float(i) / N
+            #         print "%s%% " %((pcDone,))
+
+    dbCursor.close()
+    db.close()
+    avgCorr = avgCorr / nValidNeurons
+    print "avg rate ", avgRate / nValidNeurons
+    print "#valide nuruons = ", nValidNeurons
+#    avgCorr = np.array(np.roll(avgCorr, -avgCorr.size/2))
+    bins = np.array(downSampleBinSize)
+    print avgCorr.size, bins.size
+    if(len(avgCorr) > 0):
+        filename = 'avgCorr_' + fileTag + '_' + dbName
+#        print "saving as ", filename
+#        np.save(filename, avgCorr)
+        return avgCorr
+    else :
+        return 0
+
 if __name__ == "__main__":
     computeType = 'plot'
     if(len(sys.argv) > 2):
@@ -160,15 +167,18 @@ if __name__ == "__main__":
     NI = 10000
     IF_UNIQUE = False
     #useTheta = np.array([0, 20, 30, 40, 50, 60, 70, 80, 90, 100])
-    useTheta = np.array([30, 60, 80, 100, 120])
-    simT = 100000
+    #useTheta = np.array([10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200])
+    useTheta = np.array([1])
+    simT = 6000
     dt = 0.05
     ne = 10000
     ni = 10000
-    maxLag = 5000
+    maxLag = 2000
     bins = np.arange(-500, 500, 1)
-    filetag = 'I'    
-#    useTheta = np.array([401])
+    filetag = 'after_onset_I'    
+    spkTimeStart = 3000.0
+    spkTimeEnd = 6000.0
+ 
     if(computeType == 'compute'):
         neuronsList = np.unique(np.random.randint(0, N_NEURONS, size = n + 00))
         acMat = np.zeros((useTheta.size, maxLag))
@@ -177,8 +187,9 @@ if __name__ == "__main__":
         #listOfneurons = np.arange(NE, NE + NI)
         print '#neurons = ', len(listOfneurons)
      #   nPools = np.min(10, len(useTheta))
-        p = Pool(5)
+        p = Pool(2)
         result = p.map(partial(AvgAutoCorr, listOfneurons, useDb, dt, 0, 200.0, simT, ne, ni, '_I_tau'), useTheta)
+        result = p.map(func, useTheta)
         for kk, kTheta in enumerate(useTheta):
             ac = result[kk]
             ac[np.argmax(ac)] = 0.0
@@ -186,6 +197,39 @@ if __name__ == "__main__":
         print "saving as ", '../data/long_tau_vs_ac_mat' + useDb
         np.save('../data/long_tau_vs_ac_mat'+useDb + '_' + filetag, acMat)
         kb.keyboard()
+    if(computeType == 'ac_interval'): # auto correlation in time interval 
+        # E NEURONS
+        out = []
+        #listOfneurons = np.unique(np.random.randint(0, NE, size = n + 00)) # E NEURONS
+        listOfneurons = np.arange(NE)
+        acMat = np.zeros((useTheta.size, maxLag))
+        p = Pool(np.min([useTheta.size, 12]))
+        func = partial(AvgAutoCorrInInterval, listOfneurons, spkTimeStart, spkTimeEnd, useDb, dt, 0, maxLag, NE, NI, 'EI')
+        #result = func(useTheta)
+        result = p.map(func, useTheta)
+        for kk, kTheta in enumerate(useTheta):
+            ac = result[kk]
+            ac[np.argmax(ac)] = 0.0
+            acMat[kk, :] = ac[:maxLag]
+        out.append(acMat)
+        # I NEURONS
+        #listOfneurons = np.unique(np.random.randint(NE, NE + NI, size = n + 00)) # I NEURONS
+        listOfneurons = np.arange(NE, NE+NI, 1)
+        acMat = np.zeros((useTheta.size, maxLag))
+        p = Pool(np.min([useTheta.size, 12]))
+        func = partial(AvgAutoCorrInInterval, listOfneurons, spkTimeStart, spkTimeEnd, useDb, dt, 0, maxLag, NE, NI, 'EI')
+        result = p.map(func, useTheta)
+        #result = func(useTheta)
+        for kk, kTheta in enumerate(useTheta):
+            ac = result[kk]
+            ac[np.argmax(ac)] = 0.0
+            acMat[kk, :] = ac[:maxLag]
+        p.close()
+        out.append(acMat)
+        filetag = 'EI'    
+        print "saving as ", '../data/long_tau_vs_ac_mat' + useDb + filetag
+        np.save('../data/long_tau_vs_ac_mat'+useDb + '_' + filetag, out)
+#        kb.keyboard()
     else :
         ac = np.load('../data/long_tau_vs_ac_mat'+useDb +'_' + filetag +  '.npy')
         plotMaxLag = 5000
@@ -214,7 +258,7 @@ if __name__ == "__main__":
 
 
 
-#((240,163,255),(0,117,220),(153,63,0),(76,0,92),(25,25,25),(0,92,49),(43,206,72),(255,204,153),(128,128,128),(148,255,181),(143,124,0),(157,204,0),(194,0,136),(0,51,128),(255,164,5),(255,168,187),(66,102,0),(255,0,16),(94,241,242),(0,153,143),(224,255,102),(116,10,255),(153,0,0),(255,255,128),(255,255,0),(255,80,5))
+#((240,163,255),(0,117,220),(153,63,0),(76,0,92),(25,25,25),(0,92,49),(43,206,72),(255,204,153),(128,128,128),(148,255,181),(143,124,0),(157,204,0),(194,0,1362),(0,51,128),(255,164,5),(255,168,187),(66,102,0),(255,0,16),(94,241,242),(0,153,143),(224,255,102),(116,10,255),(153,0,0),(255,255,128),(255,255,0),(255,80,5))
 
 #----------------------------------------------    
 #     ac[np.argmax(ac)] = 0.0

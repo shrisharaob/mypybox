@@ -117,12 +117,12 @@ def SerialCorDistr(dbName, neuronsList, theta = 0, simDuration = 50000.0):
     return (sc, pVal)
 
 if __name__ == "__main__":
-    dbName = "alpha01"
+    dbName = '' #sys.argv[1]
     argc = len(sys.argv)
     n = 10000
     NE = 10000
     NI = 10000
-    simDuration = 100000.0
+    simDuration = 6000.0
     simDT = 0.05
     binsize = 2000 #ms
 
@@ -465,11 +465,10 @@ if __name__ == "__main__":
 
         p = Pool(8)
 
-#        useDb = "tau3_alpha1_100"
-        useDb = "tau3_alpha0_25"
-        simDuration = 25000
+        useDb = dbName
+        simDuration = 6000
         simDT = 0.05
-        kTheta = 3
+        kTheta = 10
         n = 10000
         #neIdx = np.random.randint(0, NE, n) # NE
         #niIdx = np.random.randint(NE, NE+NI, n) # NI
@@ -480,8 +479,9 @@ if __name__ == "__main__":
         neList = [neIdx[:n/4], neIdx[n/4:n/2], neIdx[n/2:(3*n)/4], neIdx[(3*n)/4:]]
         niList = [niIdx[:n/4], niIdx[n/4:n/2], niIdx[n/2:(3*n)/4], niIdx[(3*n)/4:]]
         poolList = neList + niList
-        results = p.map(partial(CVDistr, dbName = useDb, theta = 3, discardTime = 2000.0), poolList)
-  #      kb.keyboard()
+        poollist = np.arange(10000)
+        results = p.map(partial(CVDistr, dbName = useDb, theta = kTheta, discardTime = 2500.0), poolList)
+        kb.keyboard()
         cnt, bins, patches = plt.hist(results[0], 50)
         plt.setp(patches, 'edgecolor', 'k', 'facecolor', 'k')
         plt.title(r'E neurons $\tau = 3ms, \; \alpha = 0$')
