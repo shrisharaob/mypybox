@@ -160,7 +160,7 @@ if __name__ == "__main__":
             ffMat[kNeuron, :] = np.roll(ff[kNeuron, :], -1 * prefferedOri[kNeuron])
 
         plt.ion()
-        circVar = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/Selectivity_allAnglesa0T4xi12C100Tr100.npy')
+        circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/Selectivity_allAnglesa0T4xi12C100Tr100.npy')
         nid = np.arange(NE + NI); plotId = np.logical_and(circVar < 0.3, np.max(tc, 1) > 10)
         meanE = np.nanmean(ffMat[plotId[:NE], :], 0)
         meanI = np.nanmean(ffMat[plotId[NE:], :], 0)
