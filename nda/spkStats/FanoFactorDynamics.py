@@ -172,11 +172,11 @@ def FanoInTime(dbName, spkTimeStart, spkTimeEnd, winSize, nTrials, neuronId):
 
 if __name__ == "__main__":
     alpha = 0.0
-    NE = 5000
-    NI = 5000
+    NE = 10000
+    NI = 10000
     simDuration = 6000.0
-    spkTimeStart = 4000.0
-    spkTimeEnd = 6000.0
+    spkTimeStart = 4500.0
+    spkTimeEnd = 5500.0
     simDT = 0.05
     tau = 3.0
     winSize = 50  # in ms fano factor observation window
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     [dbName, computeType, alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI] = DefaultArgs(sys.argv[1:], [dbName, 'plot', alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI])
 #    thetas = np.arange(0., 180., 22.5)
 #    thetas = np.arange(20)
-    nTrials = 50
+    nTrials = 81
     nBins = spkTimeEnd - spkTimeStart + 1
     filetag = '_w%s_'%((winSize, )) 
     if(computeType == 'mm'):
@@ -277,9 +277,12 @@ if __name__ == "__main__":
         plt.grid()
         figname = 'FanoFactorDynamics_' + filetag + dbName + '.png'
         print " saving figure as ", figname 
-        plt.savefig(figname, format = 'png')
-        kb.keyboard()
 
+        plt.text(0.79, -500, 'Firing rate (Hz)')
+        plt.text(0.77, -500, 'C = 0, E: 0.99 I: 1.81')
+        plt.text(0.755, -500, 'C = 1, E: 4.23 I: 7.48')
+        kb.keyboard()
+        plt.savefig(figname, format = 'png')
 
 
 

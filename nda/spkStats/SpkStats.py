@@ -10,10 +10,7 @@ from scipy.optimize import curve_fit
 from multiprocessing import Pool
 from functools import partial 
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
-
-
 sys.path.append("/homecentral/srao/Documents/code/mypybox")
-
 
 def MeanFiringRate(dbName, NE, NI, simDuration, discardTime, theta):
 #    print "simDuration = ", simDuration,  "theta = ", theta, 

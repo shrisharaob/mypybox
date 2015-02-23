@@ -28,37 +28,45 @@ if __name__ == "__main__":
     NI = 10000
 #    tc = np.load('tuningCurves_bidirEE.npy')
 #    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
-    dbName  = 'a0t3T3xi12tr15'
+#    dbName  = 'a0t3T3xi12tr15'
     dbName = sys.argv[1]
     tc = np.load('tuningCurves_' + dbName + '.npy')
     print tc.shape
     theta = np.arange(0, 180, 22.5)
-    theta = np.arange(0, 360, 45.0)
+#    theta = np.arange(0, 360, 45.0)
     circVariance = np.zeros((NE + NI,))
     neuronIdx = np.arange(NE + NI)
     for i, kNeuron in enumerate(neuronIdx):
-        print kNeuron
+#        print kNeuron
         circVariance[i] = CircVar(tc[kNeuron, :], theta)
 
     np.save('Selectivity_' + dbName, circVariance)
     cvE = circVariance[:NE]
     cvI = circVariance[NE:]
     cvE = cvE[np.logical_not(np.isnan(cvE))]
-    cvI = cvE[np.logical_not(np.isnan(cvI))]
+    cvI = cvI[np.logical_not(np.isnan(cvI))]
 #    circVariance = circVariance[np.logical_not(np.isnan(circVariance))]
 
+#    keyboard()
     # PLOT
+    plt.figure(); plt.ioff()
     plt.hist(cvE, 25, fc = 'k', edgecolor = 'w')
     plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
     plt.ylabel('Neuron count', fontsize = 20)
-    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+#    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
     filename = 'ori_cvDistr_E_' + dbName 
     plt.savefig(filename)
+#    plt.waitforbuttonpress()
     plt.clf()
+    plt.ioff()
     plt.hist(cvI, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
+    plt.xlabel('Circular vaiance, I neurons', fontsize = 20)
     plt.ylabel('Neuron count', fontsize = 20)
     #plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
-    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+#    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
+    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
     filename = 'ori_cvDistr_I_' + dbName 
     plt.savefig(filename)
+
+  #  plt.waitforbuttonpress()

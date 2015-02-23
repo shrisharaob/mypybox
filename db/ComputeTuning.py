@@ -38,11 +38,12 @@ def NspksForThetaForAllTrials(dbName, neuronId, discardTime, nTrials, theta):
     dbCursor = db.cursor()
     db.autocommit(True)
     nSpks = 0
-    print theta
+    #print theta
     for kTrial in np.arange(nTrials):
         kTheta = int((kTrial+1) * 1000) + int(theta)
+#kTheta = theta
         nSpks += dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s and theta = %s and spkTimes > %s;", (neuronId, kTheta, discardTime))
- #   print nSpks
+#    print nSpks
     dbCursor.close()
     db.close()
     return float(nSpks)
@@ -56,9 +57,10 @@ thetaStart = 0.0
 thetaStep = 22.5
 thetaEnd = 180.0
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
-trialLength = 3.0 # in seconds
-discardTime = 2000.0 #ms
-nTrials = 100.0
+theta = theta.astype('int')
+trialLength = 5.0 # in seconds
+discardTime = 1000.0 #ms
+nTrials = 16.0
 
 #db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
 #dbCursor = db.cursor()
@@ -66,7 +68,7 @@ nTrials = 100.0
 tuningCurve = np.zeros((len(N_NEURONS), len(theta)))
 trialLength = trialLength - discardTime / 1000.0
 z = trialLength * nTrials
-pool = Pool(20)
+pool = Pool(24)
 
 for idx, kNeuron in enumerate(N_NEURONS):
 #    print 'NEURON - ', kNeuron, 'theta :',
@@ -88,4 +90,4 @@ for idx, kNeuron in enumerate(N_NEURONS):
 
 pool.close()
 np.save('tuningCurves_'+dbName, tuningCurve)
-keyboard()
+#keyboard()
