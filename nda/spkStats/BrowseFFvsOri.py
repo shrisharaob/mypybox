@@ -19,7 +19,7 @@ from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 from Print2Pdf import Print2Pdf
 
-def PlotFFGivenCordinates(x, y, ax_tc, ax_ff, nNeuronsInPatch ,neuronType = 'E'):
+def PlotFFGivenCordinates(x, y, ax_tc, ax_ff, nNeuronsInPatch, neuronType = 'E'):
 #    fg_tc, ax_tc = plt.subplots()
  #   fg_ff, ax_ff = plt.subplots()
     ax_tc.clear()
@@ -30,6 +30,7 @@ def PlotFFGivenCordinates(x, y, ax_tc, ax_ff, nNeuronsInPatch ,neuronType = 'E')
     if(neuronType == 'E'):
         neuronId = np.ravel_multi_index((x, y), (patchSize, patchSize))
     else :
+        print x, y, patchSize
         neuronId = np.ravel_multi_index((x, y), (patchSize, patchSize))
         neuronId = neuronId + NE # since I indexing starts from fron NE 
     xyTuningCurve = tuningCurves[neuronId, :]
@@ -66,19 +67,18 @@ def keyp(event):
         Print2Pdf(plt.gca(), figFolder + figname, figFormat='png', tickFontsize=10)        
 
 if __name__ == "__main__":
-
     dbName = sys.argv[1]
     thetaStep = 22.5
     thetas = np.arange(0, 180., thetaStep)
-    NE = 10000
+    NE = 4
     NI = 10000
-    neuronType = 'E'
+    neuronType = 'I'
 
     figCounter = -1
     figFolder = basefolder + '/nda/spkStats/figs_browse_orimap/' + dbName + '/'
     if not os.path.isdir(figFolder):
         os.makedirs(figFolder)
-    tuningCurves = np.load(basefolder + '/db/tuningCurves_' + dbName + '.npy')
+    tuningCurves = np.load(basefolder + '/db/data/tuningCurves_' + dbName + '.npy')
     fanoFactor = np.load(basefolder + '/nda/spkStats/data/FFvsOri' + '_' + dbName + '.npy')
     preferredOri = np.argmax(tuningCurves, 0) 
     firingThresh = 2.0
@@ -86,9 +86,10 @@ if __name__ == "__main__":
     po = np.argmax(tuningCurves, 1)
     if(neuronType == 'E'):
         poe = po[:NE]
+        neuronsOnPatch = NE
     else :
         poe = po[NE:]
-      
+        neuronsOnPatch = NI
  #   poe[invalidId] = np.nan
     print poe.shape, tuningCurves.shape
     fg = plt.figure(0)
@@ -126,7 +127,7 @@ if __name__ == "__main__":
                 ax_po.lines.pop(0)
 #                ax_po.show()
             ax_po.plot(int(xyCordinates[0][0]), int(xyCordinates[0][1]), 'wo', markersize=10)
-            out = PlotFFGivenCordinates(int(xyCordinates[0][0]), int(xyCordinates[0][1]), ax_tc, ax_ff, NE)
+            out = PlotFFGivenCordinates(int(xyCordinates[0][0]), int(xyCordinates[0][1]), ax_tc, ax_ff, neuronsOnPatch, neuronType)
 
         else:
             print "peak firing rate is below threshold of ", firingThresh

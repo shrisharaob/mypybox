@@ -21,6 +21,7 @@ sys.path.append(basefolder + "/nda/spkStats")
 sys.path.append(basefolder + "/utils")
 from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
+from Print2Pdf import Print2Pdf
 
 def CircVar(fanofactor, atTheta):
     zk = np.dot(fanofactor, np.exp(2j * atTheta * np.pi / 180))
@@ -80,18 +81,24 @@ def FanoInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronI
 
 if __name__ == "__main__":
     alpha = np.array([0.0])
-    NE = 10000
+#    NE = 10000
+    NE = 4
     NI = 10000
-    simDuration = 5000
-    spkTimeStart = 2000.0
-    spkTimeEnd = 5000.0
+    simDuration = 3000
+    spkTimeStart = 1000.0
+    spkTimeEnd = 3000.0
     simDT = 0.05
     tau = 3.0
     binSize = 50.0  # in ms fano factor observation window
     print alpha
-    [dbName, computeType, nTrials, alpha, simDuration, simDT, NE, NI, tau] = DefaultArgs(sys.argv[1:], ['', 'plot', 16, alpha, simDuration, simDT, NE, NI, tau])
-#    nTrials =  int(nTrials)
+    [dbName, computeType, nTrials, alpha, simDuration, simDT, NE, NI, tau] = DefaultArgs(sys.argv[1:], ['', 'plot', 3, alpha, simDuration, simDT, NE, NI, tau])
+    try:
+        nTrials = int(nTrials)
+    except ValueError:
+        print 'ntrials not an interetr !'
+        raise
     thetas = np.arange(0., 180., 22.5)
+    filebase = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/data/'
     if(computeType == 'compute'):
         neuronsList = np.arange(NE + NI)
         ffMat = np.empty((NE+NI, len(thetas))) # matrix N_NEURONS-by-theta with each element containing the fano factor 
@@ -101,7 +108,8 @@ if __name__ == "__main__":
         result = p.map(func, neuronsList) 
         p.close()
         ffMat = np.asarray(result)
-        filename = os.path.splitext(sys.argv[0])[0]
+        filename =  filebase + 'FFvsOri' #os.path.splitext(sys.argv[0])[0]
+#        print 'asdfasddfasdf =', os.path.splitext(sys.argv[0])[0] 
         np.save(filename + '_' + dbName, ffMat)
         
     elif(computeType == 'cv'):
@@ -116,23 +124,23 @@ if __name__ == "__main__":
             result = p.map(func, neuronsList) 
             p.close()
             cvMat = np.asarray(result)
-            filename = os.path.splitext(sys.argv[0])[0]
+            filename = filebase + os.path.splitext(sys.argv[0])[0]
             np.save(filename + '_cv_' + dbName, cvMat)
 #            kb.keyboard()
         if(IF_PLOT):
             print "plotting cv"
-            tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_%s.npy'%((dbName, ))); 
-            filename = os.path.splitext(sys.argv[0])[0]
-            cv = np.load('./data/' + filename + '_' + dbName + '.npy')
+            tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, ))); 
+            filename = filebase + os.path.splitext(sys.argv[0])[0]
+            cv = np.load(filename + '_' + dbName + '.npy')
             prefferedOri = np.argmax(tc, 1)
             cvMat = np.empty((NE+NI, len(thetas)))
             for kNeuron in np.arange(NE + NI):
                 cvMat[kNeuron, :] = np.roll(cv[kNeuron, :], -1 * prefferedOri[kNeuron])
             plt.ion()
-            circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/Selectivity_allAnglesa0T4xi12C100Tr100.npy')
+            circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/data/Selectivity_'+ dbName +'.npy') #allAnglesa0T4xi12C100Tr100.npy')
             nid = np.arange(NE + NI)
             circVarThresh = 0.5
-            firingRateThresh = 5.0
+            firingRateThresh = 10.0
             plotId = np.max(tc, 1) > firingRateThresh
             plotId = np.logical_and(circVar < circVarThresh, plotId)
             tmpId = np.arange(NE+NI)
@@ -149,31 +157,32 @@ if __name__ == "__main__":
             plt.plot(thetas, meanI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
             plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
             plt.ylabel(r'Mean $CV^2$', fontsize = 20)
-            plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
+      #      plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
+            plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
             plt.grid()
             plt.legend(loc = 0)
             plt.ion()
             plt.show()
             filename = 'cv_vs_ori_frft_%s_cvlt_%s.png'%(firingRateThresh, circVarThresh)
             print "saving figures as", filename
-            plt.savefig(filename, format='png')
+            plt.savefig('./figs/' + filename, format='png')
     elif(computeType == 'ff_circvar'):
         filename = os.path.splitext(sys.argv[0])[0]
-        filename = './data/' + filename + '_' + dbName + '.npy'
+        filename = filebase + filename + '_' + dbName + '.npy'
         ff =  np.load(filename) 
         circVariance = np.zeros((NE + NI, ))
         theta = np.arange(0.0, 180.0, 22.5)
         circVarThresh = 0.4
-        maxFiringRateThresh = 10
-        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_%s.npy'%((dbName, )))
-        ccv = np.load('/homecentral/srao/Documents/code/mypybox/db/Selectivity_' + dbName + '.npy')
+        maxFiringRateThresh = 2.0
+        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )))
+        ccv = np.load('/homecentral/srao/Documents/code/mypybox/db/data/Selectivity_' + dbName + '.npy')
         maxRates = np.max(tc, 1)
         nid = np.arange(NE + NI) # id vector 
         useNeuronId = nid[np.logical_and(ccv < circVarThresh, maxRates> maxFiringRateThresh)]
         print "valid Neuons NE = ", len(useNeuronId < NE), " NI = ", len(useNeuronId > NE)
         for i, kNeuron in enumerate(nid):
             circVariance[i] = CircVar(ff[kNeuron, :], theta)
-        filename = filename + computeType
+        filename = filebase + filename + computeType
         print " saving as ", filename
         np.save(filename, circVariance)
         fcve = circVariance[useNeuronId[useNeuronId < NE]]
@@ -191,9 +200,9 @@ if __name__ == "__main__":
         plt.show()
         kb.keyboard()
     elif(computeType == 'ff_po_scatter'):
-        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_bidirII_%s.npy'%((dbName, )))
+        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_bidirII_%s.npy'%((dbName, )))
         filename = os.path.splitext(sys.argv[0])[0]
-        filename = './data/' + filename + '_' + dbName + '.npy'
+        filename = filebase + filename + '_' + dbName + '.npy'
         ff =  np.load(filename) 
 #        ff = np.load(filename + '_' + dbName + '.npy')
         prefferedOri = np.argmax(tc, 1)
@@ -207,11 +216,11 @@ if __name__ == "__main__":
 
     else:
         print "plotting ", "here"
-        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/tuningCurves_%s.npy'%((dbName, ))); 
-
+        tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, ))); 
+        print tc.shape
         #tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
-        filename = os.path.splitext(sys.argv[0])[0]
-        ff = np.load('./data/' + filename + '_' + dbName + '.npy')
+        filename = 'FFvsOri' #os.path.splitext(sys.argv[0])[0]
+        ff = np.load(filebase + filename + '_' + dbName + '.npy')
         print tc.shape, ff.shape
         #ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
         prefferedOri = np.argmax(tc, 1)
@@ -221,11 +230,11 @@ if __name__ == "__main__":
             ffMat[kNeuron, :] = np.roll(ff[kNeuron, :], -1 * prefferedOri[kNeuron])
             tcMat[kNeuron, :] = np.roll(tc[kNeuron, :], -1 * prefferedOri[kNeuron])
         plt.ioff()
-        circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/Selectivity_allAnglesa0T4xi12C100Tr100.npy')
+        circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/data/Selectivity_' + dbName + '.npy')
         print "CIRC VAR", circVar.shape
         nid = np.arange(NE + NI)
         circVarThresh = 0.5
-        firingRateThresh = 10.0
+        firingRateThresh = 5.0
         plotId = np.max(tc, 1) > firingRateThresh
         plotId = np.logical_and(circVar < circVarThresh, plotId)
         tmpId = np.arange(NE+NI)
@@ -241,33 +250,49 @@ if __name__ == "__main__":
         meanFrE = np.roll(meanFrE, 4)
         meanFrI = np.roll(meanFrI, 4)
         thetas = np.arange(-90, 90, 22.5)
+
         plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+
         plt.plot(thetas, meanI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
         plt.ylabel('Mean fano factor', fontsize = 20)
-        plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
+  #      plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
+        plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
         plt.grid()
-        plt.legend(loc = 0)
+        plt.legend(loc=0, prop={'size':10})
         filename = 'ff_vs_ori_frft_%s_cvlt_%s_'%(firingRateThresh, circVarThresh) + dbName + '.png'
         print "saving figures as", filename
-        plt.savefig(filename, format='png')
+        #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
+        figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar16/'
+        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=12, paperSize = [4.0, 3.0])
+#        plt.ion(); plt.show(); plt.waitforbuttonpress()
+#        plt.savefig(filename, format='png')
         plt.clf()
+ 
         plt.plot(thetas, meanFrE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+
         plt.plot(thetas, meanFrI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.grid()
-        plt.legend(loc=0)
+        
+
         plt.xlabel('Stimulus orientation (deg)', fontsize = 20)
         plt.ylabel('Mean firing rate (Hz)', fontsize = 20)
         #plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)      
         plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)      
         filename = 'tuning_curves_frft_%s_cvlt_%s_'%(firingRateThresh, circVarThresh) + dbName + '.png'
         print "saving mean tuningcurve as", filename
-        plt.savefig(filename)
+        #plt.savefig(filename)
+        plt.legend(loc=0, prop={'size':10})
+
+#    figFolder = '/homecentral/srao/Documents/code/mypybox/db/'
+        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
+ #       plt.ion(); plt.show()
+        
         # plt.figure()
         # plt.plot(np.transpose(tcMat), color = [0.9, 0.9, 0.9])
         # plt.ion()
         # plt.show()
-        # plt.waitforbuttonpress()
+#        plt.waitforbuttonpress()
 
 #        plt.waitforbuttonpress()
  #       kb.keyboard()

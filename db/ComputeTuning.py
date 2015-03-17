@@ -52,15 +52,22 @@ def NspksForThetaForAllTrials(dbName, neuronId, discardTime, nTrials, theta):
 
 
 dbName = sys.argv[1] #"bidirEE" #"anatomic" #"tstDb"
-N_NEURONS = np.arange(0, 20000, 1)
+#N_NEURONS = np.arange(0, 20000, 1)
+N_NEURONS = np.arange(0, 10004, 1)
 thetaStart = 0.0
 thetaStep = 22.5
 thetaEnd = 180.0
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
 theta = theta.astype('int')
-trialLength = 5.0 # in seconds
+trialLength = 3.0 # in seconds
 discardTime = 1000.0 #ms
-nTrials = 16.0
+if(len(sys.argv)> 1):
+    try:
+        nTrials = int(sys.argv[2])
+    except ValueError:
+        print 'ntrials not an interetr !'
+        raise
+print "nTrials = ", nTrials
 
 #db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
 #dbCursor = db.cursor()
@@ -68,8 +75,9 @@ nTrials = 16.0
 tuningCurve = np.zeros((len(N_NEURONS), len(theta)))
 trialLength = trialLength - discardTime / 1000.0
 z = trialLength * nTrials
-pool = Pool(24)
-
+pool = Pool(20)
+print "Computing ...",
+sys.stdout.flush()
 for idx, kNeuron in enumerate(N_NEURONS):
 #    print 'NEURON - ', kNeuron, 'theta :',
 #    print kNeuron,
@@ -89,5 +97,6 @@ for idx, kNeuron in enumerate(N_NEURONS):
 #db.close()
 
 pool.close()
-np.save('tuningCurves_'+dbName, tuningCurve)
+print "saving as: ", './data/tuningCurves_' + dbName
+np.save('./data/tuningCurves_'+dbName, tuningCurve)
 #keyboard()

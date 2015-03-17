@@ -11,11 +11,28 @@ from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 
 
-def Print2Pdf(axHandle, figname, paperSize = [4.26, 3.26], figFormat = 'pdf', labelFontsize = 20.0, tickFontsize = 14.0):
+def Print2Pdf_Old(axHandle, figname, paperSize = [4.26, 3.26], figFormat = 'pdf', labelFontsize = 20.0, tickFontsize = 14.0):
 #    [axHandle] = DefaultArgs(
     plt.rcParams['figure.figsize'] = paperSize[0], paperSize[1]
     plt.rcParams['axes.labelsize'] = labelFontsize
     yed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.yaxis.get_major_ticks()]
     xed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.xaxis.get_major_ticks()]
+    plt.draw()
+    plt.savefig(figname + '.' + figFormat, format=figFormat)
+
+
+
+def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', labelFontsize = 12.0, tickFontsize = 12.0, titleSize = 12.0):
+#    plt.rcParams['figure.figsize'] = paperSize[0], paperSize[1]
+ #   plt.rcParams['axes.labelsize'] = labelFontsize
+    figHandle.set_figwidth(paperSize[0])
+    figHandle.set_figheight(paperSize[1])
+    axHandle = figHandle.get_axes()[0]
+    axHandle.set_title(axHandle.get_title(), fontsize = titleSize); 
+    axHandle.set_xlabel(axHandle.get_xlabel(), fontsize = labelFontsize);
+    axHandle.set_ylabel(axHandle.get_ylabel(), fontsize = labelFontsize);
+    yed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.yaxis.get_major_ticks()]
+    xed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.xaxis.get_major_ticks()]
+    plt.draw()
     plt.savefig(figname + '.' + figFormat, format=figFormat)
     

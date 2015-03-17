@@ -1,0 +1,150 @@
++ echo '#' Trials = 6
+# Trials = 6
++ '[' -d /homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/ ']'
++ python CreateMySqlDB.py delom
+dbname =  delom
++ python PopulatDbFrmList.py delom /homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/ list.txt
+dbname =  delom
+filebase =  /homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/
+table type: defalut
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr0.csv
+populating db: theta = 1000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr1.csv
+populating db: theta = 2000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr2.csv
+populating db: theta = 3000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr3.csv
+populating db: theta = 4000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr4.csv
+populating db: theta = 5000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta0_0.00_3.0_5000_tr5.csv
+populating db: theta = 6000.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr0.csv
+populating db: theta = 1022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr1.csv
+populating db: theta = 2022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr2.csv
+populating db: theta = 3022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr3.csv
+populating db: theta = 4022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr4.csv
+populating db: theta = 5022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta22_0.00_3.0_5000_tr5.csv
+populating db: theta = 6022.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr0.csv
+populating db: theta = 1045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr1.csv
+populating db: theta = 2045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr2.csv
+populating db: theta = 3045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr3.csv
+populating db: theta = 4045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr4.csv
+populating db: theta = 5045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta45_0.00_3.0_5000_tr5.csv
+populating db: theta = 6045.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr0.csv
+populating db: theta = 1067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr1.csv
+populating db: theta = 2067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr2.csv
+populating db: theta = 3067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr3.csv
+populating db: theta = 4067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr4.csv
+populating db: theta = 5067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta67_0.00_3.0_5000_tr5.csv
+populating db: theta = 6067.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr0.csv
+populating db: theta = 1090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr1.csv
+populating db: theta = 2090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr2.csv
+populating db: theta = 3090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr3.csv
+populating db: theta = 4090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr4.csv
+populating db: theta = 5090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta90_0.00_3.0_5000_tr5.csv
+populating db: theta = 6090.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr0.csv
+populating db: theta = 1112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr1.csv
+populating db: theta = 2112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr2.csv
+populating db: theta = 3112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr3.csv
+populating db: theta = 4112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr4.csv
+populating db: theta = 5112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta112_0.00_3.0_5000_tr5.csv
+populating db: theta = 6112.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr0.csv
+populating db: theta = 1135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr1.csv
+populating db: theta = 2135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr2.csv
+populating db: theta = 3135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr3.csv
+populating db: theta = 4135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr4.csv
+populating db: theta = 5135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta135_0.00_3.0_5000_tr5.csv
+populating db: theta = 6135.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr0.csv
+populating db: theta = 1157.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr1.csv
+populating db: theta = 2157.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr2.csv
+populating db: theta = 3157.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr3.csv
+populating db: theta = 4157.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr4.csv
+populating db: theta = 5157.0
+/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f21r2e1/spkTimes_xi1.2_theta157_0.00_3.0_5000_tr5.csv
+populating db: theta = 6157.0
+done
++ python GenIndex.py delom
+table type: default
+generating index... done
++ python ComputeTuning.py delom 6
+nTrials =  6
+Computing ... saving as:  ./data/tuningCurves_delom
++ python Selectivity.py delom
+Selectivity.py:10: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+(10004, 8)
++ python ../nda/spkStats/FFvsOri.py delom compute 6
+[ 0.]
+inside DefaultArgs : assigning default args
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+../nda/spkStats/FFvsOri.py:77: RuntimeWarning: invalid value encountered in double_scalars
+  ffvsTheta[mm] = np.var(avgSpkCnt) / np.mean(avgSpkCnt)
+asdfasddfasdf = ../nda/spkStats/FFvsOri
++ python ../nda/spkStats/FFvsOri.py delom
+../nda/spkStats/FFvsOri.py:239: RuntimeWarning: invalid value encountered in less
+  plotId = np.logical_and(circVar < circVarThresh, plotId)
+/usr/local/lib/python2.7/dist-packages/numpy/lib/nanfunctions.py:598: RuntimeWarning: Mean of empty slice
+  warnings.warn("Mean of empty slice", RuntimeWarning)
+[ 0.]
+inside DefaultArgs : assigning default args
+plotting  here
+(10004, 8)
+(10004, 8) (10004, 8)
+CIRC VAR (10004,)
+# valid neurons E:  3 , I:  3101
+saving figures as ff_vs_ori_frft_5.0_cvlt_0.9_delom.png
+saving mean tuningcurve as tuning_curves_frft_5.0_cvlt_0.9_delom.png
