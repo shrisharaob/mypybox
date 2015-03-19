@@ -24,9 +24,9 @@ def CircVar(firingRate, atTheta):
     zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
     return 1 - np.absolute(zk) / np.sum(firingRate)
 
-datafolder = '/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/f3r2e1/'
+datafolder = '/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/testGmean/'
 NTRIALS = 1 #16
-NE = 1
+NE = 4
 NI = 10000
 theta = np.arange(0., 180., 22.5)
 #theta = np.arange(0., 2., 22.5)
@@ -35,7 +35,7 @@ gffTuning = np.empty((NI, theta.size))
 gffTuning[:] = 0.0
 for kk, kTheta in enumerate(theta):
     for jTrial in range(NTRIALS):
-        filename = datafolder + 'gffmean_R00.0_theta%s_0.00_3.0_2000_tr%s.csv'%((int(kTheta), jTrial))
+        filename = datafolder + 'gffmean_R00.0_theta%s_0.00_3.0_3000_tr%s.csv'%((int(kTheta), jTrial))
         print filename
         gff = np.loadtxt(filename)
         gff = gff[NE:]
@@ -55,7 +55,7 @@ np.save('gffCircVar_testGmean', cv)
 plt.ioff()
 plt.hist(cv, 50, fc = 'k', edgecolor = 'w')
 
-#plt.savefig('gffCircVar.png')
+plt.savefig('/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/gffCircVar.png')
 
 
 plt.figure()
@@ -64,9 +64,9 @@ po = po.reshape((100, 100))
 plt.pcolor(po * 22.5, cmap = 'hsv')
 plt.ylim((0, 100))
 plt.colorbar()
-plt.ion()
-plt.show()
+plt.ioff()
+#plt.show()
 
-kb.keyboard()
+#kb.keyboard()
 #plt.waitforbuttonpress()
-#plt.savefig('gff_orimap.png')
+plt.savefig('/homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/testGmean/gff_orimap.png')

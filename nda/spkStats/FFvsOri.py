@@ -251,7 +251,7 @@ if __name__ == "__main__":
         meanFrI = np.roll(meanFrI, 4)
         thetas = np.arange(-90, 90, 22.5)
 
-        plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+ #       plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
 
         plt.plot(thetas, meanI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
@@ -263,13 +263,13 @@ if __name__ == "__main__":
         filename = 'ff_vs_ori_frft_%s_cvlt_%s_'%(firingRateThresh, circVarThresh) + dbName + '.png'
         print "saving figures as", filename
         #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
-        figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar16/'
+        figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar19/'
         Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=12, paperSize = [4.0, 3.0])
 #        plt.ion(); plt.show(); plt.waitforbuttonpress()
 #        plt.savefig(filename, format='png')
         plt.clf()
  
-        plt.plot(thetas, meanFrE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+#        plt.plot(thetas, meanFrE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
 
         plt.plot(thetas, meanFrI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.grid()

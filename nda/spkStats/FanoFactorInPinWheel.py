@@ -17,6 +17,10 @@ from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 from Print2Pdf import Print2Pdf
 
+def CircVar(firingRate, atTheta):
+    zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
+    return 1 - np.absolute(zk) / np.sum(firingRate)
+
 def NeuronInRing(neuronIdx, radius0, radius1, nNeuronsInPatch, patchSize):
     tmp = np.sqrt(float(nNeuronsInPatch))
     yCor = np.floor(float(neuronIdx)/ tmp) * (1.0 / tmp) - (patchSize * 0.5)
@@ -29,11 +33,11 @@ def NeuronInRing(neuronIdx, radius0, radius1, nNeuronsInPatch, patchSize):
 
 dbName = sys.argv[1]  #"omR020a0T3Tr15" 
 dataFolder = "/homecentral/srao/Documents/code/mypybox/nda/spkStats/data/"
-NE = 10000
+NE = 4
 NI = 10000
 patchSize = 1.0
 L = 1.0
-nRings = 3.0
+nRings = 5.0
 radii = np.arange(0, L * 0.5 + 0.001, L * 0.5 / nRings) # left limits of the set
 #theta = np.arange(0.0, 180.0, 22.5)
 theta = np.arange(-90.0, 90.0, 22.5)
@@ -57,8 +61,8 @@ ffVsRadius = np.zeros((radii.size - 1, theta.size))
 firingRateVsRadius = np.zeros((radii.size - 1, theta.size))
 nNeuronsInRing = np.zeros((radii.size - 1, ))
 neuronIds = np.arange(nNeurons)
-firingThresh = 5.0
-circThresh = 0.5
+firingThresh = 0.0
+circThresh = 1.0
 #validNeuronIdx = np.empty((neuronIds.size, )) #np.max(tc, 1) > firingThresh
 #validNeuronIdx[:] = True
 validNeuronIdx = np.max(tc, 1) > firingThresh
@@ -67,16 +71,19 @@ validNeuronIdx = np.logical_and(validNeuronIdx, circVar < circThresh)
 print "# valid neurons: ", np.sum(validNeuronIdx)
 prefferedOri = np.argmax(tc, 1)
 nValidNeuronsInRing = np.zeros((radii.size, ))
+#cvInRing = np.zeros((radii.size, 25))
 for kk, kRadius in enumerate(radii[:-1]):
     radius0 = radii[kk]
     radius1 = radii[kk + 1]
     tmpFr = np.empty((1, theta.size))
     tmpFF = np.empty((1, theta.size))
+    tmpcv = []
     for i, iNeuron in enumerate(neuronIds):
         if(NeuronInRing(iNeuron, radius0, radius1, nNeurons, patchSize)):
             if(validNeuronIdx[iNeuron]):
                 iFFvsOri = np.roll(ffVsOri[iNeuron, :], -1 * prefferedOri[iNeuron]) 
-                iFiringRateVsOri = np.roll(tc[iNeuron, :], -1 * prefferedOri[iNeuron]) 
+                iFiringRateVsOri = np.roll(tc[iNeuron, :], -1 * prefferedOri[iNeuron])
+#                tmpcv
 #            print iFiringRateVsOri.shape
                 iFFvsOri.shape = 1, theta.size
                 iFiringRateVsOri.shape = 1, theta.size
@@ -102,7 +109,7 @@ for ii, iiNeuron in enumerate(neuronIds):
 tmpOthers = tmpOthers[1:, :]
 meanTmpOthers = np.nanmean(tmpOthers, 0)
 
-figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar9/'
+figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar19/'
 plt.ion()
 f0 = plt.figure()
 for kk, kRadius in enumerate(radii[:-1]):

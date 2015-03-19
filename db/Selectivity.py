@@ -60,7 +60,7 @@ if __name__ == "__main__":
  #   plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
     filename = 'ori_cvDistr_E_' + dbName 
 #    figFolder = '/homecentral/srao/Documents/cnrs/figures/feb23/'
-    figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/mar16/'
+    figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/mar19/'
 #    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [5.0, 4.26])
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=12, labelFontsize = 20, titleSize = 12,  paperSize = [6.0, 5.26])
 
