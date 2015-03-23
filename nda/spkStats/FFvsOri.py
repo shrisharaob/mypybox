@@ -83,10 +83,10 @@ if __name__ == "__main__":
     alpha = np.array([0.0])
 #    NE = 10000
     NE = 4
-    NI = 10000
-    simDuration = 3000
+    NI = 40000
+    simDuration = 2000
     spkTimeStart = 1000.0
-    spkTimeEnd = 3000.0
+    spkTimeEnd = 2000.0
     simDT = 0.05
     tau = 3.0
     binSize = 50.0  # in ms fano factor observation window
@@ -120,7 +120,7 @@ if __name__ == "__main__":
             cvMat[:] = np.nan
             func = partial(CVInIntervalForAllTheta, dbName, spkTimeStart, spkTimeEnd, nTrials)
             print len(neuronsList)
-            p = Pool(20)
+            p = Pool(16)
             result = p.map(func, neuronsList) 
             p.close()
             cvMat = np.asarray(result)
@@ -263,7 +263,7 @@ if __name__ == "__main__":
         filename = 'ff_vs_ori_frft_%s_cvlt_%s_'%(firingRateThresh, circVarThresh) + dbName + '.png'
         print "saving figures as", filename
         #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
-        figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar19/'
+        figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
         Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=12, paperSize = [4.0, 3.0])
 #        plt.ion(); plt.show(); plt.waitforbuttonpress()
 #        plt.savefig(filename, format='png')

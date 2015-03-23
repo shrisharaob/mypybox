@@ -17,7 +17,8 @@ from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 from Print2Pdf import Print2Pdf
 
-def CircVar(firingRate, atTheta):
+def CircVar(firingRate):
+    atTheta = np.arange(0.0, 180.0, 22.5)
     zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
     return 1 - np.absolute(zk) / np.sum(firingRate)
 
@@ -34,10 +35,10 @@ def NeuronInRing(neuronIdx, radius0, radius1, nNeuronsInPatch, patchSize):
 dbName = sys.argv[1]  #"omR020a0T3Tr15" 
 dataFolder = "/homecentral/srao/Documents/code/mypybox/nda/spkStats/data/"
 NE = 4
-NI = 10000
+NI = 40000
 patchSize = 1.0
 L = 1.0
-nRings = 5.0
+nRings = 3.0
 radii = np.arange(0, L * 0.5 + 0.001, L * 0.5 / nRings) # left limits of the set
 #theta = np.arange(0.0, 180.0, 22.5)
 theta = np.arange(-90.0, 90.0, 22.5)
@@ -71,7 +72,13 @@ validNeuronIdx = np.logical_and(validNeuronIdx, circVar < circThresh)
 print "# valid neurons: ", np.sum(validNeuronIdx)
 prefferedOri = np.argmax(tc, 1)
 nValidNeuronsInRing = np.zeros((radii.size, ))
-#cvInRing = np.zeros((radii.size, 25))
+nCvBins = 25
+cvBins = np.linspace(0.0, 1.0, nCvBins+1); # bin edges
+tmpBins = cvBins
+tmpBins.shape = nCvBins + 1, 1
+cvBinCenters = np.mean(np.concatenate((tmpBins[:-1], tmpBins[1:]), axis = 1), 1)
+cvBins.shape = nCvBins + 1, 
+cvInRing = np.zeros((radii.size, nCvBins))
 for kk, kRadius in enumerate(radii[:-1]):
     radius0 = radii[kk]
     radius1 = radii[kk + 1]
@@ -83,7 +90,7 @@ for kk, kRadius in enumerate(radii[:-1]):
             if(validNeuronIdx[iNeuron]):
                 iFFvsOri = np.roll(ffVsOri[iNeuron, :], -1 * prefferedOri[iNeuron]) 
                 iFiringRateVsOri = np.roll(tc[iNeuron, :], -1 * prefferedOri[iNeuron])
-#                tmpcv
+                tmpcv.append(CircVar(tc[iNeuron, :]))
 #            print iFiringRateVsOri.shape
                 iFFvsOri.shape = 1, theta.size
                 iFiringRateVsOri.shape = 1, theta.size
@@ -94,12 +101,50 @@ for kk, kRadius in enumerate(radii[:-1]):
     tmpFF = tmpFF[1:, :]
     tmpFr = tmpFr[1:, :]
     ffVsRadius[kk, :] = np.nanmean(tmpFF, 0) 
-    firingRateVsRadius[kk, :] = np.nanmean(tmpFr, 0) 
+    firingRateVsRadius[kk, :] = np.nanmean(tmpFr, 0)
+    tmpcv = np.asarray(tmpcv)
+    circVarCnt, _ = np.histogram(tmpcv[~np.isnan(tmpcv)], cvBins)
+    cvInRing[kk, :] = circVarCnt
+    tmpcv = []
 print "# neurons in ring: ", nValidNeuronsInRing
 print "others =  ", neuronIds.size
 np.save('ffinRing', ffVsRadius)
 np.save('tcinRing', firingRateVsRadius)
 
+figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
+f00 = plt.figure()
+plt.ion()
+for kk, kRadius in enumerate(radii[:-1]):
+    plt.plot(cvBinCenters, cvInRing[kk, :],'.-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+plt.xlabel('Circular variance')
+plt.ylabel('Count')
+plt.title('Circular variance of %s neurons in ring'%((neuronType)))
+plt.legend(loc=0, prop={'size':10})
+plt.grid()
+ymin, ymax = plt.ylim()
+plt.ylim((ymin - ymax/50.0, ymax))
+labels = [item.get_text() for item in f00.gca().get_xticklabels()]
+labels[0] = "0.0\nhighly tuned"
+labels[-1] = "1.0\nnot selective"
+f00.gca().set_xticklabels(labels)
+plt.draw()
+Print2Pdf(f00, figFolder + 'CircVarInRing_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26, 4.26])
+plt.clf()
+for kk, kRadius in enumerate(radii[:-1]):
+    plt.plot(cvBinCenters, cvInRing[kk, :] / cvInRing[kk, :].sum() ,'.-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+plt.xlabel('Circular variance')
+plt.ylabel('Normalized count')
+plt.title('Circular variance of %s neurons in ring'%((neuronType)))
+plt.legend(loc=0, prop={'size':10})
+plt.grid()
+ymin, ymax = plt.ylim()
+plt.ylim((ymin - ymax/50.0, ymax))
+labels = [item.get_text() for item in f00.gca().get_xticklabels()]
+labels[0] = "0.0\nhighly tuned"
+labels[-1] = "1.0\nnot selective"
+f00.gca().set_xticklabels(labels)
+plt.draw()
+Print2Pdf(f00, figFolder + 'CircVarInRing_normalized_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26, 4.26])
 
 tmpOthers = np.empty((1, theta.size))
 for ii, iiNeuron in enumerate(neuronIds):
@@ -109,8 +154,8 @@ for ii, iiNeuron in enumerate(neuronIds):
 tmpOthers = tmpOthers[1:, :]
 meanTmpOthers = np.nanmean(tmpOthers, 0)
 
-figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar19/'
-plt.ion()
+
+#plt.ion()
 f0 = plt.figure()
 for kk, kRadius in enumerate(radii[:-1]):
     plt.plot(theta, np.roll(ffVsRadius[kk, :], 4), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
@@ -138,4 +183,4 @@ Print2Pdf(f1, figFolder + 'FiringRateInRing_' + neuronType + '_' + dbName , figF
 plt.figure()
 plt.plot(theta, meanTmpOthers, 's-')
 
-kb.keyboard()
+#kb.keyboard()

@@ -9,6 +9,7 @@ import Keyboard as kb
 from reportfig import ReportFig
 from multiprocessing import Pool
 from functools import partial
+from Print2Pdf import Print2Pdf
 
 def ComputeFiringRateDiff(dbName, theta0, theta1, simDuration, neuronsList, NI = 10000):
     db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName, local_infile = 1)
@@ -81,7 +82,7 @@ if __name__ == "__main__":
     neuronsList = np.arange(0, NE+NI, 1)
     #tau = np.array([3.0, 6.0, 8.0, 10.0, 12.0])
  #   tau = np.array([3.0, 24.0])
-    tau = np.array([3.0]);
+    tau = np.array([24.0]);
 #    alpha =  [0.9]
     alpha =  [0.5]
     obsWin = np.array([10, 20, 50, 75, 100]) * 1e3 # time windows for estimation of firing rate 
@@ -135,10 +136,10 @@ if __name__ == "__main__":
 #                    df = ComputeFiringRateDiff(useDb, theta0[ll], theta1[ll], simDuration, neuronsList)
                     fr0 = df[0]
                     fr1 = df[1]
-                    np.save('../data/fr_init_alpha%s_tau%s'%((mAlpha, lTau)) + useDb, np.array(df))
+                    np.save('./data/fr_init_alpha%s_tau%s'%((mAlpha, lTau)) + useDb, np.array(df))
                     print " alpha %s tau = %s done"%((mAlpha, lTau))
         
-        kb.keyboard()
+#        kb.keyboard()
 
     if(runType == 1):
         print "computing, multi ...."
@@ -146,8 +147,8 @@ if __name__ == "__main__":
         for mm, mAlpha in enumerate(alpha):
             print "alpha : ", mAlpha
 #            thetaPairs = [[30, 31], [60, 61], [80, 81], [100, 101], [120, 121]]
-            thetaPairs = [[30, 31], [240, 241]]
-            #thetaPairs = [[30, 31]]
+#            thetaPairs = [[30, 31], [240, 241]]
+            thetaPairs = [[240, 241]]
             results = p.map(partial(ComputeFiringRateDiff02, useDb,  simDuration, neuronsList, NI), thetaPairs)
             for ll, lTau in enumerate(tau):
                 print useDb, thetaPairs[ll]
@@ -170,16 +171,20 @@ if __name__ == "__main__":
         # fr1 = df[1]
         # np.save('fr_init_alpha1_'+useDb, np.array(df))
         # kb.keyboard()
-    else :
+    if(runType == 2):
     # DISPLAY
         print "plotting"
         plt.figure()
         plt.ioff()
+        figFolder = "/homecentral/srao/Documents/code/mypybox/nda/figs/"
+ 
         for mm, mAlpha in enumerate(alpha):
             for ll, lTau in enumerate(tau):
+                filename = "initial_condition_alpha%s_tau%s_T%s"%((mAlpha, lTau, simDuration))
                 print "alpha = ", mAlpha, " tau = ", lTau
                 print './data/fr_init_alpha%s_tau%s'%((mAlpha, lTau)) + useDb
                 df = np.load('./data/fr_init_alpha%s_tau%s'%((mAlpha, lTau)) + useDb + '.npy')
+                print df.shape
                 df = np.array([df[0], df[1]])
                 plt.plot(df[0, NE:], df[1, NE:], 'r.', label='I')
                 plt.plot(df[0, :NE], df[1, :NE], 'k.', label='E')
@@ -189,8 +194,9 @@ if __name__ == "__main__":
                 plt.legend(prop={"size":18})
                 plt.tick_params(axis = 'both', labelsize = 16)
                 #plt.show()
-                ReportFig('init_cond_ff_alpha%s'%((int(10 * alpha[0]),   )), 'Neuron-wise firing rates for two different initial conditions, with connection matrix fixed, simulation time = %ss'%((simDuration * 1e-3)), 'Dependence on initial condition', 'png', 'initial condition', 'alpha%s_tau%s_T%s'%((mAlpha, lTau, simDuration)))
+#                ReportFig('init_cond_ff_alpha%s'%((int(10 * alpha[0]),   )), 'Neuron-wise firing rates for two different initial conditions, with connection matrix fixed, simulation time = %ss'%((simDuration * 1e-3)), 'Dependence on initial condition', 'png', 'initial condition', 'alpha%s_tau%s_T%s'%((mAlpha, lTau, simDuration)))
                 
+                Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
                 plt.clf()
 
 
@@ -205,7 +211,8 @@ if __name__ == "__main__":
         # plt.tick_params(axis = 'both', labelsize = 16)
         # plt.show()
         # ReportFig('initial_condition', 'Neuron-wise firing rates for two different initial conditions, with connection matrix fixed', 'Dependence on initial condition', 'png', 'initial condition', 'alpha%s_tau%s'%((1, tau)))
-        kb.keyboard()
+
+        #kb.keyboard()
 
 
 

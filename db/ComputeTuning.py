@@ -53,13 +53,13 @@ def NspksForThetaForAllTrials(dbName, neuronId, discardTime, nTrials, theta):
 
 dbName = sys.argv[1] #"bidirEE" #"anatomic" #"tstDb"
 #N_NEURONS = np.arange(0, 20000, 1)
-N_NEURONS = np.arange(0, 10004, 1)
+N_NEURONS = np.arange(0, 40004, 1)
 thetaStart = 0.0
 thetaStep = 22.5
 thetaEnd = 180.0
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
 theta = theta.astype('int')
-trialLength = 3.0 # in seconds
+trialLength = 2.0 # in seconds
 discardTime = 1000.0 #ms
 if(len(sys.argv)> 1):
     try:

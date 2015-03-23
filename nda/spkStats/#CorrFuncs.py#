@@ -225,8 +225,8 @@ if __name__ == "__main__":
         p.close()
         out.append(acMat)
         filetag = 'EI'    
-        print "saving as ", '../data/long_tau_vs_ac_mat' + useDb + filetag
-        np.save('../data/long_tau_vs_ac_mat'+useDb + '_' + filetag, out)
+        print "saving as ", './data/long_tau_vs_ac_mat' + useDb + filetag
+        np.save('./data/long_tau_vs_ac_mat'+useDb + '_' + filetag, out)
 #        kb.keyboard()
     if(computeType == 'plot'):
         ac = np.load('../data/long_tau_vs_ac_mat'+useDb +'_' + filetag +  '.npy')

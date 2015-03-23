@@ -148,3 +148,11 @@ CIRC VAR (10004,)
 # valid neurons E:  3 , I:  3101
 saving figures as ff_vs_ori_frft_5.0_cvlt_0.9_delom.png
 saving mean tuningcurve as tuning_curves_frft_5.0_cvlt_0.9_delom.png
+dbname =  init_a0t24T100
+filebase =  /homecentral/srao/Documents/code/cuda/
+table type: defalut
+/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr0.csv
+file does not exist (/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr0.csv) :
+/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr1.csv
+file does not exist (/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr1.csv) :
+done

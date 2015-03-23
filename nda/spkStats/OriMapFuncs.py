@@ -41,7 +41,6 @@ dbName = sys.argv[1] #"omR020a0T3Tr15" #
 NE = 4
 tuningCurves = np.load(basefolder + '/db/data/tuningCurves_' + dbName + '.npy')
 po = GetPO.POofPopulation(tuningCurves)
-kb.keyboard()
 #po = np.argmax(tuningCurves, 1)
 
 neuronType = 'I'
@@ -49,7 +48,7 @@ if(neuronType == 'E'):
     poe = po[:NE]
 else:
     poe = po[NE:]
-x = poe.reshape((100, 100))
+x = poe.reshape((200, 200))
 #x = x * (np.pi / 8.0)
 footprint = np.array([[1,1,1],
                       [1,1,1],
@@ -68,27 +67,28 @@ plt.xlabel('x cordinate')
 plt.ylabel('y cordinate')
 plt.gca().set_xticklabels(np.arange(0, 1.1, .2))
 plt.gca().set_yticklabels(np.arange(0, 1.1, .2))
-plt.ylim((0, 100))
-kb.keyboard()
+plt.ylim((0, 200))
+#kb.keyboard()
 #plt.pcolor(x, vmin = 0, vmax = np.max(x[:]), cmap =  'hsv')
 #plt.colorbar()
 plt.title('PO %s neurons'%(neuronType))
 #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
-figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/mar19/'
+figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
 filename = 'OriMapFunc_' + dbName + '_POmap_%s'%(neuronType)  
 plt.show()
-L = 100.0
-radii = np.arange(0, L * 0.5 + 0.001, L * 0.5 / 5.0) # left limits of the set
+L = 200.0
+nRings = 3.0
+radii = np.arange(0, L * 0.5 + 0.001, L * 0.5 / nRings) # left limits of the set
 axHandle = plt.gca()
 for kk, kRadius in enumerate(radii[1:]):
-    circObj = plt.Circle((50, 50), kRadius, color = 'w', fill = False, linewidth = 2)
+    circObj = plt.Circle((L*0.5, L*0.5), kRadius, color = 'w', fill = False, linewidth = 2)
     axHandle.add_artist(circObj)
     if(kk > 0 and kk < 5):
-        plt.text(50, 50 + (radii[kk] + radii[kk+1])*0.5 - 0.025, '%s'%(kk), color='w', weight = 'bold')
+        plt.text(L*0.5, L*0.5 + (radii[kk] + radii[kk+1])*0.5 - 0.025, '%s'%(kk), color='w', weight = 'bold')
     if(kk == 0):
-        plt.text(50, 50, '0', color='w', weight = 'bold')
+        plt.text(L*0.5, L*0.5, '0', color='w', weight = 'bold')
 plt.draw()
-plt.waitforbuttonpress()
+#plt.waitforbuttonpress()
 
 Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
 plt.figure()
@@ -104,4 +104,15 @@ plt.gca().set_yticklabels(np.arange(0, 1.1, .2))
 filename = 'OriMapFunc_' + dbName + '_POmapLocalCorr_%s'%(neuronType)
 Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
 
+plt.clf()
+poCnt, poBins = np.histogram(poe * 180.0 / np.pi, 10)
+print poCnt.sum()
+#kb.keyboard()
+plt.bar(poBins[:-1], poCnt, color = 'k', edgecolor='w', width = np.mean(np.diff(poBins)))
+plt.xlabel('Preffered orientation')
+plt.ylabel('Counts')
+plt.title('PO distribution in I neurons')
+plt.draw()
+filename = 'OriMapFunc_' + dbName + '_POhist_%s'%(neuronType)
+Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize = [6.0, 4.56])
 #plt.waitforbuttonpress()

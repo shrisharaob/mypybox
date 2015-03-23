@@ -4,6 +4,7 @@ import sys, code
 basefolder = "/homecentral/srao/Documents/code/mypybox"
 sys.path.append(basefolder + "/utils")
 from Print2Pdf import Print2Pdf
+import Keyboard as kb
 
 def CircVar(firingRate, atTheta):
     zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
@@ -27,7 +28,7 @@ def keyboard(banner=None):
 
 
 if __name__ == "__main__":
-    NE = 4
+    NE = 10000
     NI = 10000
 #    tc = np.load('tuningCurves_bidirEE.npy')
 #    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
@@ -52,7 +53,8 @@ if __name__ == "__main__":
 
 #    keyboard()
     # PLOT
-    plt.figure(); plt.ioff()
+    f00 = plt.figure();
+    plt.ioff()
     plt.hist(cvE, 25, fc = 'k', edgecolor = 'w')
     plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
     plt.ylabel('Neuron count', fontsize = 20)
@@ -60,9 +62,16 @@ if __name__ == "__main__":
  #   plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
     filename = 'ori_cvDistr_E_' + dbName 
 #    figFolder = '/homecentral/srao/Documents/cnrs/figures/feb23/'
-    figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/mar19/'
+    figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/'
 #    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [5.0, 4.26])
-    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=12, labelFontsize = 20, titleSize = 12,  paperSize = [6.0, 5.26])
+    kb.keyboard()
+    labels = [item.get_text() for item in f00.gca().get_xticklabels()]
+    labels[0] = "0.0\nhighly tuned"
+    labels[-1] = "1.0\nnot selective"
+    f00.gca().set_xticklabels(labels)
+    plt.draw()
+
+    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [6.0, 5.26])
 
     
 #    plt.savefig(filename)
@@ -70,8 +79,17 @@ if __name__ == "__main__":
     plt.clf()
     plt.ioff()
     plt.hist(cvI, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance, I neurons', fontsize = 20)
-    plt.ylabel('Neuron count', fontsize = 20)
+    plt.xlabel('Circular vaiance, I neurons') 
+    plt.ylabel('Neuron count') 
+    labels = [item.get_text() for item in plt.gca().get_xticklabels()]
+    tmpLabels = labels
+    print labels
+    labels[0] = "0.0\nhighly tuned"
+    labels[-1] = "1.0\nnot selective"
+
+    print tmpLabels
+    plt.gca().set_xticklabels(labels)
+    plt.draw()
     #plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
 #    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
 #    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
@@ -79,6 +97,8 @@ if __name__ == "__main__":
 #    plt.title(r'NI = 1E4, K = 2E3', fontsize = 20)
     filename = 'ori_cvDistr_I_' + dbName 
     #Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=8, labelFontsize = 8, titleSize = 8,  paperSize = [4.26, 3.46])
+
+    kb.keyboard()
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [4.26, 3.26])
     #plt.savefig(filename)
     print figFolder + filename
