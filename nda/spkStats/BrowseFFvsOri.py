@@ -18,6 +18,7 @@ sys.path.append(basefolder + "/utils")
 from DefaultArgs import DefaultArgs
 from reportfig import ReportFig
 from Print2Pdf import Print2Pdf
+import GetPO
 
 def PlotFFGivenCordinates(x, y, ax_tc, ax_ff, nNeuronsInPatch, neuronType = 'E'):
 #    fg_tc, ax_tc = plt.subplots()
@@ -52,6 +53,38 @@ def PlotFFGivenCordinates(x, y, ax_tc, ax_ff, nNeuronsInPatch, neuronType = 'E')
     plt.show()
     return 0
 
+def PlotFFvsFr(ax_scatter, atIndex):
+    frAtPO = np.empty((neuronsOnPatch, ))
+    frAtPO[:] = np.nan
+    ffAtPO = np.empty((neuronsOnPatch, ))
+    ffAtPO[:] = np.nan
+    for jk in np.arange(neuronsOnPatch):
+        if(neuronType == 'E'):
+            jkTuningCurve = tuningCurves[jk, :]
+            jkff = fanoFactor[jk, :]
+            jkPO = np.argmax(jkTuningCurve) 
+            jkTuningCurve = np.roll(jkTuningCurve, -1 * jkPO)   # shift 2 zero
+            jkff = np.roll(jkff, -1 * jkPO)   # shift 2 zero
+            frAtPO[jk] = jkTuningCurve[atIndex]
+            ffAtPO[jk] = jkff[atIndex]
+        else:
+            jkTuningCurve = tuningCurves[jk+NE, :]
+            jkff = fanoFactor[jk+NE, :]
+            jkPO = np.argmax(jkTuningCurve) 
+            jkTuningCurve = np.roll(jkTuningCurve, -1 * jkPO)   # shift 2 zero
+            jkff = np.roll(jkff, -1 * jkPO)   # shift 2 zero
+            frAtPO[jk] = jkTuningCurve[atIndex]
+            ffAtPO[jk] = jkff[atIndex]
+    #ax_scatter.plot(frAtPO, ffAtPO, '.')
+    #ax_scatter.hist(ffAtPO[~np.isnan(ffAtPO)], 26, alpha=0.2)
+    fcnt, fbins = np.histogram(ffAtPO[~np.isnan(ffAtPO)], 26)
+    ax_scatter.plot(fbins[:-1], fcnt / float(fcnt.sum()), label = '%s'%(atIndex))
+    print atIndex, '=', np.nanmean(ffAtPO)
+    return np.nanmean(ffAtPO)
+#    ax_scatter_xlim = ax_scatter.get_xlim()
+#    ax_scatter_ylim = ax_scatter.get_ylim()
+#    ax_scatter.plot(ax_scatter_ylim, ax_scatter_ylim, 'r')
+
 # def onclick(event):
 #     x = int(event.xdata)
 #     y = int(event.ydata)
@@ -64,15 +97,15 @@ def keyp(event):
         figname = dbName + '%s'%(figCounter)
         figCounter += 1
         print "saving figure as", figname, ' in', figFolder
-        Print2Pdf(plt.gca(), figFolder + figname, figFormat='png', tickFontsize=10)        
+        Print2Pdf(plt.gcf(), figFolder + figname, figFormat='png', tickFontsize=10)        
 
 if __name__ == "__main__":
     dbName = sys.argv[1]
     thetaStep = 22.5
     thetas = np.arange(0, 180., thetaStep)
-    NE = 4
+    NE = 40000
     NI = 10000
-    neuronType = 'I'
+    neuronType = 'E'
 
     figCounter = -1
     figFolder = basefolder + '/nda/spkStats/figs_browse_orimap/' + dbName + '/'
@@ -83,41 +116,53 @@ if __name__ == "__main__":
     preferredOri = np.argmax(tuningCurves, 0) 
     firingThresh = 2.0
 #    invalidId = np.max(tuningCurves, 1) < firingThresh
-    po = np.argmax(tuningCurves, 1)
+#    po = np.argmax(tuningCurves, 1)
+    po = GetPO.POofPopulation(tuningCurves)
     if(neuronType == 'E'):
         poe = po[:NE]
         neuronsOnPatch = NE
+        xDim = int(np.sqrt(NE))
+        yDim = xDim
     else :
         poe = po[NE:]
         neuronsOnPatch = NI
+        xDim = int(np.sqrt(NI))
+        yDim = xDim
  #   poe[invalidId] = np.nan
     print poe.shape, tuningCurves.shape
     fg = plt.figure(0)
     ax_po = plt.subplot2grid((2,2), (0, 0), aspect = 'equal') #, rowspan=2)
-    ax_po.set_xlim((0, 100))
-    ax_po.set_ylim((0, 100))
+    ax_po.set_xlim((0, xDim))
+    ax_po.set_ylim((0, yDim))
     ax_po.set_title('PO in layer 2/3 %s neurons'%(neuronType))
     ax_po.set_xlabel('x')
     ax_po.set_ylabel('y')
     ax_po.set_position([0.125, 0.58, 0.3, 0.3])
     ax_tc = plt.subplot2grid((2,2), (1, 0))
     ax_ff = plt.subplot2grid((2,2), (1, 1))
+    ax_scatter = plt.subplot2grid((2,2), (0, 1))
+    plt.draw()
     print ax_tc.get_position()
     print ax_ff.get_position()
     ax_tc.set_position([0.125, 0.1, 0.363636, 0.363636])
     ax_ff.set_position([0.57, 0.1, 0.363636, 0.363636])
     plt.ion()
-    im = ax_po.imshow(poe.reshape((100, 100)) * 22.5, cmap='hsv')
+    im = ax_po.imshow(poe.reshape((xDim, yDim)) * 22.5, cmap='hsv')
+    tmpfm = np.zeros((8, ))
+    for lk in range(8):
+        tmpfm[lk] = PlotFFvsFr(ax_scatter, lk)
+    plt.figure()
+    plt.plot(tmpfm, 'ko-')
+    kb.keyboard()
+    ax_scatter.legend()
     plt.draw()
     plt.show()
     plt.colorbar(im, ax=ax_po)
-
     fg.canvas.mpl_connect('key_press_event', keyp)
-
     while(plt.fignum_exists(0)):
         plt.figure(0)
         xyCordinates = plt.ginput(1)
-        neuronId = np.ravel_multi_index((int(xyCordinates[0][0]), int(xyCordinates[0][1])), (100, 100))
+        neuronId = np.ravel_multi_index((int(xyCordinates[0][0]), int(xyCordinates[0][1])), (xDim, yDim))
         if(np.max(tuningCurves[neuronId, :]) >= firingThresh):
             #circleObj = plt.Circle((int(xyCordinates[0][0]), int(xyCordinates[0][1])), 1.0, color = 'w', fill = False)
             #ax_po.add_artist(circleObj)

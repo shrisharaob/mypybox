@@ -82,8 +82,8 @@ def FanoInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronI
 if __name__ == "__main__":
     alpha = np.array([0.0])
 #    NE = 10000
-    NE = 4
-    NI = 40000
+    NE = 40000
+    NI = 10000
     simDuration = 2000
     spkTimeStart = 1000.0
     spkTimeEnd = 2000.0
@@ -251,7 +251,7 @@ if __name__ == "__main__":
         meanFrI = np.roll(meanFrI, 4)
         thetas = np.arange(-90, 90, 22.5)
 
- #       plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+        plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
 
         plt.plot(thetas, meanI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
@@ -264,12 +264,13 @@ if __name__ == "__main__":
         print "saving figures as", filename
         #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
         figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
-        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=12, paperSize = [4.0, 3.0])
+        ftsize = 10.0
+        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
 #        plt.ion(); plt.show(); plt.waitforbuttonpress()
 #        plt.savefig(filename, format='png')
         plt.clf()
  
-#        plt.plot(thetas, meanFrE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
+        plt.plot(thetas, meanFrE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
 
         plt.plot(thetas, meanFrI, 'ro-', label='I (N = %s)'%(np.sum(plotId > NE)))
         plt.grid()
@@ -285,8 +286,8 @@ if __name__ == "__main__":
         plt.legend(loc=0, prop={'size':10})
 
 #    figFolder = '/homecentral/srao/Documents/code/mypybox/db/'
-        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
- #       plt.ion(); plt.show()
+        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+     #       plt.ion(); plt.show()
         
         # plt.figure()
         # plt.plot(np.transpose(tcMat), color = [0.9, 0.9, 0.9])

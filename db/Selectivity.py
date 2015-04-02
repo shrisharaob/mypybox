@@ -28,7 +28,7 @@ def keyboard(banner=None):
 
 
 if __name__ == "__main__":
-    NE = 10000
+    NE = 40000
     NI = 10000
 #    tc = np.load('tuningCurves_bidirEE.npy')
 #    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
@@ -55,8 +55,12 @@ if __name__ == "__main__":
     # PLOT
     f00 = plt.figure();
     plt.ioff()
-    plt.hist(cvE, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
+#    plt.hist(cvE, 25, fc = 'k', edgecolor = 'w')
+    cveCnt, cvEbins = np.histogram(cvE, 26)
+    plt.plot(cvEbins[:-1], cveCnt, 'k.-', label = 'E')
+
+    
+#    plt.xlabel('Circular vaiance, E neurons', fontsize = 20)
     plt.ylabel('Neuron count', fontsize = 20)
 #    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
  #   plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
@@ -64,23 +68,26 @@ if __name__ == "__main__":
 #    figFolder = '/homecentral/srao/Documents/cnrs/figures/feb23/'
     figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/'
 #    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [5.0, 4.26])
-    kb.keyboard()
-    labels = [item.get_text() for item in f00.gca().get_xticklabels()]
-    labels[0] = "0.0\nhighly tuned"
-    labels[-1] = "1.0\nnot selective"
-    f00.gca().set_xticklabels(labels)
-    plt.draw()
+ #   kb.keyboard()
+    # labels = [item.get_text() for item in f00.gca().get_xticklabels()]
+    # labels[0] = "0.0\nhighly tuned"
+    # labels[-1] = "1.0\nnot selective"
+    # f00.gca().set_xticklabels(labels)
+    # plt.draw()
 
-    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [6.0, 5.26])
+#    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [4.26/1.3, 3.26/1.3])
 
     
 #    plt.savefig(filename)
 #    plt.waitforbuttonpress()
-    plt.clf()
-    plt.ioff()
-    plt.hist(cvI, 25, fc = 'k', edgecolor = 'w')
-    plt.xlabel('Circular vaiance, I neurons') 
-    plt.ylabel('Neuron count') 
+    #plt.clf()
+
+#    plt.hist(cvI, 25, fc = 'k', edgecolor = 'w')
+    cviCnt, cvIbins = np.histogram(cvI, 26)
+    plt.plot(cvIbins[:-1], cviCnt, 'r.-', label = 'I')
+    plt.xlabel('Circular vaiance') 
+    plt.ylabel('Neuron count')
+    plt.title('Distribution of circular variance')
     labels = [item.get_text() for item in plt.gca().get_xticklabels()]
     tmpLabels = labels
     print labels
@@ -90,16 +97,24 @@ if __name__ == "__main__":
     print tmpLabels
     plt.gca().set_xticklabels(labels)
     plt.draw()
-    #plt.title('NE = NI = 1.96E4, K = 2E3, C = 100, KSI = 1.2')
-#    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0, \; \xi = 1.2$', fontsize = 20)
-#    plt.title(r'NE = NI = 1E4, K = 1E3, C = 100, $\alpha = 0.0$', fontsize = 20)
-#    plt.title(r'NE = NI = 1E4, K = 1E3', fontsize = 20)
-#    plt.title(r'NI = 1E4, K = 2E3', fontsize = 20)
-    filename = 'ori_cvDistr_I_' + dbName 
-    #Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=8, labelFontsize = 8, titleSize = 8,  paperSize = [4.26, 3.46])
+    filename = 'ori_cvDistr_EI_' + dbName
+    plt.legend()
+    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
 
-    kb.keyboard()
-    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [4.26, 3.26])
+    plt.clf()
+    plt.plot(cvEbins[:-1], cveCnt / float(cveCnt.sum()), 'k.-', label = 'E')
+    plt.plot(cvIbins[:-1], cviCnt / float(cviCnt.sum()), 'r.-', label = 'I')
+    plt.xlabel('Circular vaiance') 
+    plt.ylabel('Normalized count')
+    plt.title('Distribution of circular variance')
+    labels = [item.get_text() for item in plt.gca().get_xticklabels()]
+    tmpLabels = labels
+    print labels
+    labels[0] = "0.0\nhighly tuned"
+    labels[-1] = "1.0\nnot selective"
+    plt.legend()
+    filename = 'ori_cvDistr_EI_normalized_' + dbName
+    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
     #plt.savefig(filename)
     print figFolder + filename
     # plt.ion()
