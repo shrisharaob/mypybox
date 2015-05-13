@@ -52,14 +52,15 @@ def NspksForThetaForAllTrials(dbName, neuronId, discardTime, nTrials, theta):
 
 
 dbName = sys.argv[1] #"bidirEE" #"anatomic" #"tstDb"
-#N_NEURONS = np.arange(0, 20000, 1)
-N_NEURONS = np.arange(0, 50000, 1)
+N_NEURONS = np.arange(0, 20000, 1)
+#N_NEURONS = np.arange(0, 50000, 1)
 thetaStart = 0.0
-thetaStep = 22.5
+thetaStep = 22.5/2.0
 thetaEnd = 180.0
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
+#theta = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
 theta = theta.astype('int')
-trialLength = 2.0 # in seconds
+trialLength = 3.0 # in seconds
 discardTime = 1000.0 #ms
 if(len(sys.argv)> 1):
     try:
@@ -75,7 +76,7 @@ print "nTrials = ", nTrials
 tuningCurve = np.zeros((len(N_NEURONS), len(theta)))
 trialLength = trialLength - discardTime / 1000.0
 z = trialLength * nTrials
-pool = Pool(20)
+pool = Pool(16)
 print "Computing ...",
 sys.stdout.flush()
 for idx, kNeuron in enumerate(N_NEURONS):

@@ -28,15 +28,18 @@ def keyboard(banner=None):
 
 
 if __name__ == "__main__":
-    NE = 40000
+#    NE = 40000
+    NE = 10000
     NI = 10000
 #    tc = np.load('tuningCurves_bidirEE.npy')
 #    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
 #    dbName  = 'a0t3T3xi12tr15'
     dbName = sys.argv[1]
+    print './data/tuningCurves_' + dbName + '.npy'
     tc = np.load('./data/tuningCurves_' + dbName + '.npy')
     print tc.shape
-    theta = np.arange(0, 180, 22.5)
+    theta = np.arange(0, 180, 22.5/2.0)
+#    theta = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
 #    theta = np.arange(0, 360, 45.0)
     circVariance = np.zeros((NE + NI,))
     neuronIdx = np.arange(NE + NI)
@@ -98,7 +101,7 @@ if __name__ == "__main__":
     plt.gca().set_xticklabels(labels)
     plt.draw()
     filename = 'ori_cvDistr_EI_' + dbName
-    plt.legend()
+    plt.legend(loc=0)
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
 
     plt.clf()
@@ -112,7 +115,7 @@ if __name__ == "__main__":
     print labels
     labels[0] = "0.0\nhighly tuned"
     labels[-1] = "1.0\nnot selective"
-    plt.legend()
+    plt.legend(loc=0)
     filename = 'ori_cvDistr_EI_normalized_' + dbName
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
     #plt.savefig(filename)

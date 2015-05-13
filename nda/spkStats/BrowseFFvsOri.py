@@ -159,8 +159,8 @@ if __name__ == "__main__":
     plt.show()
     plt.colorbar(im, ax=ax_po)
     fg.canvas.mpl_connect('key_press_event', keyp)
-    while(plt.fignum_exists(0)):
-        plt.figure(0)
+    while(plt.fignum_exists(fg.number)):
+        plt.figure(fg.number)
         xyCordinates = plt.ginput(1)
         neuronId = np.ravel_multi_index((int(xyCordinates[0][0]), int(xyCordinates[0][1])), (xDim, yDim))
         if(np.max(tuningCurves[neuronId, :]) >= firingThresh):

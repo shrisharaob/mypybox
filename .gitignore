@@ -10,3 +10,6 @@
 *.pdf
 *.svg
 *.out
+*.dat
+*.so
+*.o

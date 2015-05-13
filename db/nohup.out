@@ -156,3 +156,10 @@ file does not exist (/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0
 /homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr1.csv
 file does not exist (/homecentral/srao/Documents/code/cuda/spkTimes_xi1.2_theta0_0.50_24.0_100000_tr1.csv) :
 done
+Selectivity.py:11: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+(50000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+['', '', '', '', '', '']
+/homecentral/srao/Documents/code/mypybox/db/figs/ori_cvDistr_EI_normalized_om2pope4i1f2r19e1

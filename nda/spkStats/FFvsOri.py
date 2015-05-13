@@ -41,7 +41,7 @@ def CVInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronId)
     db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
     dbCursor = db.cursor()
     db.autocommit(True)
-    thetas = np.arange(0., 180., 22.5)
+ #   thetas = np.arange(0., 180., 22.5)
     cvVsTheta = np.empty((thetas.size, ))
     thetas = thetas.astype(int)
     for mm, mTheta in enumerate(thetas):
@@ -66,7 +66,9 @@ def FanoInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronI
     fanoFactor = np.empty((1, ))
     fanoFactor[:] = np.nan
 #    print "neuronId", neuronId
-    thetas = np.arange(0., 180., 22.5)
+#    thetas = np.arange(0., 180., 22.5)
+#    thetas = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
+    thetas = np.arange(0., 180., 22.5/2.0)
     ffvsTheta = np.empty((thetas.size, ))
     thetas = thetas.astype(int)
     for mm, mTheta in enumerate(thetas):
@@ -81,12 +83,12 @@ def FanoInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronI
 
 if __name__ == "__main__":
     alpha = np.array([0.0])
-#    NE = 10000
-    NE = 40000
+    NE = 10000
+#    NE = 40000
     NI = 10000
-    simDuration = 2000
+    simDuration = 3000
     spkTimeStart = 1000.0
-    spkTimeEnd = 2000.0
+    spkTimeEnd = 3000.0
     simDT = 0.05
     tau = 3.0
     binSize = 50.0  # in ms fano factor observation window
@@ -97,14 +99,15 @@ if __name__ == "__main__":
     except ValueError:
         print 'ntrials not an interetr !'
         raise
-    thetas = np.arange(0., 180., 22.5)
+    thetas = np.arange(0., 180., 22.5/2.0)
+#    thetas = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
     filebase = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/data/'
     if(computeType == 'compute'):
         neuronsList = np.arange(NE + NI)
         ffMat = np.empty((NE+NI, len(thetas))) # matrix N_NEURONS-by-theta with each element containing the fano factor 
         ffMat[:] = np.nan
         func = partial(FanoInIntervalForAllTheta, dbName, spkTimeStart, spkTimeEnd, nTrials)
-        p = Pool(20)
+        p = Pool(34)
         result = p.map(func, neuronsList) 
         p.close()
         ffMat = np.asarray(result)
@@ -198,7 +201,7 @@ if __name__ == "__main__":
         plt.title(r'Distribution of circular variance of Fano factor, $\alpha = %s$'%(alpha))
         plt.ion()
         plt.show()
-        kb.keyboard()
+#        kb.keyboard()
     elif(computeType == 'ff_po_scatter'):
         tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_bidirII_%s.npy'%((dbName, )))
         filename = os.path.splitext(sys.argv[0])[0]
@@ -212,7 +215,7 @@ if __name__ == "__main__":
         plt.plot(ffMat[NE:,0], ffMat[NE:, 4], '.r')
         plt.plot(ffMat[:NE,0], ffMat[:NE, 4], '.k')
         plt.ion()
-        kb.keyboard()
+#        kb.keyboard()
 
     else:
         print "plotting ", "here"
@@ -242,14 +245,17 @@ if __name__ == "__main__":
         print "# valid neurons E: ", np.sum(plotId < NE), ", I: ", np.sum(plotId > NE)
         meanE = np.nanmean(ffMat[plotId[plotId < NE], :], 0)
         meanI = np.nanmean(ffMat[plotId[plotId > NE], :], 0)
-        meanFrE = np.mean(tcMat[plotId[plotId < NE], :], 0)
-        meanFrI = np.mean(tcMat[plotId[plotId > NE], :], 0)
+        meanFrE = np.nanmean(tcMat[plotId[plotId < NE], :], 0)
+        meanFrI = np.nanmean(tcMat[plotId[plotId > NE], :], 0)
 #        kb.keyboard()
-        meanE = np.roll(meanE, 4)
-        meanI = np.roll(meanI, 4)
-        meanFrE = np.roll(meanFrE, 4)
-        meanFrI = np.roll(meanFrI, 4)
-        thetas = np.arange(-90, 90, 22.5)
+        meanE = np.roll(meanE, 8)
+        meanI = np.roll(meanI, 8)
+        meanFrE = np.roll(meanFrE, 8)
+        meanFrI = np.roll(meanFrI, 8)
+        thetas = np.arange(-90, 90, 22.5/2)
+
+
+#        kb.keyboard()
 
         plt.plot(thetas, meanE, 'ko-', label='E (N = %s)'%(np.sum(plotId < NE)))
 
@@ -257,6 +263,7 @@ if __name__ == "__main__":
         plt.xlabel(r'Stimulus orientation ($\deg$)', fontsize = 20)
         plt.ylabel('Mean fano factor', fontsize = 20)
   #      plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
+        np.save('delthis11', np.array([meanE, meanI]))
         plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)
         plt.grid()
         plt.legend(loc=0, prop={'size':10})

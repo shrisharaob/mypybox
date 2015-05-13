@@ -43,7 +43,7 @@ if __name__ == "__main__":
     argc = len(sys.argv)
     filebase = "/homecentral/srao/Documents/code/cuda/cudanw/"
     thetaStart = 0
-    thetaStep = 45
+    thetaStep = 22.5
     thetaEnd = 1
     dbName = "biII_8"
     tblType = 'defalut'

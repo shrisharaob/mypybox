@@ -22,7 +22,7 @@ def Print2Pdf_Old(axHandle, figname, paperSize = [4.26, 3.26], figFormat = 'pdf'
 
 
 
-def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', labelFontsize = 12.0, tickFontsize = 12.0, titleSize = 12.0):
+def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', labelFontsize = 12.0, tickFontsize = 12.0, titleSize = 12.0, IF_ADJUST_POSITION = False, axPosition = [0.125,  0.1, 0.775  ,  0.8]):
 #    plt.rcParams['figure.figsize'] = paperSize[0], paperSize[1]
  #   plt.rcParams['axes.labelsize'] = labelFontsize
     figHandle.set_figwidth(paperSize[0])
@@ -33,6 +33,9 @@ def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', l
     axHandle.set_ylabel(axHandle.get_ylabel(), fontsize = labelFontsize);
     yed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.yaxis.get_major_ticks()]
     xed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.xaxis.get_major_ticks()]
-    plt.draw()
-    plt.savefig(figname + '.' + figFormat, format=figFormat)
+    if(IF_ADJUST_POSITION):
+#        plt.gca().set_position(axPosition) #[0.15, 0.15, .8, .75]
+         axHandle.set_position(axPosition) #[0.15, 0.15, .8, .75]
+    figHandle.canvas.draw()
+    figHandle.savefig(figname + '.' + figFormat, format=figFormat)
     

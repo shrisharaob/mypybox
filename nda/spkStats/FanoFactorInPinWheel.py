@@ -68,7 +68,7 @@ ffVsOri = np.load(dataFolder + 'FFvsOri_' + dbName + '.npy')
 print ffVsOri.shape
 tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
 circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/data/Selectivity_' + dbName + '.npy')
-neuronType = 'E'
+neuronType = 'I'
 if(neuronType == 'E'):
     nNeurons = NE
     ffVsOri = ffVsOri[:NE, :]
@@ -83,8 +83,8 @@ ffVsRadius = np.zeros((radii.size - 1, theta.size))
 firingRateVsRadius = np.zeros((radii.size - 1, theta.size))
 nNeuronsInRing = np.zeros((radii.size - 1, ))
 neuronIds = np.arange(nNeurons)
-firingThresh = 0.0
-circThresh = 1.0
+firingThresh = 10.0
+circThresh = 0.5
 #validNeuronIdx = np.empty((neuronIds.size, )) #np.max(tc, 1) > firingThresh
 #validNeuronIdx[:] = True
 validNeuronIdx = np.max(tc, 1) > firingThresh
