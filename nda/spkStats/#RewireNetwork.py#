@@ -91,8 +91,8 @@ if __name__ == '__main__':
         print "computing prob I --> E"
         for i in np.arange(NE, NE+NI, 1):
             cprob[i, :NE] = ConProbFunc(np.abs(po[i] - poe[:]), thetaSigI) # I --> E
-        print "computing prefactor"            
-        zb = K / cprob[NE:, :NE].sum(0)        
+        print "computing prefactor"        
+        zb = K / cprob[NE:, :NE].sum(0)
         cprob[NE:, :NE] = cprob[NE:, :NE] * zb
     elif NetworkType == 'uni':
         cprob[:NE, :NE] = float(K) / NE # E --> E

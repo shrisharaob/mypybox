@@ -38,7 +38,7 @@ if __name__ == "__main__":
     print './data/tuningCurves_' + dbName + '.npy'
     tc = np.load('./data/tuningCurves_' + dbName + '.npy')
     print tc.shape
-    theta = np.arange(0, 180, 22.5/2.0)
+    theta = np.arange(0, 180, 22.5)
 #    theta = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
 #    theta = np.arange(0, 360, 45.0)
     circVariance = np.zeros((NE + NI,))

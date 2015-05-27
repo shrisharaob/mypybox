@@ -68,7 +68,7 @@ def FanoInIntervalForAllTheta(dbName, spkTimeStart, spkTimeEnd, nTrials, neuronI
 #    print "neuronId", neuronId
 #    thetas = np.arange(0., 180., 22.5)
 #    thetas = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
-    thetas = np.arange(0., 180., 22.5/2.0)
+    thetas = np.arange(0., 180., 22.5)
     ffvsTheta = np.empty((thetas.size, ))
     thetas = thetas.astype(int)
     for mm, mTheta in enumerate(thetas):
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     except ValueError:
         print 'ntrials not an interetr !'
         raise
-    thetas = np.arange(0., 180., 22.5/2.0)
+    thetas = np.arange(0., 180., 22.5)
 #    thetas = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
     filebase = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/data/'
     if(computeType == 'compute'):
@@ -222,7 +222,7 @@ if __name__ == "__main__":
         tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, ))); 
         print tc.shape
         #tc = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/tuningCurves_allAnglesa0T4xi12C100Tr100.npy')
-        filename = 'FFvsOri' #os.path.splitext(sys.argv[0])[0]
+        filename = 'FFvsOri' #os.path.splitebxt(sys.argv[0])[0]
         ff = np.load(filebase + filename + '_' + dbName + '.npy')
         print tc.shape, ff.shape
         #ff = np.load('/home/shrisha/Documents/cnrs/tmp/jan30/FFvsOri_allAnglesa0T4xi12C100Tr100.npy')
@@ -248,11 +248,12 @@ if __name__ == "__main__":
         meanFrE = np.nanmean(tcMat[plotId[plotId < NE], :], 0)
         meanFrI = np.nanmean(tcMat[plotId[plotId > NE], :], 0)
 #        kb.keyboard()
-        meanE = np.roll(meanE, 8)
-        meanI = np.roll(meanI, 8)
-        meanFrE = np.roll(meanFrE, 8)
-        meanFrI = np.roll(meanFrI, 8)
-        thetas = np.arange(-90, 90, 22.5/2)
+        rotateMeanBy = 4
+        meanE = np.roll(meanE, rotateMeanBy)
+        meanI = np.roll(meanI, rotateMeanBy)
+        meanFrE = np.roll(meanFrE, rotateMeanBy)
+        meanFrI = np.roll(meanFrI, rotateMeanBy)
+        thetas = np.arange(-90, 90, 22.5)
 
 
 #        kb.keyboard()
@@ -272,7 +273,8 @@ if __name__ == "__main__":
         #figFolder = '/homecentral/srao/Documents/cnrs/figures/feb28/'
         figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
         ftsize = 10.0
-        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+#        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+        Print2Pdf(plt.gcf(),  figFolder + filename, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
 #        plt.ion(); plt.show(); plt.waitforbuttonpress()
 #        plt.savefig(filename, format='png')
         plt.clf()
@@ -293,7 +295,8 @@ if __name__ == "__main__":
         plt.legend(loc=0, prop={'size':10})
 
 #    figFolder = '/homecentral/srao/Documents/code/mypybox/db/'
-        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+  #      Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+        Print2Pdf(plt.gcf(),  figFolder + filename, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
      #       plt.ion(); plt.show()
         
         # plt.figure()

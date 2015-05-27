@@ -11,8 +11,8 @@ set -x
 echo \# Trials = $NTRIALS
 if [ -d "$DATA_DIRECTORY" ]; then
     python CreateMySqlDB.py $1
-#    python PopulatDbFrmList.py $1 /homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/$2/ $4;
-#    python PopulatDbFrmList.py $1 /homecentral/srao/Documents/code/cuda/$2/ $4;
+###    python PopulatDbFrmList.py $1 /homecentral/srao/Documents/code/cuda/tmp/alpha0/oriMap/$2/ $4;
+###    python PopulatDbFrmList.py $1 /homecentral/srao/Documents/code/cuda/$2/ $4;
     python PopulatDbFrmList.py $1 $2 $4;
     python GenIndex.py $1; 
     python ComputeTuning.py $1 $NTRIALS; 

@@ -66,9 +66,24 @@ def ComputePO(firingRate, thetas):
     
 def POofPopulation(tc):
     # return value in radians
-    theta = np.arange(0.0, 180.0, 22.5/2)
+    theta = np.arange(0.0, 180.0, 22.5/2.0)
     nNeurons, _ = tc.shape
     po = np.zeros((nNeurons, ))
     for kNeuron in np.arange(nNeurons):
         po[kNeuron] = ComputePO(tc[kNeuron, :], theta)
     return po 
+
+
+
+def OSIofPopulation(tc, theta = np.arange(0.0, 180.0, 22.5)):
+    # returon OSI, OSI 1 is good selectivity
+#    theta = np.arange
+    nNeurons, _ = tc.shape
+    po = np.argmax(tc, 1)
+    OSI = np.zeros((nNeurons, ))
+    midPoint = theta.size / 2
+    for kNeuron in np.arange(nNeurons):
+        rPO = tc[kNeuron, po[kNeuron]]
+        rOrtho = tc[kNeuron, np.mod(po[kNeuron] + midPoint, theta.size)]
+        OSI[kNeuron] = (rPO - rOrtho) / (rPO + rOrtho)
+    return OSI
