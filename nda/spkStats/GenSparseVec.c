@@ -11,6 +11,7 @@ void GenSparseMat(int *conVec,  int rows, int clms, int* sparseVec, int* idxVec,
     nPost = 0;
     for(j = 0; j < clms; ++j) {
       if(conVec[i + clms * j]) { /* i --> j  */
+	//        printf("%d %d : %d\n", (int)i, (int)j, (int)(i + clms * j));
         sparseVec[counter] = j;
         counter += 1;
         nPost += 1;

@@ -64,9 +64,9 @@ def ComputePO(firingRate, thetas):
         out = out + np.pi
     return out # because arctan principle domain is -90 to 90, returns in radians
     
-def POofPopulation(tc):
+def POofPopulation(tc, theta = np.arange(0.0, 180.0, 22.5/2.0)):
     # return value in radians
-    theta = np.arange(0.0, 180.0, 22.5/2.0)
+#    theta = np.arange(0.0, 180.0, 22.5/2.0)
     nNeurons, _ = tc.shape
     po = np.zeros((nNeurons, ))
     for kNeuron in np.arange(nNeurons):

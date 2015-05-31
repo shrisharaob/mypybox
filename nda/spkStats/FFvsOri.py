@@ -248,7 +248,7 @@ if __name__ == "__main__":
         meanFrE = np.nanmean(tcMat[plotId[plotId < NE], :], 0)
         meanFrI = np.nanmean(tcMat[plotId[plotId > NE], :], 0)
 #        kb.keyboard()
-        rotateMeanBy = 4
+        rotateMeanBy = 8
         meanE = np.roll(meanE, rotateMeanBy)
         meanI = np.roll(meanI, rotateMeanBy)
         meanFrE = np.roll(meanFrE, rotateMeanBy)
@@ -288,7 +288,9 @@ if __name__ == "__main__":
         plt.xlabel('Stimulus orientation (deg)', fontsize = 20)
         plt.ylabel('Mean firing rate (Hz)', fontsize = 20)
         #plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \xi = 1.2,\; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)      
-        plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)      
+
+#        plt.title(r'$\alpha = 0.0,\; \tau = 3.0,\; \; fr_{thresh} = %sHz, \; CircVar_{thersh} = %s$'%(firingRateThresh, circVarThresh), fontsize = 16)      
+        plt.title('Population averaged tuning curves')
         filename = 'tuning_curves_frft_%s_cvlt_%s_'%(firingRateThresh, circVarThresh) + dbName + '.png'
         print "saving mean tuningcurve as", filename
         #plt.savefig(filename)

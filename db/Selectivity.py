@@ -105,8 +105,8 @@ if __name__ == "__main__":
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
 
     plt.clf()
-    plt.plot(cvEbins[:-1], cveCnt / float(cveCnt.sum()), 'k.-', label = 'E')
-    plt.plot(cvIbins[:-1], cviCnt / float(cviCnt.sum()), 'r.-', label = 'I')
+    plt.plot(cvEbins[:-1], cveCnt / float(cveCnt.sum()), 'k.-', label = 'E (%.4s)'%(cvE.mean()))
+    plt.plot(cvIbins[:-1], cviCnt / float(cviCnt.sum()), 'r.-', label = 'I (%.4s)'%(cvI.mean()))
     plt.xlabel('Circular vaiance') 
     plt.ylabel('Normalized count')
     plt.title('Distribution of circular variance')
@@ -115,8 +115,10 @@ if __name__ == "__main__":
     print labels
     labels[0] = "0.0\nhighly tuned"
     labels[-1] = "1.0\nnot selective"
+    plt.gca().set_xticklabels(labels)
     plt.legend(loc=0)
     filename = 'ori_cvDistr_EI_normalized_' + dbName
+    kb.keyboard()
     Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
     #plt.savefig(filename)
     print figFolder + filename

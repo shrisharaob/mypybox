@@ -25,7 +25,7 @@ def ConProbFunc(thetaDiff, sig):
     #thetaDiff in radians
     return probFunc(thetaDiff, sig)
 
-os.system("gcc -o gensparsevec.so -shared GenSparseVec.c") 
+os.system("gcc -fPIC -o gensparsevec.so -shared GenSparseVec.c") 
 #os.system("gcc -g -ggdb -o gensparsevec.so -shared GenSparseVec.c")
 mycfunc = np.ctypeslib.load_library('gensparsevec.so', '.') # use gcc -o gensparsevec.so -shared GenSparseVec.c
 mycfunc.GenSparseMat.restype = None
@@ -55,7 +55,7 @@ def GenSparseMat(convec, rows, clmns, sparseVec, idxvec, nPostNeurons):
 
 if __name__ == '__main__':
     # NetworkType : {'uni', 'ori'}, 'uni' is for standard random network, 'ori' is to rewire depending on the distance in ori space
-    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75])
+    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75, ])
     NE = int(NE)
     NI = int(NI)
     K = int(K)
@@ -71,12 +71,22 @@ if __name__ == '__main__':
         poe = po[:NE]
         # sigarray = np.array([0.0125, 0.0125/2, 0.0125/4, 0.0125/8])
         print "computing prob"
-        for i in np.arange(NE):
-            cprob[i, :NE] = ConProbFunc(np.abs(poe[i] - poe[:]), thetaSig)
+#        for i in np.arange(NE):
+        for i in np.arange(NE, NE+NI):
+#            cprob[i, :NE] = ConProbFunc(np.abs(poe[i] - poe[:]), thetaSig)
+            cprob[i, NE:] = ConProbFunc(np.abs(po[i] - po[NE:]), thetaSig)
         print "computing prefactor"
-        zb = K / cprob[:NE, :NE].sum(0)
-        cprob[:NE, :NE] = cprob[:NE, :NE] * zb
-    elif NetworkType == 'oriEI':
+        #zb = K / cprob[:NE, :NE].sum(0)
+        #cprob[:NE, :NE] = cprob[:NE, :NE] * zb
+
+        zb = K / cprob[NE:, NE:].sum(0)
+        cprob[NE:, NE:] = cprob[NE:, NE:] * zb
+        
+        cprob[:NE, NE:] = float(K) / NE     # E --> I
+#        cprob[NE:, NE:] = float(K) / NI     # I --> I
+        cprob[:NE, :NE] = float(K) / NE     # E --> E
+        cprob[:NE, NE:] = float(K) / NI # I --> E
+    elif NetworkType == 'oriEI': # EE & E-to-I
         tuningCurves = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
         po = GetPO.POofPopulation(tuningCurves)
         print "po done "
@@ -91,14 +101,64 @@ if __name__ == '__main__':
         print "computing prob I --> E"
         for i in np.arange(NE, NE+NI, 1):
             cprob[i, :NE] = ConProbFunc(np.abs(po[i] - poe[:]), thetaSigI) # I --> E
-        print "computing prefactor"            
-        zb = K / cprob[NE:, :NE].sum(0)        
+        print "computing prefactor"        
+        zb = K / cprob[NE:, :NE].sum(0)
         cprob[NE:, :NE] = cprob[NE:, :NE] * zb
+        cprob[:NE, NE:] = float(K) / NE     # E --> I
+        cprob[NE:, NE:] = float(K) / NI     # I --> I
+    elif NetworkType == 'oriEEIE': # EE & I-to-E
+        tuningCurves = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
+        po = GetPO.POofPopulation(tuningCurves)
+        print "po done "
+        poe = po[:NE]
+        # sigarray = np.array([0.0125, 0.0125/2, 0.0125/4, 0.0125/8])
+        print "computing prob E --> E"
+        for i in np.arange(NE):
+            cprob[i, :NE] = ConProbFunc(np.abs(poe[i] - poe[:]), thetaSig) # E --> E
+        print "computing prefactor"
+        zb = K / cprob[:NE, :NE].sum(0)
+        cprob[:NE, :NE] = cprob[:NE, :NE] * zb
+        print "computing prob I --> E"
+        for i in np.arange(NE):
+            cprob[i, NE:] = ConProbFunc(np.abs(po[i] - po[NE:]), thetaSigI) # I --> E
+        print "computing prefactor"        
+        zb = K / cprob[:NE, NE:].sum(0)
+        cprob[:NE, NE:] = cprob[:NE, NE:] * zb
+        cprob[NE:, :NE] = float(K) / NE     # E --> I
+        cprob[NE:, NE:] = float(K) / NI     # I --> I        
+#        cprob[:NE, NE:] = float(K) / NE     # E --> I
+    elif NetworkType == 'oriII': # II
+        tuningCurves = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
+        po = GetPO.POofPopulation(tuningCurves)
+        print "po done "
+        poe = po[:NE]
+        # sigarray = np.array([0.0125, 0.0125/2, 0.0125/4, 0.0125/8])
+        print "computing prob I --> I"
+        for i in np.arange(NE, NE+NI):
+            cprob[i, NE:] = ConProbFunc(np.abs(po[i] - po[NE:]), thetaSigI) # I --> I
+        print "computing prefactor"
+        zb = K / cprob[NE:, NE:].sum(0)
+        cprob[NE:, NE:] = cprob[NE:, NE:] * zb
+        cprob[NE:, :NE] = float(K) / NE # E --> I
+        cprob[:NE, :NE] = float(K) / NE # E --> E
+        cprob[:NE, NE:] = float(K) / NI # I --> E
+    elif NetworkType == 'check':
+        NE = 2
+        NI = 2
+        idxvec = np.zeros((NE + NI, ), dtype = np.int32)
+        nPostNeurons = np.zeros((NE + NI, ), dtype = np.int32)
+        sparseVec = np.zeros(shape = (cprob.sum(), ), dtype = np.int32)
+        rows = 2
+        clmns = 2
+        cprob = np.array([[0, 0], [1, 0]])
+        print cprob
+        GenSparseMat(cprob.astype(np.int32), rows, clmns, sparseVec, idxvec, nPostNeurons)
+        sys.exit()
     elif NetworkType == 'uni':
         cprob[:NE, :NE] = float(K) / NE # E --> E
-        cprob[NE:, :NE] = float(K) / NI # I --> E
-    cprob[:NE, NE:] = float(K) / NE     # E --> I
-    cprob[NE:, NE:] = float(K) / NI     # I --> I
+        cprob[NE:, :NE] = float(K) / NE # E --> I
+        cprob[:NE, NE:] = float(K) / NI # I --> E
+        cprob[NE:, NE:] = float(K) / NI # I --> I
     print 'generating  connectivity matrix...',
     sys.stdout.flush()
     cprob = cprob > np.random.uniform(size = (cprob.shape))
@@ -120,23 +180,29 @@ if __name__ == '__main__':
 #     plt.waitforbuttonpress()
 #     plt.clf()
 # #    np.save('convec', cprob.astype(np.int32))
-    
 # #    convec[:NE, :NE] = cprob[:NE, :NE] > np.random.uniform(size = (cprob[:NE, :NE].shape))
     figFolder = figFolder = basefolder + '/nda/spkStats/figs/rewiring/'
+    plotCon = 'I'
     for i in range(25):
-        idx = np.random.randint(0, NE, 1)[0]
-        plt.hist(poe[cprob[:NE, idx]] * 180.0 / np.pi)
-        plt.title("PO = %s"%(poe[idx] * 180.0 / np.pi))
-        plt.waitforbuttonpress()
-        Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
-        plt.clf()
-        
-#    kb.keyboard()
-                
-            
-            
-        
-                                    
+        if(plotCon == 'E'):
+            idx = np.random.randint(0, NE, 1)[0]
+            plt.hist(poe[cprob[:NE, idx]] * 180.0 / np.pi)
+#            plt.hist(poe[cprob[idx, :NE]] * 180.0 / np.pi)
+            plt.title("PO = %s"%(poe[idx] * 180.0 / np.pi))
+            plt.waitforbuttonpress()
+            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+            plt.clf()
+        elif(plotCon == 'I'):
+            idx = np.random.randint(NE, NE+NI, 1)[0]
+            plt.hist(po[cprob[idx, NE:]] * 180.0 / np.pi)
+            plt.title("PO = %s"%(po[idx] * 180.0 / np.pi))
+            plt.waitforbuttonpress()
+            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+            plt.clf()
+    kb.keyboard()
+
+
+
 # #-------------------
 #     for i in np.arange(NE):
 #         if(i < NE):
