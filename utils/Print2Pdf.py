@@ -3,7 +3,7 @@ import numpy as np
 import code, sys, os
 import pylab as plt
 #sys.path.append(basefolder)
-import Keyboard as kb
+#import Keyboard as kb
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 #sys.path.append(basefolder + "/nda/spkStats")
 #sys.path.append(basefolder + "/utils")
