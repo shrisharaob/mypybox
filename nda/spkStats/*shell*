@@ -1,0 +1,3770 @@
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+srao@pcneurophys80:~/cuda$ ./nw.out 
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+2.030000 9.598000 
+3.426000 9.594000 
+4.710000 10.158000 
+5.506000 10.530000 
+6.024000 10.716000 
+6.210000 10.830000 
+6.286000 10.838000 
+6.352000 10.882000 
+6.274000 10.816000 
+6.444000 10.908000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ git log
+WARNING: terminal is not fully functional
+-  (press RETURN)
+commit fa03ea011cc625810be16b055da92781d1bf885a
+Author: shrisharaob <srao@pcneurophys80.(none)>
+Date:   Tue Jun 23 18:01:05 2015 +0200
+
+    seems like diff K is fixed and running, there was a bug in the generation of the matix with diff K's (again the blody rows and clms indexing)
+
+commit 0472889031ba8c63f265015020ece1ff018e67b2
+Author: shrisharaob <srao@pcneurophys80.(none)>
+Date:   Wed Jun 17 17:17:21 2015 +0200
+
+    before moving to diferring K's
+
+commit 1bb57cef9869dc62510895ea23edc439e558ca29
+Author: shrisharaob <srao@pcneurophys80.(none)>
+Date:   Wed Jun 17 15:08:48 2015 +0200
+
+    ...
+
+commit e909c5067fe76bb173bc25288d9adaf198d7fe06
+Author: shrisharaob <srao@pcneurophys80.(none)>
+Date:   Thu May 21 12:29:51 2015 +0200
+
+    ...
+:q
+srao@pcneurophys80:~/cuda$ srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+In file included from mysolver.cu:12:0:
+globalVars.h:148:2: error: #endif without #if
+In file included from aux.cu:7:0,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from cudaRandFuncs.cu:4:0,
+                 from aux.cu:9,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from isynap.cu:4:0,
+                 from aux.cu:11,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from rkdumbPretty.cu:4:0,
+                 from aux.cu:12,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from derivs.cu:4:0,
+                 from rkdumbPretty.cu:6,
+                 from aux.cu:12,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from rk4.cu:3:0,
+                 from rkdumbPretty.cu:7,
+                 from aux.cu:12,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+In file included from IFF.cu:3:0,
+                 from aux.cu:15,
+                 from mysolver.cu:13:
+globalVars.h:148:2: error: #endif without #if
+make: *** [a.out] Error 1
+srao@pcneurophys80:~/cuda$ git reset --hard HEAD
+HEAD is now at fa03ea0 seems like diff K is fixed and running, there was a bug in the generation of the matix with diff K's (again the blody rows and clms indexing)
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+  C-c C-cnvcc error   : 'cicc' died due to signal 2 
+make: *** [a.out] Error 2
+
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+srao@pcneurophys80:~/cuda$ ./genconvec.out 0; ./nw.out 
+Global Mem = 12079136768
+ maxNeurons = 20000
+ nChunks = 1
+chunckSize = 400000000 
+ Threads per block : 512, Blocks per grid : 40 
+generating chunk 0 ... 
+ random conmat 
+done
+copying dev to host ... done
+generating sparse representation ...done
+#connections = 39996405
+writing to file ... done
+
+N = 20000
+ done
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1800 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+0.000000 25.384000 
+0.000000 22.316000 
+0.000000 22.310000 
+0.002000 22.302000 
+0.010000 22.374000 
+0.006000 22.280000 
+0.006000 22.372000 
+0.008000 22.346000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+  C-c C-c
+Compilation terminated.
+nvcc error   : 'cudafe' died due to signal 2 
+make: *** [a.out] Error 2
+
+srao@pcneurophys80:~/cuda$ ./nw.out 
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1800 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+0.006000 14.308000 
+0.006000 12.904000 
+0.008000 12.960000 
+0.016000 12.944000 
+0.034000 12.954000 
+0.020000 12.944000 
+0.022000 12.898000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ make
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+  C-c C-c
+Compilation terminated.
+nvcc error   : 'cudafe' died due to signal 2 
+make: *** [a.out] Error 2
+
+srao@pcneurophys80:~/cuda$ ./nw.out 
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+2.008000 9.564000 
+3.426000 9.562000 
+4.810000 10.206000 
+5.590000 10.506000 
+5.956000 10.676000 
+6.274000 10.862000 
+6.284000 10.808000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+srao@pcneurophys80:~/cuda$ ./nw.out 
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+4.776000 17.228000 
+7.356000 16.752000 
+9.306000 17.610000 
+10.316000 18.042000 
+10.730000 18.108000 
+11.104000 18.404000 
+10.928000 18.240000 
+11.068000 18.254000 
+11.220000 18.476000 
+11.116000 18.318000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+0.052000 11.372000 
+0.116000 10.214000 
+0.224000 10.256000 
+0.342000 10.254000 
+0.458000 10.324000 
+0.496000 10.364000 
+0.468000 10.340000 
+0.504000 10.354000 
+0.510000 10.382000 
+0.530000 10.342000 
+0.538000 10.390000 
+0.540000 10.334000 
+0.538000 10.424000 
+0.564000 10.336000 
+0.570000 10.374000 
+0.556000 10.418000 
+0.516000 10.320000 
+0.542000 10.354000 
+0.478000 10.332000 
+0.538000 10.342000 
+0.550000 10.360000 
+0.544000 10.372000 
+0.488000 10.372000 
+0.536000 10.332000 
+0.526000 10.366000 
+0.466000 10.356000 
+0.582000 10.336000 
+0.576000 10.384000 
+0.508000 10.428000 
+0.518000 10.346000 
+0.546000 10.338000 
+0.568000 10.432000 
+0.544000 10.340000 
+0.524000 10.388000 
+0.534000 10.402000 
+0.528000 10.320000 
+0.556000 10.360000 
+0.520000 10.360000 
+0.594000 10.386000 
+0.554000 10.374000 
+0.560000 10.372000 
+0.568000 10.408000 
+0.564000 10.368000 
+0.490000 10.384000 
+0.560000 10.384000 
+0.566000 10.340000 
+0.554000 10.354000 
+0.566000 10.386000 
+0.520000 10.380000 
+0.512000 10.354000 
+0.540000 10.354000 
+0.500000 10.304000 
+0.552000 10.378000 
+0.584000 10.348000 
+0.512000 10.418000 
+0.502000 10.356000 
+0.554000 10.374000 
+0.524000 10.362000 
+0.512000 10.316000 
+0.516000 10.386000 
+0.536000 10.340000 
+0.498000 10.340000 
+0.556000 10.382000 
+0.582000 10.410000 
+0.570000 10.344000 
+0.524000 10.390000 
+0.498000 10.320000 
+0.550000 10.376000 
+0.560000 10.394000 
+0.486000 10.378000 
+0.552000 10.370000 
+0.496000 10.352000 
+0.598000 10.402000 
+0.532000 10.386000 
+0.510000 10.334000 
+0.518000 10.356000 
+0.556000 10.366000 
+0.534000 10.404000 
+0.578000 10.368000 
+0.580000 10.354000 
+0.548000 10.380000 
+0.568000 10.338000 
+0.540000 10.384000 
+0.514000 10.366000 
+0.524000 10.446000 
+0.496000 10.298000 
+0.580000 10.378000 
+0.544000 10.398000 
+0.504000 10.346000 
+0.586000 10.398000 
+0.518000 10.326000 
+0.500000 10.384000 
+0.512000 10.324000 
+0.568000 10.374000 
+0.570000 10.388000 
+0.518000 10.354000 
+0.542000 10.332000 
+0.532000 10.368000 
+0.514000 10.352000 
+0.554000 10.406000 
+0.566000 10.314000 
+0.504000 10.422000 
+0.534000 10.334000 
+0.506000 10.382000 
+0.564000 10.364000 
+0.512000 10.330000 
+0.536000 10.324000 
+0.510000 10.380000 
+0.508000 10.320000 
+0.474000 10.360000 
+0.564000 10.358000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+1.710000 9.136000 
+2.984000 8.974000 
+4.148000 9.436000 
+5.012000 9.858000 
+5.380000 9.998000 
+5.672000 10.182000 
+5.712000 10.124000 
+5.810000 10.210000 
+5.832000 10.238000 
+5.838000 10.214000 
+5.850000 10.246000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+1.558000 9.180000 
+2.804000 8.536000 
+3.872000 9.016000 
+4.842000 9.526000 
+5.170000 9.658000 
+5.498000 9.810000 
+5.446000 9.828000 
+5.568000 9.832000 
+5.600000 9.890000 
+5.558000 9.850000 
+5.512000 9.840000 
+5.484000 9.800000 
+5.442000 9.790000 
+5.660000 9.928000 
+5.438000 9.842000 
+5.574000 9.856000 
+5.482000 9.810000 
+5.552000 9.866000 
+5.686000 9.936000 
+5.444000 9.732000 
+5.552000 9.810000 
+5.486000 9.838000 
+5.544000 9.902000 
+5.610000 9.880000 
+5.538000 9.864000 
+5.494000 9.820000 
+5.520000 9.802000 
+5.542000 9.858000 
+5.488000 9.828000 
+5.504000 9.822000 
+5.478000 9.794000 
+5.580000 9.860000 
+5.608000 9.852000 
+5.580000 9.868000 
+5.518000 9.836000 
+5.564000 9.902000 
+5.476000 9.754000 
+5.520000 9.818000 
+5.530000 9.806000 
+5.510000 9.874000 
+5.540000 9.848000 
+5.542000 9.846000 
+5.538000 9.862000 
+5.452000 9.760000 
+5.566000 9.894000 
+5.532000 9.822000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+4.134000 17.010000 
+6.514000 15.904000 
+8.510000 16.700000 
+9.470000 17.100000 
+10.010000 17.404000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+1.766000 9.172000 
+2.972000 8.954000 
+4.304000 9.472000 
+5.016000 9.876000 
+5.552000 10.066000 
+5.684000 10.164000 
+5.720000 10.144000 
+5.842000 10.242000 
+5.828000 10.148000 
+5.800000 10.256000 
+5.862000 10.252000 
+5.832000 10.218000 
+5.900000 10.244000 
+5.812000 10.138000 
+5.844000 10.264000 
+5.884000 10.240000 
+5.772000 10.206000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out; ./nw.out 
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+2.822000 9.754000 
+4.708000 9.596000 
+6.002000 10.178000 
+6.912000 10.618000 
+7.340000 10.806000 
+7.616000 10.946000 
+7.688000 10.948000 
+7.760000 10.900000 
+7.740000 11.040000 
+7.862000 10.982000 
+7.828000 10.986000 
+7.828000 11.062000 
+7.716000 10.974000 
+7.812000 11.026000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ grep CFF GenerateConVecFile.cu 
+srao@pcneurophys80:~/cuda$ grep CFF IFF.cu ]
+IFF.cu:      rTotal[mNeuron] = CFF * CFF_E_PREFACTOR * K * (R0 +  R1 * log10(1.000 + varContrast))
+IFF.cu:	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R0 * randnXiA[mNeuron]
+IFF.cu:	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] 
+IFF.cu:      rTotal[mNeuron] = CFF * CFF_I_PREFACTOR * K * K_I_PREFACTOR * (R0 + R1 * log10(1.000 + varContrast)) + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R0 * randnXiA[mNeuron] + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] + ETA_I * randwZiA[mNeuron * 4] * cos(2.0 * (theta - randuDelta[mNeuron])) + MU_I * randwZiA[mNeuron * 4 + 1] * cos(INP_FREQ * t - randuPhi[mNeuron * 3]) + ETA_I * MU_I * 0.5 * (randwZiA[mNeuron * 4 + 2] * cos(2.0 * theta + INP_FREQ * t - randuPhi[mNeuron * 3 + 1]) + randwZiA[mNeuron * 4 + 3] * cos(2.0 * theta - INP_FREQ * t + randuPhi[mNeuron * 3 + 2])));
+IFF.cu:      rTotal[mNeuron] = (R0 + R1 * log10(1 + CONTRAST)) * (CFF * K + sqrt(CFF *K) * randnXiA[mNeuron]);*/
+grep: ]: No such file or directory
+srao@pcneurophys80:~/cuda$ grep CFF IFF.cu 
+      rTotal[mNeuron] = CFF * CFF_E_PREFACTOR * K * (R0 +  R1 * log10(1.000 + varContrast))
+	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R0 * randnXiA[mNeuron]
+	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] 
+      rTotal[mNeuron] = CFF * CFF_I_PREFACTOR * K * K_I_PREFACTOR * (R0 + R1 * log10(1.000 + varContrast)) + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R0 * randnXiA[mNeuron] + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] + ETA_I * randwZiA[mNeuron * 4] * cos(2.0 * (theta - randuDelta[mNeuron])) + MU_I * randwZiA[mNeuron * 4 + 1] * cos(INP_FREQ * t - randuPhi[mNeuron * 3]) + ETA_I * MU_I * 0.5 * (randwZiA[mNeuron * 4 + 2] * cos(2.0 * theta + INP_FREQ * t - randuPhi[mNeuron * 3 + 1]) + randwZiA[mNeuron * 4 + 3] * cos(2.0 * theta - INP_FREQ * t + randuPhi[mNeuron * 3 + 2])));
+      rTotal[mNeuron] = (R0 + R1 * log10(1 + CONTRAST)) * (CFF * K + sqrt(CFF *K) * randnXiA[mNeuron]);*/
+srao@pcneurophys80:~/cuda$ grep CFF* IFF.cu 
+      rTotal[mNeuron] = CFF * CFF_E_PREFACTOR * K * (R0 +  R1 * log10(1.000 + varContrast))
+	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R0 * randnXiA[mNeuron]
+	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] 
+      rTotal[mNeuron] = CFF * CFF_I_PREFACTOR * K * K_I_PREFACTOR * (R0 + R1 * log10(1.000 + varContrast)) + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R0 * randnXiA[mNeuron] + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] + ETA_I * randwZiA[mNeuron * 4] * cos(2.0 * (theta - randuDelta[mNeuron])) + MU_I * randwZiA[mNeuron * 4 + 1] * cos(INP_FREQ * t - randuPhi[mNeuron * 3]) + ETA_I * MU_I * 0.5 * (randwZiA[mNeuron * 4 + 2] * cos(2.0 * theta + INP_FREQ * t - randuPhi[mNeuron * 3 + 1]) + randwZiA[mNeuron * 4 + 3] * cos(2.0 * theta - INP_FREQ * t + randuPhi[mNeuron * 3 + 2])));
+      rTotal[mNeuron] = (R0 + R1 * log10(1 + CONTRAST)) * (CFF * K + sqrt(CFF *K) * randnXiA[mNeuron]);*/
+srao@pcneurophys80:~/cuda$ grep CFF* *.cu
+IFF.cu:      rTotal[mNeuron] = CFF * CFF_E_PREFACTOR * K * (R0 +  R1 * log10(1.000 + varContrast))
+IFF.cu:	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R0 * randnXiA[mNeuron]
+IFF.cu:	+ sqrt(CFF * CFF_E_PREFACTOR * K) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] 
+IFF.cu:      rTotal[mNeuron] = CFF * CFF_I_PREFACTOR * K * K_I_PREFACTOR * (R0 + R1 * log10(1.000 + varContrast)) + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R0 * randnXiA[mNeuron] + sqrt(CFF * CFF_E_PREFACTOR * K * K_I_PREFACTOR) * R1 * log10(1.0 + varContrast) * (randnXiA[mNeuron] + ETA_I * randwZiA[mNeuron * 4] * cos(2.0 * (theta - randuDelta[mNeuron])) + MU_I * randwZiA[mNeuron * 4 + 1] * cos(INP_FREQ * t - randuPhi[mNeuron * 3]) + ETA_I * MU_I * 0.5 * (randwZiA[mNeuron * 4 + 2] * cos(2.0 * theta + INP_FREQ * t - randuPhi[mNeuron * 3 + 1]) + randwZiA[mNeuron * 4 + 3] * cos(2.0 * theta - INP_FREQ * t + randuPhi[mNeuron * 3 + 2])));
+IFF.cu:      rTotal[mNeuron] = (R0 + R1 * log10(1 + CONTRAST)) * (CFF * K + sqrt(CFF *K) * randnXiA[mNeuron]);*/
+srao@pcneurophys80:~/cuda$ grep CFF* *.h
+globalVars.h:#define CFF 0.10
+globalVars.h:#define CFF_E_PREFACTOR 1.0
+globalVars.h:#define CFF_I_PREFACTOR 2.0
+globalVars.h:#define GFF_E (CONDUCTANCE_GLOBAL_PREFACTOR * 0.95 / (CFF_E_PREFACTOR * sqrt(K)))
+globalVars.h:#define GFF_I (CONDUCTANCE_GLOBAL_PREFACTOR * 1.26 / (CFF_I_PREFACTOR * sqrt(K * K_I_PREFACTOR)))
+hostConstants.h:#define HOST_CFF 0.2 // KFF = CFF * K
+hostConstants.h:#define CFF HOST_CFF
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+srao@pcneurophys80:~/cuda$ ./nw.out 
+
+ Computing on GPU0 
+
+ N  = 20000 
+ NE = 10000 
+ NI = 10000 
+ KE  = 1000, KI = 1000 
+ tStop = 25000 milli seconds nSteps = 500000
+
+ theta = 0.000 
+ contrast = 100.0
+ ksi = 1.200000
+ dt = 0.050000 
+ tau = 3.000000 
+ EXP_SUM = 0.9834714538216175
+ Conductance glb prefactor = 1.000000
+ alpha = 0.000000, RHO = 0.500000
+ Threads per block : 128, Blocks per grid : 157 
+ GPU memory allocation successful ! 
+ 
+ launching Simulation kernel ... 
+0.000000 0.000000 
+2.826000 9.784000 
+4.682000 9.610000 
+6.044000 10.154000 
+6.996000 10.674000 
+7.478000 10.826000 
+7.536000 10.910000 
+7.764000 11.032000 
+7.804000 10.966000 
+7.852000 11.094000 
+  C-c C-c
+srao@pcneurophys80:~/cuda$ cat > cffloop.txt 
+1.5
+2.0
+srao@pcneurophys80:~/cuda$ cat > cffloop.txt 
+2.0
+3.0
+4.0
+5.0
+6.0
+7.0
+8.0
+9.0
+10.0
+srao@pcneurophys80:~/cuda$ chmod +x cffloop.sh
+srao@pcneurophys80:~/cuda$ ./cffloop.sh cffloop.txt
++ THETA_START=0
++ THETA_STEP=45
++ NTRIALS=1
++ for n in '$(< $1)'
++ echo 2.0
+2.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 2.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 2.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k2.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 3.0
+3.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 3.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 3.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k3.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 4.0
+4.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 4.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 4.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k4.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 5.0
+5.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 5.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 5.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k5.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 6.0
+6.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 6.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 6.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k6.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 7.0
+7.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 7.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 7.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k7.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 8.0
+8.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 8.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 8.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k8.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 9.0
+9.0
++ eval sed '-i '\''s^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 9.0^'\'' devHostConstants.h'
+++ sed -i 's^#define K_I_PREFACTOR .*^#define K_I_PREFACTOR 9.0^' devHostConstants.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k9.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+srao@pcneurophys80:~/cuda$ ./cffloop.sh cffloop.txt
++ THETA_START=0
++ THETA_STEP=45
++ NTRIALS=1
++ for n in '$(< $1)'
++ echo 2.0
+2.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 2.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 2.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k2.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 3.0
+3.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 3.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 3.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k3.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 4.0
+4.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 4.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 4.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k4.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 5.0
+5.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 5.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 5.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k5.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 6.0
+6.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 6.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 6.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k6.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 7.0
+7.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 7.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 7.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k7.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 8.0
+8.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 8.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 8.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k8.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
++ for n in '$(< $1)'
++ echo 9.0
+9.0
++ eval sed '-i '\''s^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 9.0^'\'' globalVars.h'
+++ sed -i 's^#define CFF_I_PREFACTOR .*^#define CFF_I_PREFACTOR 9.0^' globalVars.h
++ nvcc -arch=sm_35 -O9 mysolver.cu -o nw_k9.0.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+srao@pcneurophys80:~/cuda$ make
+nvcc -arch=sm_35 -O4 mysolver.cu -o nw.out
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+derivs.cu(108): warning: pointless comparison of unsigned integer with zero
+
+rkdumbPretty.cu(72): warning: pointless comparison of unsigned integer with zero
+
+nvcc -arch=sm_35 -O2 GenerateConVecFile.cu -o genconvec.out
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+GenConProbDistDepMat.cu(54): warning: variable "out" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(29): warning: variable "n" was declared but never referenced
+
+tinyRNG.cu(95): warning: missing return statement at end of non-void function "TestBidir"
+
+tinyRNG.cu(109): warning: variable "p" is used before its value is set
+
+tinyRNG.cu(102): warning: variable "k" was declared but never referenced
+
+tinyRNG.cu(102): warning: variable "n" was declared but never referenced
+
+GenerateConVecFile.cu(457): warning: variable "nElementsWritten" was set but never used
+
+srao@pcneurophys80:~/cuda$ ./genconvec.out 0
+Global Mem = 12079136768
+ maxNeurons = 20000
+ nChunks = 1
+chunckSize = 400000000 
+ Threads per block : 512, Blocks per grid : 40 
+generating chunk 0 ... 
+ random conmat 
+done
+copying dev to host ... done
+generating sparse representation ...done
+#connections = 40000386
+writing to file ... done
+
+N = 20000
+ done
+srao@pcneurophys80:~/cuda$ cd ~/nda
+srao@pcneurophys80:~/nda$ grep "fg*, ax*" *.py
+BrowseFFvsOri.py: #   fg_ff, ax_ff = plt.subplots()
+CurStats.py:    f, ax = plt.subplots(tau.size)
+CurStats.py:        f, ax = plt.subplots(len(tau))
+FanoFactorDynamics.py:#         f, ax = plt.subplots(2, 4)
+FFvsOri.py:        #f, ax = plt.subplots(2, 4)
+ProcessPinWheels.py:fg, ax = plt.subplots(3,  int(np.ceil(nPinwheels / 3.0)))
+SpkStats.py:                f, ax = plt.subplots(2, 3)
+srao@pcneurophys80:~/nda$ grep DefaultArgs *.py
+AlphaVsCorrlength.py:from DefaultArgs import DefaultArgs
+BrowseFFvsOri.py:from DefaultArgs import DefaultArgs
+CompareCircVarOfDBs.py:from DefaultArgs import DefaultArgs
+CorrFuncs.py:from DefaultArgs import DefaultArgs
+CRF.py:from DefaultArgs import DefaultArgs
+FanoAlphaDependence.py:from DefaultArgs import DefaultArgs
+FanoAlphaDependence.py:    [dbName, alpha, simDuration, simDT, NE, NI, tau] = DefaultArgs(sys.argv[1:], ['', alpha, simDuration, simDT, NE, NI, tau])
+FanoDistrFit.py:from DefaultArgs import DefaultArgs
+FanoFactorDynamics.py:from DefaultArgs import DefaultArgs
+FanoFactorDynamics.py:    [dbName, computeType, alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI] = DefaultArgs(sys.argv[1:], [dbName, 'plot', alpha, tau, spkTimeStart, spkTimeEnd, simDT, NE, NI])
+FanoFactorInPinWheel.py:from DefaultArgs import DefaultArgs
+FanoOriDependency.py:from DefaultArgs import DefaultArgs
+FanoOriDependency.py:    [alpha, simDuration, simDT, NE, NI, tau] = DefaultArgs(sys.argv[1:], [alpha, simDuration, simDT, NE, NI, tau])
+FFConductanceTuning.py:from DefaultArgs import DefaultArgs
+FFvsOri.py:from DefaultArgs import DefaultArgs
+FFvsOri.py:    [dbName, computeType, nTrials, alpha, simDuration, simDT, NE, NI, tau] = DefaultArgs(sys.argv[1:], ['', 'plot', 3, alpha, simDuration, simDT, NE, NI, tau])
+GenSpikes.py:from DefaultArgs import DefaultArgs
+MeanMatchedFano.py:from DefaultArgs import DefaultArgs
+OriMapDisplay.py:from DefaultArgs import DefaultArgs
+OriMapFuncs.py:from DefaultArgs import DefaultArgs
+ProcessPinWheels.py:from DefaultArgs import DefaultArgs
+ProcessPinWheels.py:[neuronType, NE, NI] = DefaultArgs(sys.argv[1:4], ['I', 40000, 10000])
+RewireNetwork.py:''' USAGE: [dbName, NetworkType, K, NE, NI, thetaSig] = DefaultArgs(sys.argv[1:], ['', 'ori', 1000, 10000, 10000, 0.5]) '''
+RewireNetwork.py:from DefaultArgs import DefaultArgs
+RewireNetwork.py:    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75, ])
+RewireNetworkv2.py:''' USAGE: [dbName, NetworkType, K, NE, NI, thetaSig] = DefaultArgs(sys.argv[1:], ['', 'ori', 1000, 10000, 10000, 0.5]) '''
+RewireNetworkv2.py:from DefaultArgs import DefaultArgs
+RewireNetworkv2.py:    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75, ])
+srao@pcneurophys80:~/nda$ grep plt.legend(*) *.py
+bash: syntax error near unexpected token `('
+srao@pcneurophys80:~/nda$ grep "plt.legend(*)" *.py
+AlphaVsCorrlength.py:    plt.legend()
+CorrFuncs.py:        plt.legend()
+CorrFuncs.py:#     plt.legend()
+CorrFuncs.py:#     plt.legend()
+ExpFit.py:    plt.legend()
+FanoAlphaDependence.py:        # # plt.legend()
+FanoOriDependency.py:        # plt.legend()
+OriMapFuncs.py:    plt.legend()
+SpkStats.py:        plt.legend()
+SpkStats.py:            plt.legend()
+SpkStats.py:            plt.legend()
+srao@pcneurophys80:~/nda$ grep "plt.legend(*" *.py
+AlphaVsCorrlength.py:    plt.legend(prop={"size":16})
+AlphaVsCorrlength.py:    plt.legend()
+CorrFuncs.py:        plt.legend()
+CorrFuncs.py:# #    plt.legend(('E', 'I'))
+CorrFuncs.py:#     plt.legend()
+CorrFuncs.py:#     plt.legend()
+CRF.py:plt.legend(loc=2)
+ExpFit.py:    plt.legend(prop={"size":16})
+ExpFit.py:    plt.legend()
+FanoAlphaDependence.py:        # # plt.legend()
+FanoAlphaDependence.py:  # #       plt.legend(('I', 'E'))
+FanoDistrFit.py:plt.legend(prop={"size":18})
+FanoFactorDynamics.py:#        plt.legend(loc = 0)
+FanoFactorInPinWheel.py:plt.legend(loc=0, prop={'size':10})
+FanoFactorInPinWheel.py:plt.legend(loc=0, prop={'size':10})
+FanoFactorInPinWheel.py:plt.legend(loc=0, prop={'size':10})
+FanoFactorInPinWheel.py:plt.legend(loc=0, prop={'size':10})
+FanoOriDependency.py:        # plt.legend()
+FanoOriDependency.py:        # plt.legend(('I', 'E'))
+FFvsOri.py:            plt.legend(loc = 0)
+FFvsOri.py:        plt.legend(('I', 'E'), loc=0)
+FFvsOri.py:        plt.legend(loc=0, prop={'size':10})
+FFvsOri.py:        plt.legend(loc=0, prop={'size':10})
+OriMapFuncs.py:    plt.legend()
+SpkStats.py:        plt.legend()
+SpkStats.py:            plt.legend(loc=2)
+SpkStats.py:            plt.legend()
+SpkStats.py:            plt.legend(loc=2)
+SpkStats.py:            plt.legend()
+SpkStats.py:            plt.legend(('E', 'I'))
+srao@pcneurophys80:~/nda$ grep Print2Pdf *.py
+AlphaVsCorrlength.py:from Print2Pdf import Print2Pdf
+BrowseFFvsOri.py:from Print2Pdf import Print2Pdf
+BrowseFFvsOri.py:        Print2Pdf(plt.gcf(), figFolder + figname, figFormat='png', tickFontsize=10)        
+CompareCircVarOfDBs.py:from Print2Pdf import Print2Pdf
+CRF.py:from Print2Pdf import Print2Pdf
+CRF.py:        Print2Pdf(plt.gcf(),  figFolder + figname,  [4.6,  4.0], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .77, .74])        #[6.3,  5.27], figFormat='png', labelFontsize = 10, tickFontsize=10, titleSize = 10.0)
+CRF.py:Print2Pdf(plt.gcf(),  figFolder + 'mean_circvar_',  [4.6,  4.0], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .77, .74])
+CRF.py:# Print2Pdf(fgE,  figFolder + 'mean_normalized_tuningCurves_E_cvgt8',  [5.8,  5.0], figFormat='png', labelFontsize = 14, tickFontsize=14, titleSize = 14.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .77, .74])
+CRF.py:# Print2Pdf(fgI,  figFolder + 'mean_normalized_tuningCurves_I_cvgt8',  [5.8,  5.0], figFormat='png', labelFontsize = 14, tickFontsize=14, titleSize = 14.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .77, .74])
+CRF.py:Print2Pdf(plt.gcf(),  figFolder + 'mean_crf_K%s'%(K), [6.3,  5.27], figFormat='png', labelFontsize = 10, tickFontsize=10, titleSize = 10.0)        
+CRF.py:    Print2Pdf(plt.gcf(),  figFolder + 'crf_rmaxDistr_K%s'%(K),  [4.3,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
+CRF.py:    Print2Pdf(plt.gcf(),  figFolder + 'crf_n_K%s'%(K), [4.3,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .8, .75])        
+CRF.py:    Print2Pdf(plt.gcf(),  figFolder + 'crf_c50_K%s'%(K),  [4.3,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
+CRF.py:    Print2Pdf(plt.gcf(),  figFolder + 'crf_a_logfit_K%s'%(K), [4.3,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .8, .75])        
+CRF.py:    Print2Pdf(plt.gcf(),  figFolder + 'crf_b_logfit_%s'%(K),  [4.3,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .8, .75])        
+CRF.py:Print2Pdf(plt.gcf(),  figFolder + 'residuals_crf_k%s_%s'%(K, fitFunc), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
+FanoFactorInPinWheel.py:from Print2Pdf import Print2Pdf
+FanoFactorInPinWheel.py:Print2Pdf(f00, figFolder + 'CircVarInRing_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FanoFactorInPinWheel.py:Print2Pdf(f00, figFolder + 'CircVarInRing_normalized_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FanoFactorInPinWheel.py:Print2Pdf(f0, figFolder + 'FFInRing_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FanoFactorInPinWheel.py:Print2Pdf(f1, figFolder + 'FiringRateInRing_' + neuronType + '_' + dbName , figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FanoFactorInPinWheel.py:Print2Pdf(figHdl_ffdistr, figFolder + 'FFDistrInRing_' + neuronType + '_' + dbName , figFormat='png', paperSize=[6.26, 12.3], labelFontsize = 10, tickFontsize = 8, titleSize = 12)
+FFConductanceTuning.py:from Print2Pdf import Print2Pdf
+FFvsOri.py:from Print2Pdf import Print2Pdf
+FFvsOri.py:#        Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FFvsOri.py:        Print2Pdf(plt.gcf(),  figFolder + filename, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
+FFvsOri.py:  #      Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+FFvsOri.py:        Print2Pdf(plt.gcf(),  figFolder + filename, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])        
+OriMapFuncs.py:from Print2Pdf import Print2Pdf
+OriMapFuncs.py:    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png',  paperSize = [8.26, 5.8], labelFontsize = ftsize, tickFontsize = ftsize, titleSize = ftsize)
+OriMapFuncs.py:    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png',  paperSize = prps, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+OriMapFuncs.py:    #Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png') #, tickFontsize=14, paperSize = [4.0, 3.0])
+OriMapFuncs.py:    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png',  paperSize = [5.26/ 1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+OriMapFuncs.py: #   Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png',  paperSize = [5.26/ 1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+OriMapFuncs.py:    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', paperSize = [6.0, 4.56])
+ProcessPinWheels.py:from Print2Pdf import Print2Pdf
+ProcessPinWheels.py:#    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png',  paperSize = prps, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+RewireNetwork.py:from Print2Pdf import Print2Pdf
+RewireNetwork.py:            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+RewireNetwork.py:            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+RewireNetworkv2.py:from Print2Pdf import Print2Pdf
+RewireNetworkv2.py:            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+RewireNetworkv2.py:            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+RewireNetworkv2.py:#             Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+RewireNetworkv2.py:#      
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 54, in <module>
+    [NE, NI, thetaStart, thetaEnd, thetaStep, dbNames] = DefaultArgs(sys.argv[1:6], [10000, 10000, 0, 180, 22.5])
+ValueError: need more than 5 values to unpack
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+[]
+[]
+cff2
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+srao@pcneurophys80:~/nda$ grep "__main__" *.py
+AlphaVsCorrlength.py:if __name__ == "__main__":
+BrowseFFvsOri.py:if __name__ == "__main__":
+CorrFuncs.py:if __name__ == "__main__":
+CurStats.py:if __name__ == "__main__":
+enum.py:if __name__ == "__main__":
+ExpFit.py:if __name__ == "__main__":
+FanoAlphaDependence.py:if __name__ == "__main__":
+FanoFactorDynamics.py:if __name__ == "__main__":
+FanoOriDependency.py:if __name__ == "__main__":
+FFvsOri.py:if __name__ == "__main__":
+GenSpikes.py:if __name__ == '__main__':
+OriMapFuncs.py:if __name__ == '__main__':
+RewireNetwork.py:if __name__ == '__main__':
+RewireNetworkv2.py:if __name__ == '__main__':
+SpkStats.py:if __name__ == "__main__":
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 68, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 43, in main
+    circVariance = PopulationCircVar(tc, theta)
+  File "CompareCircVarOfDBs.py", line 23, in PopulationCircVar
+    circVariance[i] = CircVar(tc[kNeuron, :], theta)
+NameError: global name 'tc' is not defined
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+srao@pcneurophys80:~/nda$ ls figs/ -lht | head -n3
+total 36M
+-rw-r--r-- 1 srao users  26K juin   2 23:50 tuning_curves_frft_5.0_cvlt_0.5_bidireea2.png.png
+-rw-r--r-- 1 srao users  26K juin   2 23:50 tuning_curves_frft_5.0_cvlt_0.5_bidireea8.png.png
+srao@pcneurophys80:~/nda$ ls ~/dbfigs/ -lht | head -n3
+ls: cannot access /homecentral/srao/dbfigs/: No such file or directory
+srao@pcneurophys80:~/nda$ ls ~/db/figs/ -lht | head -n3
+total 6,1M
+-rw-r--r-- 1 srao users  27K juin  25 15:06 ori_cvDistr_I_diffFFK.png
+-rw-r--r-- 1 srao users  24K juin  25 15:06 ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda$ eog ~/db/figs/ori_cvDistr_I_diffFFK.png &
+[1] 17391
+srao@pcneurophys80:~/nda$ grep color *.py
+BrowseFFvsOri.py:    plt.colorbar(im, ax=ax_po)
+BrowseFFvsOri.py:            #circleObj = plt.Circle((int(xyCordinates[0][0]), int(xyCordinates[0][1])), 1.0, color = 'w', fill = False)
+CorrFuncs.py:        colormap = plt.cm.gist_rainbow
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(alpha))]
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(tau))]
+CorrFuncs.py:        plt.gca().set_color_cycle(colors)
+CRF.py:# colormap = plt.cm.gist_rainbow
+CRF.py:# colors = [colormap(i) for i in np.linspace(0, 0.9, nContrastLevels)]
+CRF.py:# axE.set_color_cycle(colors)
+CRF.py:# axI.set_color_cycle(colors)
+FanoAlphaDependence.py:  ##      plt.bar(bins[:-1], cnts, color = 'r', edgecolor = 'r', width = np.mean(np.diff(bins)))
+FanoAlphaDependence.py:  # #        plt.bar(bins[:-1], cnts, color = 'k', edgecolor = 'k', width = np.mean(np.diff(bins)))
+FanoDistrFit.py:        plt_color = 'k'
+FanoDistrFit.py:            plt_color = 'r'
+FanoDistrFit.py:#        plt.errorbar(kf, lognParams[1], yerr=[[lognParams[3][0]], [lognParams[3][1]]], ecolor=plt_color)
+FanoDistrFit.py:        plt.errorbar(kf, lognParams[0], yerr=[[lognParams[2][0]], [lognParams[2][1]]], ecolor=plt_color)
+FanoDistrFit.py:    plt_color_mu = 'ks-'
+FanoDistrFit.py:    plt_color_sig = 'ko-'
+FanoDistrFit.py:        plt_color_mu = 'rs-'
+FanoDistrFit.py:        plt_color_sig = 'ro-'
+FanoDistrFit.py:#    plt.plot(np.arange(nfiles), logMu, plt_color_mu, label=r'$\mu$,' + legend_label, markersize = 10.0)
+FanoDistrFit.py: #   plt.plot(np.arange(nfiles), logSigma, plt_color_sig, label=r'$\sigma$,'+ legend_label, markersize = 10.0)
+FanoDistrFit.py:    plt.plot(np.arange(nfiles), mu, plt_color_mu, label=r'$\mu$,' + legend_label, markersize = 10.0)
+FanoDistrFit.py:#    plt.plot(np.arange(nfiles), sig, plt_color_sig, label=r'$\sigma$,'+ legend_label, markersize = 10.0)
+FanoFactorDynamics.py:#             ax[subscripts].bar(bins[:-1], cnts, color = 'r', edgecolor = 'r', width = bins[1]-bins[0])
+FanoFactorDynamics.py:#             ax[subscripts].bar(bins[:-1], cnts, color = 'k', edgecolor = 'k', width = bins[1]-bins[0])
+FanoFactorInPinWheel.py:    axisHdl.axvline(np.nanmean(ffAtPO), color = 'k')
+FanoOriDependency.py: #       plt.bar(bins[:-1], cnts, color = 'r', edgecolor = 'r', width = np.mean(np.diff(bins)))
+FanoOriDependency.py:        # plt.bar(bins[:-1], cnts, color = 'k', edgecolor = 'k', width = np.mean(np.diff(bins)))
+FFConductanceTuning.py:plt.hist(cv[~np.isnan(cv)], 50, fc = 'k', edgecolor = 'w')
+FFConductanceTuning.py:plt.pcolor(po * 180.0 / np.pi, cmap = 'hsv')
+FFConductanceTuning.py:plt.colorbar()
+FFvsOri.py:        plt.bar(binsI[:-1], cntI, color = 'r', edgecolor = 'r', width = np.mean(np.diff(binsI)))
+FFvsOri.py:        plt.bar(binsE[:-1], cntE, color = 'k', edgecolor = 'k', width = np.mean(np.diff(binsE)))
+FFvsOri.py:        # plt.plot(np.transpose(tcMat), color = [0.9, 0.9, 0.9])
+FFvsOri.py:        #     ax[subscripts].bar(bins[:-1], cnts, color = 'r', edgecolor = 'r', width = bins[1]-bins[0])
+FFvsOri.py:        #     ax[subscripts].bar(bins[:-1], cnts, color = 'k', edgecolor = 'k', width = bins[1]-bins[0])
+OriMapDisplay.py:plt.colorbar()
+OriMapFuncs.py:    cmap.set_bad(color = 'w', alpha = 1.)
+OriMapFuncs.py:    #plt.pcolor(maskedOm, cmap = cmap, vmin = 0.0, vmax = 180.0)
+OriMapFuncs.py:    plt.colorbar()
+OriMapFuncs.py:    plt.pcolor(x * 180.0 / np.pi, cmap = 'hsv')
+OriMapFuncs.py:    plt.colorbar()
+OriMapFuncs.py:    #plt.pcolor(x, vmin = 0, vmax = np.max(x[:]), cmap =  'hsv')
+OriMapFuncs.py:    #plt.colorbar()
+OriMapFuncs.py:        circObj = plt.Circle((L*0.5, L*0.5), kRadius, color = 'w', fill = False, linewidth = 2)
+OriMapFuncs.py:            plt.text(L*0.5, L*0.5 + (radii[kk] + radii[kk+1])*0.5 - 0.025, '%s'%(kk), color='w', weight = 'bold')
+OriMapFuncs.py:            plt.text(L*0.5, L*0.5, '0', color='w', weight = 'bold')
+OriMapFuncs.py:    #plt.pcolor(results, vmin = 0.0, vmax = 1.0, cmap = 'rainbow')
+OriMapFuncs.py:#    plt.pcolor(results, vmin = -1.0, vmax = 1.0, cmap = 'rainbow')
+OriMapFuncs.py:#    plt.colorbar()
+OriMapFuncs.py:    plt.bar(poBins[:-1], poCnt, color = 'k', edgecolor='w', width = np.mean(np.diff(poBins)))
+OriMapFuncs.py:    # plt.colorbar()
+ProcessPinWheels.py:    cmap.set_bad(color = 'w', alpha = 1.)
+ProcessPinWheels.py:    #plt.pcolor(maskedOm, cmap = cmap, vmin = 0.0, vmax = 180.0)
+ProcessPinWheels.py:    plt.colorbar()
+ProcessPinWheels.py:plt.colorbar(im, ax=ax[subscripts])
+ProcessPinWheels.py:plt.colorbar()
+SpkStats.py:            ax1.errorbar(tau, quadParameters[:, 0], ecolor = 'k', yerr=1.96*np.sqrt(quadParameters[:, 3]))
+SpkStats.py:            ax1.set_ylabel('a', fontsize=20, color='k')
+SpkStats.py:                t1.set_color('k')
+SpkStats.py:            ax2.errorbar(tau, quadParameters[:, 1], ecolor='r', yerr=1.96*np.sqrt(quadParameters[:, 4]))
+SpkStats.py:            ax2.set_ylabel('b', fontsize=20, color = 'r')
+SpkStats.py:                t1.set_color('r')
+SpkStats.py:            ax1.errorbar(tau, linParameters[:, 0], ecolor = 'k', yerr=1.96*np.sqrt(linParameters[:, 2]))
+SpkStats.py:            ax2.errorbar(tau, linParameters[:, 1], ecolor='r', yerr=1.96*np.sqrt(linParameters[:, 3]))
+SpkStats.py:            tl.set_color('r')
+SpkStats.py:        plt.setp(patches, 'edgecolor', 'k', 'facecolor', 'k')
+SpkStats.py:        plt.setp(patches, 'edgecolor', 'k', 'facecolor', 'k')
+SpkStats.py:                ax0[subscripts].bar(bins[:-1], cnts, color = 'r', edgecolor = 'r', width = 0.8)
+SpkStats.py:                ax0[subscripts].bar(bins[:-1], cnts, color = 'k', edgecolor = 'k', width = 0.8)
+SpkStats.py:                # plt.bar(bins[:-1], cnts, color = 'k', edgecolor = 'k')
+[1]+  Done                    eog ~/db/figs/ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda$ grep colors *.py
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(alpha))]
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(tau))]
+CorrFuncs.py:        plt.gca().set_color_cycle(colors)
+CRF.py:# colors = [colormap(i) for i in np.linspace(0, 0.9, nContrastLevels)]
+CRF.py:# axE.set_color_cycle(colors)
+CRF.py:# axI.set_color_cycle(colors)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 72, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 40, in main
+    colors = [colormap(i) for i in np.linspace(0, 0.9, len(dbNames))]
+NameError: global name 'colormap' is not defined
+srao@pcneurophys80:~/nda$ grep colormap *.py
+CompareCircVarOfDBs.py:    colors = [colormap(i) for i in np.linspace(0, 0.9, len(dbNames))]
+CorrFuncs.py:        colormap = plt.cm.gist_rainbow
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(alpha))]
+CorrFuncs.py:        colors = [colormap(i) for i in np.linspace(0, 0.9, len(tau))]
+CRF.py:# colormap = plt.cm.gist_rainbow
+CRF.py:# colors = [colormap(i) for i in np.linspace(0, 0.9, nContrastLevels)]
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n3
+total 36M
+-rw-r--r-- 1 srao users  31K juin  25 15:16 ori_cvDistr_I_diffFFK.png
+-rw-r--r-- 1 srao users  23K juin  25 15:16 ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[1] 17424
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[2] 17430
+[1]   Done                    eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+[2]+  Done                    eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[1] 17444
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+[1]+  Done                    
+srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 82, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 51, in main
+    labels = [item.get_text() for item in plt.axE.get_xticklabels()]
+AttributeError: 'module' object has no attribute 'axE'
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 82, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 59, in main
+    kb.Keyboard()
+AttributeError: 'module' object has no attribute 'Keyboard'
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> plt.legend(loc = 1)
+<matplotlib.legend.Legend object at 0x3a24f10>
+>>> plt.show()
+>>> plt.legend(loc = 0)
+<matplotlib.legend.Legend object at 0x3a33b10>
+>>>     axE.set_xticklabels(labels)
+  File "<console>", line 1
+    axE.set_xticklabels(labels)
+   ^
+IndentationError: unexpected indent
+>>> axE.set_xticklabels(labels)
+[<matplotlib.text.Text object at 0x306ec90>, <matplotlib.text.Text object at 0x3070e50>, <matplotlib.text.Text object at 0x3085850>, <matplotlib.text.Text object at 0x3085ed0>, <matplotlib.text.Text object at 0x3087590>, <matplotlib.text.Text object at 0x3087c10>, <matplotlib.text.Text object at 0x3a16510>, <matplotlib.text.Text object at 0x3a16b90>]
+>>> plt.show()
+>>> plt.draw()
+>>> labels
+['0.0\nhighly tuned', '', '', '', '', '', '', '1.0\nnot selective']
+>>>
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 82, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 62, in main
+    Print2Pdf(figE,  figFolder + figName, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> axI.set_xticklabels(labels)
+[<matplotlib.text.Text object at 0x367edd0>, <matplotlib.text.Text object at 0x3685090>, <matplotlib.text.Text object at 0x3690410>, <matplotlib.text.Text object at 0x3690a90>, <matplotlib.text.Text object at 0x3696150>, <matplotlib.text.Text object at 0x36856d0>, <matplotlib.text.Text object at 0x3c3c7d0>, <matplotlib.text.Text object at 0x3c3ce50>]
+>>> plt.draw()
+>>> labels()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'list' object is not callable
+>>> labels
+['0.0\nhighly tuned', '', '', '', '', '', '', '1.0\nnot selective']
+>>> axI.get_xticks()
+array([ 0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ])
+>>> len(axI.get_xticks())
+10
+>>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 82, in <module>
+    if __name__ == '__main__':
+  File "CompareCircVarOfDBs.py", line 62, in main
+    figName = 'ori_cvDistr_E_diffFFK'
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> axI.get_xticks()
+array([ 0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ])
+>>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 83, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 63, in main
+    Print2Pdf(figE,  figFolder + figName, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> labels
+['\nhighly tuned', '', '', '', '', '', '', '', '', '\nnot selective']
+>>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 86, in <module>
+    print dbName
+  File "CompareCircVarOfDBs.py", line 66, in main
+    plt.show()
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> axI.get_xticks()
+array([ 0.1,  0.2,  0.3,  0.4,  0.5,  0.6,  0.7,  0.8,  0.9,  1. ])
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 92, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 55, in main
+    labels[0] = xticks[0] + "\nhighly tuned"
+TypeError: unsupported operand type(s) for +: 'numpy.float64' and 'str'
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> axE.xlim([0.0, 1.0])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'AxesSubplot' object has no attribute 'xlim'
+>>> axE.xlims([0.0, 1.0])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'AxesSubplot' object has no attribute 'xlims'
+>>> plt.xlim([0.0, 1.0])
+(0.0, 1.0)
+>>> plt.xlim([0.0, 1.0])
+(0.0, 1.0)
+>>> fgE.xlim([-0.5, 1.0])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'fgE' is not defined
+>>> figE.xlim([-0.5, 1.0])
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Figure' object has no attribute 'xlim'
+>>> figE.legend()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: legend() takes at least 3 arguments (1 given)
+>>> figE.legends()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+TypeError: 'list' object is not callable
+>>> plt.figure(fgE.fignum())
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'fgE' is not defined
+>>> plt.figure(figE.fignum())
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Figure' object has no attribute 'fignum'
+>>> plt.figure(figE.fignum)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Figure' object has no attribute 'fignum'
+>>> figE.fignum
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Figure' object has no attribute 'fignum'
+>>> figE
+<matplotlib.figure.Figure object at 0x1ff1ed0>
+>>> figE.fignum
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'Figure' object has no attribute 'fignum'
+>>> figE.number
+1
+>>> plt.figure(figE.number)
+<matplotlib.figure.Figure object at 0x1ff1ed0>
+>>> plt.xlim([-0.5, 1.0])
+(-0.5, 1.0)
+>>> plt.figure(figI.number)
+<matplotlib.figure.Figure object at 0x23f6f50>
+>>> plt.xlim([-0.5, 1.0])
+(-0.5, 1.0)
+>>> 
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> labels[-2] =  "%s\nnot selective"%(xticks[-2])
+>>> labels[-1] = '%s'%(xticks[-1])
+>>> labels
+['0.0\nhighly tuned', '', '', 0.60000000000000009, '0.8\nnot selective', '1.0']
+>>> axE.get_xticks()
+array([ 0. ,  0.2,  0.4,  0.6,  0.8,  1. ])
+>>> axI.set_xticklabels(labels)
+[<matplotlib.text.Text object at 0x26eadd0>, <matplotlib.text.Text object at 0x26f1090>, <matplotlib.text.Text object at 0x26fc410>, <matplotlib.text.Text object at 0x26fca90>, <matplotlib.text.Text object at 0x2702150>, <matplotlib.text.Text object at 0x26f16d0>]
+>>> plt.draw()
+>>> xt=axE.get_xticks()
+>>> xt
+array([ 0. ,  0.2,  0.4,  0.6,  0.8,  1. ])
+>>> xt = np.array([0,.2, .4, .6, .8, .9, 1])
+>>> axE.set_xticks(xt)
+[<matplotlib.axis.XTick object at 0x22fa390>, <matplotlib.axis.XTick object at 0x22fa0d0>, <matplotlib.axis.XTick object at 0x23043d0>, <matplotlib.axis.XTick object at 0x23049d0>, <matplotlib.axis.XTick object at 0x2306090>, <matplotlib.axis.XTick object at 0x2306710>, <matplotlib.axis.XTick object at 0x2c7b7d0>]
+>>> draw()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'draw' is not defined
+>>> plt.draw()
+>>> plt.show()
+>>> labels
+['0.0\nhighly tuned', '', '', 0.60000000000000009, '0.8\nnot selective', '1.0']
+>>>     labels[-1] =  "%s\nnot selective"%(xticks[-1])
+  File "<console>", line 1
+    labels[-1] =  "%s\nnot selective"%(xticks[-1])
+   ^
+IndentationError: unexpected indent
+>>> labels[-1] =  "%s\nnot selective"%(xticks[-1])
+>>> labels
+['0.0\nhighly tuned', '', '', 0.60000000000000009, '0.8\nnot selective', '1.0\nnot selective']
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 100, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 69, in main
+    labels[i] = '.2%s'%(xticks[i])
+IndexError: index 6 is out of bounds for axis 0 with size 6
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 100, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 69, in main
+    labels[i] = '.2%s'%(xticks[ii])
+IndexError: list assignment index out of range
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+0 2
+1 4
+2 6
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 101, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 70, in main
+    labels[i] = '.2%s'%(xticks[ii])
+IndexError: list assignment index out of range
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+0 2
+1 4
+2 6
+3 8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+  File "<console>", line 1
+    python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+                             ^
+SyntaxError: invalid syntax
+>>> >>> python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+  File "<console>", line 1
+    python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+                             ^
+SyntaxError: invalid syntax
+>>> >>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 101, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 81, in main
+    Print2Pdf(figE,  figFolder + figName, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+0 2
+1 4
+2 6
+3 8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 101, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 81, in main
+    Print2Pdf(figE,  figFolder + figName, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+0 2
+1 4
+2 6
+3 8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+0 2
+1 4
+2 6
+3 8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 101, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 81, in main
+    Print2Pdf(figE,  figFolder + figName, [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+  File "/homecentral/srao/Documents/code/mypybox/utils/Print2Pdf.py", line 39, in Print2Pdf
+    figHandle.canvas.draw()
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/backend_tkagg.py", line 240, in draw
+    tkagg.blit(self._tkphoto, self.renderer._renderer, colormode=2)
+  File "/usr/lib/pymodules/python2.7/matplotlib/backends/tkagg.py", line 19, in blit
+    tk.call("PyAggImagePhoto", photoimage, id(aggimage), colormode, id(bbox_array))
+_tkinter.TclError: this isn't a Tk application
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ [1]+  Done                      C-c C-c
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+srao@pcneurophys80:~/nda/figs$ srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+srao@pcneurophys80:~/nda/figs$ srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+  File "CompareCircVarOfDBs.py", line 47
+    for k, kDb in enumerate(dbNames):
+                                    ^
+SyntaxError: invalid syntax
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+  File "CompareCircVarOfDBs.py", line 47
+    for k, kDb in enumerate(dbNames):
+                                    ^
+SyntaxError: invalid syntax
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+  File "CompareCircVarOfDBs.py", line 47
+    for k, kDb in enumerate(dbNames):
+                                    ^
+SyntaxError: invalid syntax
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 109, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 89, in main
+    axm.plot(xaxis, cvMeans[:, 0], 'k.-', label = 'E')
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 3893, in plot
+    for line in self._get_lines(*args, **kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 322, in _grab_next_args
+    for seg in self._plot_args(remaining, kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 300, in _plot_args
+    x, y = self._xy_from_xy(x, y)
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 240, in _xy_from_xy
+    raise ValueError("x and y must have same first dimension")
+ValueError: x and y must have same first dimension
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 110, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 90, in main
+    axm.plot(xaxis, cvMeans[:, 0], 'k.-', label = 'E')
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 3893, in plot
+    for line in self._get_lines(*args, **kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 322, in _grab_next_args
+    for seg in self._plot_args(remaining, kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 300, in _plot_args
+    x, y = self._xy_from_xy(x, y)
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 240, in _xy_from_xy
+    raise ValueError("x and y must have same first dimension")
+ValueError: x and y must have same first dimension
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 110, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 90, in main
+    axm.plot(xaxis, cvMeans[:, 0], 'k.-', label = 'E')
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 3893, in plot
+    for line in self._get_lines(*args, **kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 322, in _grab_next_args
+    for seg in self._plot_args(remaining, kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 300, in _plot_args
+    x, y = self._xy_from_xy(x, y)
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 240, in _xy_from_xy
+    raise ValueError("x and y must have same first dimension")
+ValueError: x and y must have same first dimension
+srao@pcneurophys80:~/nda$ srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> xaxis
+array([0, 1, 2])
+>>> cvMeans.shape
+(4, 2)
+>>> cvMeans
+array([[ 0.43129244,  0.63926683],
+       [ 0.44113594,  0.71753543],
+       [ 0.44968134,  0.80948356],
+       [ 0.        ,  0.        ]])
+>>> 
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 113, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 93, in main
+    axm.plot(xaxis, cvMeans[:, 0], 'k.-', label = 'E')
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 3893, in plot
+    for line in self._get_lines(*args, **kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 322, in _grab_next_args
+    for seg in self._plot_args(remaining, kwargs):
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 300, in _plot_args
+    x, y = self._xy_from_xy(x, y)
+  File "/usr/lib/pymodules/python2.7/matplotlib/axes.py", line 240, in _xy_from_xy
+    raise ValueError("x and y must have same first dimension")
+ValueError: x and y must have same first dimension
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff8
+
+cff2
+cff3
+cff8
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff8
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> >>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: cff2
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n4
+total 36M
+-rw-r--r-- 1 srao users  58K juin  25 16:16 cv_vs_cff.png
+-rw-r--r-- 1 srao users  58K juin  25 16:16 ori_cvDistr_I_diffFFK.png
+-rw-r--r-- 1 srao users  45K juin  25 16:16 ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[1] 18059
+srao@pcneurophys80:~/nda/figs$ cd ..
+[1]+  Done                    eog ori_cvDistr_I_diffFFK.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ eog ori_cvDistr_I_diffFFK.png &
+[1] 18070
+srao@pcneurophys80:~/nda$ eog ori_cvDistr_E_diffFFK.png &
+[2] 18076
+[1]   Done                    eog ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda$ cd figs
+[2]+  Done                    eog ori_cvDistr_E_diffFFK.png  (wd: ~/nda)
+(wd now: ~/nda/figs)
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_E_diffFFK.png &
+[1] 18082
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[2] 18089
+[1]   Done                    eog ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ cd ~/db/data/
+[2]+  Done                    eog ori_cvDistr_I_diffFFK.png  (wd: ~/nda/figs)
+(wd now: ~/db/data)
+srao@pcneurophys80:~/db/data$ ls t* -lht
+-rw-r--r-- 1 srao users 1,3M juin  25 13:38 tuningCurves_cff9.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:36 tuningCurves_cff3.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:27 tuningCurves_cff2.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:59 tuningCurves_cff4.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:43 tuningCurves_cff6.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff8.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff7.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:19 tuningCurves_cff5.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 1,3M juin   5 12:23 tuningCurves_bidirIIa8.npy
+-rw-r--r-- 1 srao users 1,3M juin   5 12:23 tuningCurves_bidirIIa2.npy
+-rw-r--r-- 1 srao users 1,3M juin   3 09:45 tuningCurves_bidireea8g4x.npy
+-rw-r--r-- 1 srao users 1,3M juin   3 09:45 tuningCurves_bidireea2g4x.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:58 tuningCurves_bidircntrlg2x.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:25 tuningCurves_bidireea2.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:25 tuningCurves_bidireea8.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 20:20 tuningCurves_rewireEEI2Es5.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 18:21 tuningCurves_bidirEEa8.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 18:19 tuningCurves_bidirEEa2.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 14:22 tuningCurves_rewireEEI2Es1.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 12:22 tuningCurves_rewireiisig1.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 12:00 tuningCurves_rewireiisig75.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 06:59 tuningCurves_rewireiisig5.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 01:49 tuningCurves_rewireControl.npy
+-rw-r--r-- 1 srao users 1,3M mai   29 12:56 tuningCurves_rewireCheck.npy
+-rw-r--r-- 1 srao users 1,3M mai   27 20:50 tuningCurves_rewireEIsig75.npy
+-rw-r--r-- 1 srao users 1,3M mai   27 13:51 tuningCurves_rewireEIsig1.npy
+-rw-r--r-- 1 srao users 1,3M mai   20 15:56 tuningCurves_rewireEIsig5.npy
+-rw-r--r-- 1 srao users 6,2M mai   19 17:31 tuningCurves_a0T3tr16NE4NI1K2.npy
+-rw-r--r-- 1 srao users 1,3M mai   15 20:09 tuningCurves_rewiresig75.npy
+-rw-r--r-- 1 srao users 1,3M mai   14 22:45 tuningCurves_rewiresig1.npy
+-rw-r--r-- 1 srao users 1,3M mai   14 15:48 tuningCurves_rewiresig5.npy
+-rw-r--r-- 1 srao users 2,5M mai    8 18:12 tuningCurves_g1xT3theta16Tr16.npy
+-rw-r--r-- 1 srao users 2,5M mai    7 16:25 tuningCurves_gx175.npy
+-rw-r--r-- 1 srao users 313K mai    5 17:36 tuningCurves_fftuningDelThis.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 20:10 tuningCurves_crfT25K100C100.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 13:45 tuningCurves_crfT25K100C60.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 12:55 tuningCurves_crfT25K100C2.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 18:12 tuningCurves_crfT25K100C1400.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:28 tuningCurves_crfT25K100C10.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:14 tuningCurves_crfT25K100C4.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:11 tuningCurves_crfT25K100C3.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:09 tuningCurves_crfT25K100C6.npy
+-rw-r--r-- 1 srao users 1,3M mai    2 17:17 tuningCurves_crfT30K400C100.npy
+-rw-r--r-- 1 srao users 1,3M mai    2 16:32 tuningCurves_crfT30K400C2.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:46 tuningCurves_crfT30K400C30.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:28 tuningCurves_crfT30K400C10.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:24 tuningCurves_crfT30K400C4.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:36 tuningCurves_crfT30K400C60.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:30 tuningCurves_crfT30K400C20.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:22 tuningCurves_crfT30K400C6.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:10 tuningCurves_crfT30K400C3.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:06 tuningCurves_crfT30K400C1400.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 19:35 tuningCurves_crfT30C1.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 19:12 tuningCurves_crfT30C2500.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 17:18 tuningCurves_crfT30C90.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 17:17 tuningCurves_crfT30C100.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:54 tuningCurves_crfT30C10.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:31 tuningCurves_crfT30C5.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:05 tuningCurves_crfT30C1500.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 14:17 tuningCurves_crfT30C6.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 14:16 tuningCurves_crfT30C4.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 20:00 tuningCurves_crfT30C20.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:12 tuningCurves_crfT30C50.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:01 tuningCurves_crfT30C80.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:00 tuningCurves_crfT30C70.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:57 tuningCurves_crfT30C60.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:55 tuningCurves_crfT30C40.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:48 tuningCurves_crfT30C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:10 tuningCurves_crfT30C0.npy
+-rw-r--r-- 1 srao users 1,3M avril 28 15:26 tuningCurves_crfTheta0T30.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 26 19:06 tuningCurves_pinwheel8Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 11:49 tuningCurves_pinwheel7Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 02:54 tuningCurves_pinwheel5Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 00:50 tuningCurves_pinwheel6Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:39 tuningCurves_pinwheel2Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:07 tuningCurves_pinwheel0Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:48 tuningCurves_pinwheel1Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:31 tuningCurves_pinwheel4Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:23 tuningCurves_pinwheel3Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 12:48 tuningCurves_pinwheel4Tr16.npy
+-rw-r--r-- 1 srao users 1,3M avril 21 22:22 tuningCurves_gx175Tr18C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 21 22:10 tuningCurves_gx175Tr30C100.npy
+-rw-r--r-- 1 srao users 3,1M avril 21 19:52 tuningCurves_pinwheel2.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel3Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel1Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 21:41 tuningCurves_pinwheel0Tr16.npy
+-rw-r--r-- 1 srao users 1,3M avril 20 15:18 tuningCurves_gx175em1C30.npy
+-rw-r--r-- 1 srao users 4,0K avril 19 23:42 tuningCurves_gx175tr19C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 19 17:24 tuningCurves_gx175tr37.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 15:06 tuningCurves_gx175_old.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 11:16 tuningCurves_gx15.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 10:30 tuningCurves_gx2.npy
+-rw-r--r-- 1 srao users 1,3M avril 17 15:59 tuningCurves_gx25.npy
+-rw-r--r-- 1 srao users 1,3M avril 17 02:27 tuningCurves_gx185.npy
+-rw-r--r-- 1 srao users 1,3M avril 16 18:19 tuningCurves_gx125.npy
+-rw-r--r-- 1 srao users 1,3M avril 16 16:04 tuningCurves_mtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 15 19:26 tuningCurves_omFFtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 15 13:20 tuningCurves_omf2r19e1Mtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 14 15:00 tuningCurves_om2pope4i1f2r19e1.npy
+-rw-r--r-- 1 srao users 3,1M avril 13 19:07 tuningCurves_omoldgff.npy
+-rw-r--r-- 1 srao users 3,1M avril  8 08:21 tuningCurves_omoldgff_old.npy
+-rw-r--r-- 1 srao users 3,1M mars  31 14:47 tuningCurves_omoldgff_ne4ni1f2r19e1.npy
+-rw-r--r-- 1 srao users 2,5M mars  22 05:01 tuningCurves_omf2r19e1NI4e4T3tr100.npy
+-rw-r--r-- 1 srao users 2,5M mars  21 19:53 tuningCurves_omDEL.npy
+-rw-r--r-- 1 srao users 2,5M mars  20 16:55 tuningCurves_omNE4E4f2r19e1.npy
+-rw-r--r-- 1 srao users 626K mars  18 14:40 tuningCurves_omf2r19e1T3tr100.npy
+-rw-r--r-- 1 srao users 626K mars  17 19:47 tuningCurves_omf2r19e1T3tr16.npy
+-rw-r--r-- 1 srao users 626K mars  17 15:50 tuningCurves_omf2r15e1T3tr100.npy
+-rw-r--r-- 1 srao users 626K mars  17 00:05 tuningCurves_omf2r15e1T3tr16.npy
+-rw-r--r-- 1 srao users 626K mars   9 18:30 tuningCurves_omg2xf2r19e1.npy
+-rw-r--r-- 1 srao users 1,3M mars   9 12:19 tuningCurves_om2popf21r2e1T5tr100.npy
+-rw-r--r-- 1 srao users 1,3M mars   8 16:39 tuningCurves_om2popf21r2e1T5tr40.npy
+-rw-r--r-- 1 srao users 626K mars   7 19:11 tuningCurves_omf3re2e1T5tr100.npy
+-rw-r--r-- 1 srao users 626K mars   7 18:28 tuningCurves_omf21re2e1T5tr100.npy
+-rw-r--r-- 1 srao users 626K mars   6 09:33 tuningCurves_omT50f21r2e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 18:59 tuningCurves_delom.npy
+-rw-r--r-- 1 srao users 626K mars   5 16:19 tuningCurves_omf2r19e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 13:19 tuningCurves_omf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 13:18 tuningCurves_omg2xf2r15e1R020.npy
+-rw-r--r-- 1 srao users 626K mars   4 17:19 tuningCurves_omf2r1e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:30 tuningCurves_g4xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:26 tuningCurves_g2xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:06 tuningCurves_omg4xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   3 17:47 tuningCurves_f2r15e1R020.npy
+-rw-r--r-- 1 srao users 626K mars   3 15:46 tuningCurves_ormf2r1k1e4.npy
+-rw-r--r-- 1 srao users 626K mars   3 15:31 tuningCurves_ormf2r2.npy
+-rw-r--r-- 1 srao users 626K mars   3 12:37 tuningCurves_omg4xf2r2.npy
+-rw-r--r-- 1 srao users 626K mars   3 12:22 tuningCurves_om2ksig.npy
+-rw-r--r-- 1 srao users 626K mars   3 11:46 tuningCurves_omrand2k.npy
+-rw-r--r-- 1 srao users   96 mars   3 11:37 tuningCurves_omtest.npy
+-rw-r--r-- 1 srao users 626K mars   3 10:05 tuningCurves_omg2xf2r1.npy
+-rw-r--r-- 1 srao users 626K mars   3 09:54 tuningCurves_omf2r1.npy
+-rw-r--r-- 1 srao users 626K mars   2 22:34 tuningCurves_om2Ksig.npy
+-rw-r--r-- 1 srao users 626K mars   2 11:36 tuningCurves_orimaprG4xOrigParam.npy
+-rw-r--r-- 1 srao users 626K mars   2 11:32 tuningCurves_orimaprG2xOrigParam.npy
+-rw-r--r-- 1 srao users 626K févr. 28 15:44 tuningCurves_omR020a0T3Tr15.npy
+-rw-r--r-- 1 srao users 626K févr. 27 17:38 tuningCurves_orimapTestGmean.npy
+-rw-r--r-- 1 srao users 626K févr. 23 21:30 tuningCurves_orimap_randConL2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 23 12:41 tuningCurves_orimaprG4xFF1Em1.npy
+-rw-r--r-- 1 srao users 1,3M févr. 22 23:14 tuningCurves_orimapOrigParamTr15.npy
+-rw-r--r-- 1 srao users 1,3M févr. 22 19:23 tuningCurves_orimapOrigParamTr3.npy
+-rw-r--r-- 1 srao users 1,3M févr. 20 12:02 tuningCurves_orimap_origparams.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 21:38 tuningCurves_orimap_sig25e1.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 11:41 tuningCurves_orimapR20LSig2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 04:56 tuningCurves_orimapR20_new.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 00:40 tuningCurves_orimapR40E5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 18:59 tuningCurves_orimapr40eps5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 10:50 tuningCurves_orimapr20eps5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 00:54 tuningCurves_orimapR10.npy
+-rw-r--r-- 1 srao users 1,3M févr. 17 10:56 tuningCurves_orimapSig2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 21:27 tuningCurves_orimap3.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 19:00 tuningCurves_orimap0.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 12:33 tuningCurves_orimap2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 01:47 tuningCurves_orimap.npy
+-rw-r--r-- 1 srao users 1,3M févr. 12 17:46 tuningCurves_orimap1.npy
+-rw-r--r-- 1 srao users 1,3M févr.  6 14:17 tuningCurves_a0T4C100xi12Rho1em1G2x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  6 05:59 tuningCurves_a0T4C100xi12Rho1em1G1x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  4 15:33 tuningCurves_a0T4C100xi12Rho1em1G4x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  1 15:34 tuningCurves_a0T4xi12C100tr100g2x.npy
+-rw-r--r-- 1 srao users 1,3M janv. 29 18:41 tuningCurves_allAnglesa0T4xi12C100Tr100.npy
+-rw-r--r-- 1 srao users 1,3M janv.  2 17:56 tuningCurves_bidirII_a5t3T3xi12tr15.npy
+-rw-r--r-- 1 srao users 1,3M janv.  2 17:38 tuningCurves_bidirII_a0t3T3xi12tr15.npy
+-rw-r--r-- 1 srao users 1,3M déc.  30 18:03 tuningCurves_bidirII_a0t3T3xi12.npy
+-rw-r--r-- 1 srao users 1,3M déc.  16  2014 tuningCurves_bidirII_a0t3_ff3cos.npy
+-rw-r--r-- 1 srao users 1,3M déc.  13  2014 tuningCurves_bidirII_tmp666.npy
+-rw-r--r-- 1 srao users 1,3M déc.  13  2014 tuningCurves_bidirII_t3a9_tuning.npy
+-rw-r--r-- 1 srao users 1,2M oct.   6  2014 tuningCurves_bidirEE.npy
+-rw-r--r-- 1 srao users 1,2M oct.   6  2014 tuningCurves_bidir.npy
+-rw-r--r-- 1 srao users 1,2M sept. 30  2014 tuningCurves_anatomic.npy
+-rw-r--r-- 1 srao users 626K sept. 16  2014 tuningCurves.npy
+srao@pcneurophys80:~/db/data$ cd ../figs
+srao@pcneurophys80:~/db/figs$ ls a0T3tr16NE4NI1K2*
+ls: cannot access a0T3tr16NE4NI1K2*: No such file or directory
+srao@pcneurophys80:~/db/figs$ ls *a0T3tr16NE4NI1K2*
+ori_cvDistr_EI_a0T3tr16NE4NI1K2.png  ori_cvDistr_EI_normalized_a0T3tr16NE4NI1K2.png
+srao@pcneurophys80:~/db/figs$ eog ori_cvDistr_EI_normalized_a0T3tr16NE4NI1K2.png 
+srao@pcneurophys80:~/db/figs$ eog ori_cvDistr_EI_normalized_g1xT3theta16Tr16.png 
+srao@pcneurophys80:~/db/figs$ cd ~/nda
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 118, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 51, in main
+    circVariance = PopulationCircVar(tc, theta)
+  File "CompareCircVarOfDBs.py", line 23, in PopulationCircVar
+    circVariance[i] = CircVar(tuningCurves[kNeuron, :], theta)
+  File "CompareCircVarOfDBs.py", line 16, in CircVar
+    zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
+ValueError: shapes (16,) and (8,) not aligned: 16 (dim 0) != 8 (dim 0)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n3
+total 36M
+-rw-r--r-- 1 srao users  61K juin  25 16:25 cv_vs_cff.png
+-rw-r--r-- 1 srao users  61K juin  25 16:25 ori_cvDistr_I_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n4
+total 36M
+-rw-r--r-- 1 srao users  61K juin  25 16:25 cv_vs_cff.png
+-rw-r--r-- 1 srao users  61K juin  25 16:25 ori_cvDistr_I_diffFFK.png
+-rw-r--r-- 1 srao users  59K juin  25 16:25 ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_I_diffFFK.png &
+[1] 18124
+srao@pcneurophys80:~/nda/figs$ cd ..
+[1]+  Done                    eog ori_cvDistr_I_diffFFK.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_E_diffFFK.png &
+[1] 18135
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+[1]+  Done                    eog ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ eog ori_cvDistr_E_diffFFK.png &
+[1] 18145
+srao@pcneurophys80:~/nda/figs$ cd ..
+[1]+  Done                    eog ori_cvDistr_E_diffFFK.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls
+apr13							 ff_vs_ori_frft_10.0_cvlt_0.5_omrand2k.png.png		     gff_gE_Mean_circvarDistr_ne4ni1f2r19e1.png		       masked_om_discarded4000pix_om2pope4i1f2r19e1.png		OSI_distr_rewire_sig5_and_1.png
+apr2							 ff_vs_ori_frft_10.0_cvlt_0.5_orimap0.png		     gff_gE_Mean_orimap_ne4ni1f2r19e1.png		       masked_om_discarded4250pix_I_om2pope4i1f2r19e1.png	pinwheel_masked_I.png
+apr8							 ff_vs_ori_frft_10.0_cvlt_0.5_orimap_origparams.png	     gffmean_circvarDistr_ne4ni1f2r19e1.png		       masked_om_discarded4500pix_I_om2pope4i1f2r19e1.png	pinwheel_masked.png
+azimuth_vs_po_E_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimapOrigParamTr15.png	     gffmean_ne4ni1f2r19e1_ormmap.png			       masked_om_discarded4750pix_I_om2pope4i1f2r19e1.png	pinwheel_mean_I.png
+azimuth_vs_po_I_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimapOrigParamTr3.png	     gff_orimap_0.pdf					       masked_om_discarded5000pix_E_om2pope4i1f2r19e1.png	pinwheel_mean.png
+CircVarInRing_E_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimap.png		     gff_orimap_0.png					       masked_om_discarded5000pix_I_om2pope4i1f2r19e1.png	pinwheels0_2_7_I.png
+CircVarInRing_E_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_10.0_cvlt_0.5_orimapr20eps5.png		     gff_orimap.pdf					       masked_om_discarded5000pix_I_omoldgff_ne4ni1f2r19e1.png	pinwheels0_2_7.png
+CircVarInRing_I_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimapR20LSig2.png	     gff_orimap.png					       masked_om_discarded5000pix_om2pope4i1f2r19e1.png		rewiring
+CircVarInRing_I_omDEL.png				 ff_vs_ori_frft_10.0_cvlt_0.5_orimapR20_new.png		     mar19						       masked_om_discarded500pix_I_om2pope4i1f2r19e1.png	tcinRing.npy
+CircVarInRing_I_omf2r19e1NI4e4T3tr100.png		 ff_vs_ori_frft_10.0_cvlt_0.5_orimapR40E5.png		     mar3						       masked_om_discarded5250pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_0.0_cvlt_1.0_rewiresig5.png.png
+CircVarInRing_I_omf2r19e1T3tr100.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimapr40eps5.png		     mar4						       masked_om_discarded5500pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.3_a0T4C100xi12Rho1em1G4x.png
+CircVarInRing_I_omNE4E4f2r19e1.png			 ff_vs_ori_frft_10.0_cvlt_0.5_orimaprG4xFF1Em1.png	     mar8						       masked_om_discarded5750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.3_a0T4xi12C100tr100g2x.png
+CircVarInRing_I_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_10.0_cvlt_0.5_orimaprG4xOrigParam.png	     mar9						       masked_om_discarded6000pix_E_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.3_orimap1.png
+CircVarInRing_normalized_E_om2pope4i1f2r19e1.png	 ff_vs_ori_frft_10.0_cvlt_0.5_orimapSig2.png		     masked_om_discarded10000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded6000pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.3_orimap.png
+CircVarInRing_normalized_E_omoldgff_ne4ni1f2r19e1.png	 ff_vs_ori_frft_1.0_cvlt_0.5_gx15.png.png		     masked_om_discarded1000pix_E_om2pope4i1f2r19e1.png        masked_om_discarded6000pix_I_omoldgff_ne4ni1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_omrand2k.png.png
+CircVarInRing_normalized_I_om2pope4i1f2r19e1.png	 ff_vs_ori_frft_1.0_cvlt_0.5_gx175.png.png		     masked_om_discarded1000pix_I_om2pope4i1f2r19e1.png        masked_om_discarded6250pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimap0.png
+CircVarInRing_normalized_I_omDEL.png			 ff_vs_ori_frft_1.0_cvlt_0.5_gx175tr37.png.png		     masked_om_discarded1000pix_I_omoldgff_ne4ni1f2r19e1.png   masked_om_discarded6500pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimap_origparams.png
+CircVarInRing_normalized_I_omf2r19e1NI4e4T3tr100.png	 ff_vs_ori_frft_1.0_cvlt_0.5_gx185.png.png		     masked_om_discarded1000pix_I_pinwheel7Tr50.png	       masked_om_discarded6750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapOrigParamTr15.png
+CircVarInRing_normalized_I_omf2r19e1T3tr100.png		 ff_vs_ori_frft_1.0_cvlt_0.5_gx2.png.png		     masked_om_discarded1000pix_om2pope4i1f2r19e1.png	       masked_om_discarded7000pix_E_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapOrigParamTr3.png
+CircVarInRing_normalized_I_omNE4E4f2r19e1.png		 ff_vs_ori_frft_2.0_cvlt_0.6_om2ksig.png.png		     masked_om_discarded11000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded7000pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimap.png
+CircVarInRing_normalized_I_omoldgff_ne4ni1f2r19e1.png	 ff_vs_ori_frft_2.0_cvlt_0.6_omf2r1.png.png		     masked_om_discarded12000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded7000pix_I_omoldgff_ne4ni1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapr20eps5.png
+crf							 ff_vs_ori_frft_5.0_cvlt_0.5_a0T3tr16NE4NI1K2.png.png	     masked_om_discarded12000pix_E_omoldgff_ne4ni1f2r19e1.png  masked_om_discarded7250pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapR20LSig2.png
+cv_vs_cff.png						 ff_vs_ori_frft_5.0_cvlt_0.5_bidireea2.png.png		     masked_om_discarded1250pix_I_om2pope4i1f2r19e1.png        masked_om_discarded7500pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapR20_new.png
+cv_vs_ori_frft_5.0_cvlt_0.5.png				 ff_vs_ori_frft_5.0_cvlt_0.5_bidireea8.png.png		     masked_om_discarded13000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapR40E5.png
+FanoFactorDynamics_a0t3T6C0n1ge2xrf2x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_bidirEEa8.png.png		     masked_om_discarded14000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded7750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapr40eps5.png
+FanoFactorDynamics_a0t3T6C0n1rg4x_old.png		 ff_vs_ori_frft_5.0_cvlt_0.5_fftuningDelThis.png.png	     masked_om_discarded15000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded8000pix_E_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimaprG4xFF1Em1.png
+FanoFactorDynamics_a0t3T6xi12C0n1bg2x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_g1xT3theta16Tr16.png.png	     masked_om_discarded1500pix_I_om2pope4i1f2r19e1.png        masked_om_discarded8000pix_E_omoldgff_ne4ni1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimaprG4xOrigParam.png
+FanoFactorDynamics_a0t3T6xi12C0n1_old.png		 ff_vs_ori_frft_5.0_cvlt_0.5_gx125.png.png		     masked_om_discarded16000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded8000pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_10.0_cvlt_0.5_orimapSig2.png
+FanoFactorDynamics_a2t3T6xi12C0n1.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx15.png.png		     masked_om_discarded16000pix_E_omoldgff_ne4ni1f2r19e1.png  masked_om_discarded8000pix_I_pinwheel7Tr50.png		tuning_curves_frft_1.0_cvlt_0.5_gx15.png.png
+FanoFactorDynamics_a5t3T6xi12C0n1.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx175em1C30.png.png	     masked_om_discarded17000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded8250pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_1.0_cvlt_0.5_gx175.png.png
+FanoFactorDynamics_poisTr100.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx175.png.png		     masked_om_discarded1750pix_I_om2pope4i1f2r19e1.png        masked_om_discarded8500pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_1.0_cvlt_0.5_gx175tr37.png.png
+FanoFactorDynamics__w100.0_a0t3T6xi12C0n1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_gx175Tr18C30.png.png	     masked_om_discarded18000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded8750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_1.0_cvlt_0.5_gx185.png.png
+FanoFactorDynamics__w1000_pois991.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx175Tr30C100.png.png	     masked_om_discarded19000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded9000pix_E_om2pope4i1f2r19e1.png	tuning_curves_frft_1.0_cvlt_0.5_gx2.png.png
+FanoFactorDynamics__w200_pois991.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx185.png.png		     masked_om_discarded20000pix_E_om2pope4i1f2r19e1.png       masked_om_discarded9000pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_2.0_cvlt_0.6_om2ksig.png.png
+FanoFactorDynamics__w400_pois991.png			 ff_vs_ori_frft_5.0_cvlt_0.5_gx25.png.png		     masked_om_discarded20000pix_E_omoldgff_ne4ni1f2r19e1.png  masked_om_discarded9250pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_5.0_cvlt_0.5_a0T3tr16NE4NI1K2.png.png
+FanoFactorDynamics__w50_a0t3T6C0n1g2x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_gx2.png.png		     masked_om_discarded2000pix_E_om2pope4i1f2r19e1.png        masked_om_discarded9500pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_5.0_cvlt_0.5_bidireea2.png.png
+FanoFactorDynamics__w50_a0t3T6xi12C0n1g4x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_gx2_withtilt.png		     masked_om_discarded2000pix_I_om2pope4i1f2r19e1.png        masked_om_discarded9750pix_I_om2pope4i1f2r19e1.png	tuning_curves_frft_5.0_cvlt_0.5_bidireea8.png.png
+FanoFactorDynamics__w50_a0t3T6xi12C0n1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_mtuning.png.png		     masked_om_discarded2000pix_I_omoldgff_ne4ni1f2r19e1.png   masked_om_om2pope4i1f2r19e1.png				tuning_curves_frft_5.0_cvlt_0.5_bidirEEa8.png.png
+FanoFactorDynamics__w50_a0T4C0n1Rho1em1G4x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_om2pope4i1f2r19e1.png.png	     masked_om_discarded2000pix_om2pope4i1f2r19e1.png	       ori_cvDistr_E_diffFFK.png				tuning_curves_frft_5.0_cvlt_0.5_fftuningDelThis.png.png
+FanoFactorDynamics__w50_a0T6C0n1G2x_new.png		 ff_vs_ori_frft_5.0_cvlt_0.5_omf2r19e1Mtuning.png.png	     masked_om_discarded21000pix_E_om2pope4i1f2r19e1.png       ori_cvDistr_I_diffFFK.png				tuning_curves_frft_5.0_cvlt_0.5_g1xT3theta16Tr16.png.png
+FanoFactorDynamics__w50_a0T6C0n1gff2x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_omf2r19e1NI4e4T3tr100.png.png   masked_om_discarded22000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_om2pope4i1f2r19e1_POhist_E.png		tuning_curves_frft_5.0_cvlt_0.5_gx125.png.png
+FanoFactorDynamics__w50_a0T6C0n1Rho1em1G1x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_omf2r1.png.png		     masked_om_discarded2250pix_I_om2pope4i1f2r19e1.png        OriMapFunc_om2pope4i1f2r19e1_POhist_I.png		tuning_curves_frft_5.0_cvlt_0.5_gx15.png.png
+FanoFactorDynamics_w50_a0T6C0n1Rho1em1G1x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_omoldgff_ne4ni1f2r19e1.png.png  masked_om_discarded23000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_om2pope4i1f2r19e1_POmap_E.png			tuning_curves_frft_5.0_cvlt_0.5_gx175em1C30.png.png
+FanoFactorDynamics__w50_a0T6C0n1Rho1em1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_orimap1.png		     masked_om_discarded24000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_om2pope4i1f2r19e1_POmap_I.png			tuning_curves_frft_5.0_cvlt_0.5_gx175.png.png
+FanoFactorDynamics__w50_a5t3T6xi12C0n1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_pinwheel0Tr50.png.png	     masked_om_discarded24000pix_E_omoldgff_ne4ni1f2r19e1.png  OriMapFunc_om2pope4i1f2r19e1_POmapLocalCorr_E.png	tuning_curves_frft_5.0_cvlt_0.5_gx175Tr18C30.png.png
+FanoFactorDynamics__w50_origgff11.png			 ff_vs_ori_frft_5.0_cvlt_0.5_pinwheel2.png.png		     masked_om_discarded25000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_om2pope4i1f2r19e1_POmapLocalCorr_I.png	tuning_curves_frft_5.0_cvlt_0.5_gx175Tr30C100.png.png
+FanoFactorDynamics__w50_origp.png			 ff_vs_ori_frft_5.0_cvlt_0.5_pinwheel4Tr16.png.png	     masked_om_discarded2500pix_I_om2pope4i1f2r19e1.png        OriMapFunc_omDEL_POhist_I.png				tuning_curves_frft_5.0_cvlt_0.5_gx185.png.png
+FanoFactorDynamics__w800_a0t3T6xi12C0n1g4x.png		 ff_vs_ori_frft_5.0_cvlt_0.5_pinwheel8Tr50.png.png	     masked_om_discarded250pix_I_om2pope4i1f2r19e1.png	       OriMapFunc_omDEL_POmap_I.png				tuning_curves_frft_5.0_cvlt_0.5_gx25.png.png
+FanoFactorDynamics__w800_pois991.png			 ff_vs_ori_frft_5.0_cvlt_0.5_pinwheel9Tr50.png.png	     masked_om_discarded26000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omDEL_POmapLocalCorr_I.png			tuning_curves_frft_5.0_cvlt_0.5_gx2.png.png
+FFDistrInRing_E_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.5.png			     masked_om_discarded27000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omf2r19e1NI4e4T3tr100_POhist_I.png		tuning_curves_frft_5.0_cvlt_0.5_gx2_withtilt.png
+FFDistrInRing_E_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_rewireCheck.png.png	     masked_om_discarded2750pix_I_om2pope4i1f2r19e1.png        OriMapFunc_omf2r19e1NI4e4T3tr100_POmap_I.png		tuning_curves_frft_5.0_cvlt_0.5_mtuning.png.png
+FFDistrInRing_I_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.5_rewireEIsig1.png.png	     masked_om_discarded28000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omf2r19e1NI4e4T3tr100_POmapLocalCorr_I.png	tuning_curves_frft_5.0_cvlt_0.5_om2pope4i1f2r19e1.png.png
+FFDistrInRing_I_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_rewireEIsig75.png.png	     masked_om_discarded28000pix_E_omoldgff_ne4ni1f2r19e1.png  OriMapFunc_omNE4E4f2r19e1_POhist_I.png			tuning_curves_frft_5.0_cvlt_0.5_omf2r19e1Mtuning.png.png
+FFdistr_vs_ori_E_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_rewiresig1.png.png		     masked_om_discarded29000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omNE4E4f2r19e1_POmap_I.png			tuning_curves_frft_5.0_cvlt_0.5_omf2r19e1NI4e4T3tr100.png.png
+FFDistr_vsOri_I_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.5_rewiresig5.png.png		     masked_om_discarded30000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omNE4E4f2r19e1_POmapLocalCorr_I.png		tuning_curves_frft_5.0_cvlt_0.5_omoldgff_ne4ni1f2r19e1.png.png
+FFdistr_vs_ori_I_omoldgff_ne4ni1f2r19e1.png		 ff_vs_ori_frft_5.0_cvlt_0.5_rewiresig75.png.png	     masked_om_discarded3000pix_E_om2pope4i1f2r19e1.png        OriMapFunc_omoldgff_ne4ni1f2r19e1_POhist_E.png		tuning_curves_frft_5.0_cvlt_0.5_orimap1.png
+ff_in_om.pdf						 ff_vs_ori_frft_5.0_cvlt_0.9_delom.png.png		     masked_om_discarded3000pix_I_om2pope4i1f2r19e1.png        OriMapFunc_omoldgff_ne4ni1f2r19e1_POhist_I.png		tuning_curves_frft_5.0_cvlt_0.5_pinwheel0Tr50.png.png
+FFInRing_E_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.9_f2r15e1R020.png.png	     masked_om_discarded3000pix_I_omoldgff_ne4ni1f2r19e1.png   OriMapFunc_omoldgff_ne4ni1f2r19e1_POmap_E.png		tuning_curves_frft_5.0_cvlt_0.5_pinwheel2.png.png
+FFInRing_E_omoldgff_ne4ni1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.9_g2xf2r15e1.png.png		     masked_om_discarded3000pix_om2pope4i1f2r19e1.png	       OriMapFunc_omoldgff_ne4ni1f2r19e1_POmap_I.png		tuning_curves_frft_5.0_cvlt_0.5_pinwheel4Tr16.png.png
+FFInRing_f2r15e1R020.png				 ff_vs_ori_frft_5.0_cvlt_0.9_omf2r1.png.png		     masked_om_discarded31000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omoldgff_ne4ni1f2r19e1_POmapLocalCorr_E.png	tuning_curves_frft_5.0_cvlt_0.5_pinwheel8Tr50.png.png
+FFInRing_I_om2pope4i1f2r19e1.png			 ff_vs_ori_frft_5.0_cvlt_0.9_omg4xf2r15e1.png.png	     masked_om_discarded32000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_omoldgff_ne4ni1f2r19e1_POmapLocalCorr_I.png	tuning_curves_frft_5.0_cvlt_0.5_pinwheel9Tr50.png.png
+FFInRing_I_omDEL.png					 ff_vs_ori_frft_5.0_cvlt_0.9_ormf2r1k1e4.png.png	     masked_om_discarded3250pix_I_om2pope4i1f2r19e1.png        OriMapFunc_omoldgff_POmap_E.png				tuning_curves_frft_5.0_cvlt_0.5.png
+FFInRing_I_omf2r19e1NI4e4T3tr100.png			 ff_vs_ori_frft_5.0_cvlt_0.9_ormf2r2.png.png		     masked_om_discarded33000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel0Tr16_POhist_E.png			tuning_curves_frft_5.0_cvlt_0.5_rewireCheck.png.png
+FFInRing_I_omf2r19e1T3tr100.png				 FiringRateInRing_E_om2pope4i1f2r19e1.png		     masked_om_discarded34000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel0Tr16_POhist_I.png			tuning_curves_frft_5.0_cvlt_0.5_rewireEIsig1.png.png
+FFInRing_I_omNE4E4f2r19e1.png				 FiringRateInRing_E_omoldgff_ne4ni1f2r19e1.png		     masked_om_discarded35000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel0Tr16_POmap_E.png			tuning_curves_frft_5.0_cvlt_0.5_rewireEIsig75.png.png
+FFInRing_I_omoldgff_ne4ni1f2r19e1.png			 FiringRateInRing_f2r15e1R020.png			     masked_om_discarded3500pix_I_om2pope4i1f2r19e1.png        OriMapFunc_pinwheel0Tr16_POmap_I.png			tuning_curves_frft_5.0_cvlt_0.5_rewiresig1.png.png
+ffinRing.npy						 FiringRateInRing_I_om2pope4i1f2r19e1.png		     masked_om_discarded36000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel1Tr16_POhist_E.png			tuning_curves_frft_5.0_cvlt_0.5_rewiresig5.png.png
+FFInRing_omR020a0T3Tr15.png				 FiringRateInRing_I_omDEL.png				     masked_om_discarded37000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel1Tr16_POhist_I.png			tuning_curves_frft_5.0_cvlt_0.5_rewiresig75.png.png
+FFInRing.pdf						 FiringRateInRing_I_omf2r19e1NI4e4T3tr100.png		     masked_om_discarded3750pix_I_om2pope4i1f2r19e1.png        OriMapFunc_pinwheel1Tr16_POmap_E.png			tuning_curves_frft_5.0_cvlt_0.9_delom.png.png
+FFInRing.png						 FiringRateInRing_I_omf2r19e1T3tr100.png		     masked_om_discarded38000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel1Tr16_POmap_I.png			tuning_curves_frft_5.0_cvlt_0.9_f2r15e1R020.png.png
+ff_vs_ori_frft_0.0_cvlt_1.0_rewiresig5.png.png		 FiringRateInRing_I_omNE4E4f2r19e1.png			     masked_om_discarded39000pix_E_om2pope4i1f2r19e1.png       OriMapFunc_pinwheel3Tr16_POhist_E.png			tuning_curves_frft_5.0_cvlt_0.9_g2xf2r15e1.png.png
+ff_vs_ori_frft_10.0_cvlt_0.3_a0T4C100xi12Rho1em1G4x.png  FiringRateInRing_I_omoldgff_ne4ni1f2r19e1.png		     masked_om_discarded4000pix_E_om2pope4i1f2r19e1.png        OriMapFunc_pinwheel3Tr16_POhist_I.png			tuning_curves_frft_5.0_cvlt_0.9_omf2r1.png.png
+ff_vs_ori_frft_10.0_cvlt_0.3_a0T4xi12C100tr100g2x.png	 FiringRateInRing_omR020a0T3Tr15.png			     masked_om_discarded4000pix_E_omoldgff_ne4ni1f2r19e1.png   OriMapFunc_pinwheel3Tr16_POmap_E.png			tuning_curves_frft_5.0_cvlt_0.9_omg4xf2r15e1.png.png
+ff_vs_ori_frft_10.0_cvlt_0.3_orimap1.png		 FiringRateInRing.png					     masked_om_discarded4000pix_I_om2pope4i1f2r19e1.png        OriMapFunc_pinwheel3Tr16_POmap_I.png			tuning_curves_frft_5.0_cvlt_0.9_ormf2r1k1e4.png.png
+ff_vs_ori_frft_10.0_cvlt_0.3_orimap.png			 gffCircVar.png						     masked_om_discarded4000pix_I_omoldgff_ne4ni1f2r19e1.png   ormap							tuning_curves_frft_5.0_cvlt_0.9_ormf2r2.png.png
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n4
+total 36M
+-rw-r--r-- 1 srao users  63K juin  25 16:30 cv_vs_cff.png
+-rw-r--r-- 1 srao users  68K juin  25 16:30 ori_cvDistr_I_diffFFK.png
+-rw-r--r-- 1 srao users  59K juin  25 16:30 ori_cvDistr_E_diffFFK.png
+srao@pcneurophys80:~/nda/figs$ eog cv_vs_cff.png &
+[1] 18158
+srao@pcneurophys80:~/nda/figs$ cd ..
+[1]+  Done                    eog cv_vs_cff.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ cd -
+/homecentral/srao/nda/figs
+srao@pcneurophys80:~/nda/figs$ eog cv_vs_cff.png &
+[1] 18164
+srao@pcneurophys80:~/nda/figs$ cd ..
+[1]+  Done                    eog cv_vs_cff.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 124, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 92, in main
+    Print2Pdf(figE,  figFolder + figName, 1.5 * [4.6,  4.0], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+TypeError: can't multiply sequence by non-int of type 'float'
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ Processint db: cff7  C-c C-c
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] 1 cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+inside DefaultArgs : assigning default args
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] 1 cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+inside DefaultArgs : assigning default args
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+hellp
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+  C-c C-cTraceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 173, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 101, in main
+    circVariance = PopulationCircVar(tc, theta)
+  File "CompareCircVarOfDBs.py", line 23, in PopulationCircVar
+    circVariance[i] = CircVar(tuningCurves[kNeuron, :], theta)
+  File "CompareCircVarOfDBs.py", line 16, in CircVar
+    zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
+KeyboardInterrupt
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] 1 cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+inside DefaultArgs : assigning default args
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 0]
+hellp
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+  C-c C-cTraceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 174, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 101, in main
+    circVariance = PopulationCircVar(tc, theta)
+  File "CompareCircVarOfDBs.py", line 23, in PopulationCircVar
+    circVariance[i] = CircVar(tuningCurves[kNeuron, :], theta)
+  File "CompareCircVarOfDBs.py", line 16, in CircVar
+    zk = np.dot(firingRate, np.exp(2j * atTheta * np.pi / 180))
+KeyboardInterrupt
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+inside DefaultArgs : assigning default args
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 0]
+hellp
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+  C-c C-cTraceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 174, in <module>
+    main(dbNames)
+  File "CompareCircVarOfDBs.py", line 101, in main
+    circVariance = PopulationCircVar(tc, theta)
+  File "CompareCircVarOfDBs.py", line 23, in PopulationCircVar
+    circVariance[i] = CircVar(tuningCurves[kNeuron, :], theta)
+  File "CompareCircVarOfDBs.py", line 17, in CircVar
+    return 1 - np.absolute(zk) / np.sum(firingRate)
+  File "/usr/local/lib/python2.7/dist-packages/numpy/core/fromnumeric.py", line 1716, in sum
+    out=out, keepdims=keepdims)
+  File "/usr/local/lib/python2.7/dist-packages/numpy/core/_methods.py", line 32, in _sum
+    return umr_sum(a, axis, dtype, out, keepdims)
+KeyboardInterrupt
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 177, in <module>
+    main2(dbNames)
+  File "CompareCircVarOfDBs.py", line 72, in main2
+    Print2Pdf(figE,  figFolder + figName, [pageSizePreFactore*4.6,  pageSizePreFactore*3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+NameError: global name 'figE' is not defined
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 177, in <module>
+    main2(dbNames)
+  File "CompareCircVarOfDBs.py", line 72, in main2
+    Print2Pdf(figtcE,  figFolder + figName, [pageSizePreFactore*4.6,  pageSizePreFactore*3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+NameError: global name 'figtcE' is not defined
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Traceback (most recent call last):
+  File "CompareCircVarOfDBs.py", line 181, in <module>
+    main2(dbNames)
+  File "CompareCircVarOfDBs.py", line 66, in main2
+    PlotPopAvgTuningCurves(tc, nTheta, axtcE, axtcI, legendLabel)
+  File "CompareCircVarOfDBs.py", line 39, in PlotPopAvgTuningCurves
+    tcMat = np.empty((NE + NI, len(thetas)))
+NameError: global name 'thetas' is not defined
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n3
+total 36M
+-rw-r--r-- 1 srao users  41K juin  25 17:24 meanTuningCurves_I.png
+-rw-r--r-- 1 srao users  39K juin  25 17:24 meanTuningCurves_E.png
+srao@pcneurophys80:~/nda/figs$ eog meanTuningCurves_I.png &
+[1] 18758
+srao@pcneurophys80:~/nda/figs$ eog meanTuningCurves_E.png &
+[2] 18764
+[1]   Done                    eog meanTuningCurves_I.png
+srao@pcneurophys80:~/nda/figs$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+python: can't open file 'CompareCircVarOfDBs.py': [Errno 2] No such file or directory
+[2]+  Done                    eog meanTuningCurves_E.png
+srao@pcneurophys80:~/nda/figs$ cd ..
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> plt.grid()
+>>> plt.grid()
+>>> plt.grid()
+>>> axtcE.grid()
+>>> axtcE.grid('off')
+>>> plt.show()
+>>> plt.draw()
+>>> axtcE.grid('on')
+>>> plt.draw()
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ cd figs
+srao@pcneurophys80:~/nda/figs$ ls -lht | head -n3
+total 36M
+-rw-r--r-- 1 srao users  45K juin  25 17:28 meanTuningCurves_I.png
+-rw-r--r-- 1 srao users  42K juin  25 17:28 meanTuningCurves_E.png
+srao@pcneurophys80:~/nda/figs$ eog meanTuningCurves_I.png &
+[1] 18781
+srao@pcneurophys80:~/nda/figs$ eog meanTuningCurves_E.png &
+[2] 18787
+[1]   Done                    eog meanTuningCurves_I.png
+srao@pcneurophys80:~/nda/figs$ cd ..
+[2]+  Done                    eog meanTuningCurves_E.png  (wd: ~/nda/figs)
+(wd now: ~/nda)
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 1]
+hellp
+hellp
+Processint db: g1xT3theta16Tr16
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+# Use quit() to exit
+Python 2.7.3 (default, Dec 18 2014, 19:10:20) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> 
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '0' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9
+cff2
+cff3
+cff4
+cff5
+cff6
+cff7
+cff8
+cff9
+[10000, 10000, 0.0, 180.0, 22.5, 0]
+hellp
+Processint db: g1xT3theta16Tr16
+CompareCircVarOfDBs.py:17: RuntimeWarning: invalid value encountered in double_scalars
+  return 1 - np.absolute(zk) / np.sum(firingRate)
+Processint db: cff2
+Processint db: cff3
+Processint db: cff4
+Processint db: cff5
+Processint db: cff6
+Processint db: cff7
+Processint db: cff8
+Processint db: cff9
+1 0.2
+2 0.4
+3 0.6
+4 0.8
+srao@pcneurophys80:~/nda$ cd data
+srao@pcneurophys80:~/nda/data$ ls -lht t* | head 
+-rw-r--r-- 1 srao users 272 avril 14 17:21 tcinRing.npy
+srao@pcneurophys80:~/nda/data$ ls
+apr7pomap.npy					FanoFactorDynamics_w50.0_poisTr100.npy	       FFvsOri_allAnglesa0T4xi12C100Tr100.npy		     FFvsOri_gx2.npy			FFvsOri_omoldgff_ne4ni1f2r19e1.npy  FFvsOri_pinwheel0Tr16.npy  FFvsOri_rewiresig75.npy
+bidirEE_a2.npy					FanoFactorDynamics_w50_a0t3T6C0n1g2x.npy       FFvsOri_allAnglesa0T4xi12C100Tr100.npyff_circvar.npy  FFvsOri_mtuning.npy		FFvsOri_omoldgff.npy		    FFvsOri_pinwheel0Tr50.npy  gffCircVar_testGmean.npy
+bidirEE_a8.npy					FanoFactorDynamics_w50_a0t3T6xi12C0n1g4x.npy   FFvsOri_bidircntrlg2x.npy			     FFvsOri_om2ksig.npy		FFvsOri_omR020a0T3Tr15.npy	    FFvsOri_pinwheel1Tr16.npy  gffTuning_testGmean.npy
+fano_distr_E_alpha0.51x.npy			FanoFactorDynamics_w50_a0t3T6xi12C0n1.npy      FFvsOri_bidireea2g4x.npy				     FFvsOri_om2Ksig.npy		FFvsOri_omrand2k.npy		    FFvsOri_pinwheel1Tr50.npy  long_tau_vs_ac_matalphaVsCorlength_after_onset_I.npy
+fano_distr_E_alpha0.52x.npy			FanoFactorDynamics_w50_a0T4C0n1Rho1em1G4x.npy  FFvsOri_bidireea2.npy				     FFvsOri_om2pope4i1f2r19e1.npy	FFvsOri_omT50f21r2e1.npy	    FFvsOri_pinwheel2.npy      long_tau_vs_ac_matbidirEEa2_after_onset_I.npy
+fano_distr_I_alpha0.51x.npy			FanoFactorDynamics_w50_a0T6C0n1gff2x.npy       FFvsOri_bidireea8g4x.npy				     FFvsOri_om2popf21r2e1T5tr100.npy	FFvsOri_omtest.npy		    FFvsOri_pinwheel2Tr50.npy  long_tau_vs_ac_matbidirEEa8_after_onset_I.npy
+fano_distr_I_alpha0.52x.npy			FanoFactorDynamics_w50_a0T6C0n1Rho1em1G2x.npy  FFvsOri_bidireea8.npy				     FFvsOri_om2popf21r2e1T5tr40.npy	FFvsOri_orimap0.npy		    FFvsOri_pinwheel3Tr16.npy  long_tau_vs_ac_matrewiresig1_after_onset_I.npy
+FanoFactorDynamics_a0t3T6C0n1ge2xrf2x.npy	FanoFactorDynamics_w50_a0T6C0n1Rho1em1.npy     FFvsOri_bidirEEa8.npy				     FFvsOri_omDEL.npy			FFvsOri_orimap1.npy		    FFvsOri_pinwheel3Tr50.npy  om.npy
+FanoFactorDynamics_a0t3T6xi12C0n1bg2x.npy	FanoFactorDynamics_w50_origgff11.npy	       FFvsOri_bidirIIa2.npy				     FFvsOri_omf21re2e1T5tr100.npy	FFvsOri_orimap.npy		    FFvsOri_pinwheel4Tr16.npy  po_om2pope4i1f2r19e1.npy
+FanoFactorDynamics_a0t3T6xi12C0n1.npy		FanoFactorDynamics_w50_origp.npy	       FFvsOri_bidirIIa8.npy				     FFvsOri_omf2r15e1.npy		FFvsOri_orimap_origparams.npy	    FFvsOri_pinwheel4Tr50.npy  po_omoldgff_ne4ni1f2r19e1.npy
+FanoFactorDynamics_a2t3T6xi12C0n1.npy		FanoFactorDynamics_w800_a0t3T6xi12C0n1g4x.npy  FFvsOri_cv_allAnglesa0T4xi12C100Tr100.npy	     FFvsOri_omf2r15e1T3tr100.npy	FFvsOri_orimapOrigParamTr15.npy     FFvsOri_pinwheel5Tr50.npy  po_omoldgff.npy
+FanoFactorDynamics_a5t3T6xi12C0n1.npy		FanoFactorDynamics_w800_pois991.npy	       FFvsOri_delom.npy				     FFvsOri_omf2r15e1T3tr16.npy	FFvsOri_orimapOrigParamTr3.npy	    FFvsOri_pinwheel6Tr50.npy  po_pinwheel0Tr16.npy
+FanoFactorDynamics_aftera0t3T6xi12C0n1.npy	ff_E_alpha0.5_t3_vs_a_ff_1x.npy		       FFvsOri_f2r15e1R020.npy				     FFvsOri_omf2r19e1Mtuning.npy	FFvsOri_orimapR10.npy		    FFvsOri_pinwheel7Tr50.npy  po_pinwheel0Tr50.npy
+FanoFactorDynamics_bna_aftera0t3T6xi12C0n1.npy	ff_E_alpha0.5_t3_vs_a_ff_2x.npy		       FFvsOri_fftuningDelThis.npy			     FFvsOri_omf2r19e1NI4e4T3tr100.npy	FFvsOri_orimapr20eps5.npy	    FFvsOri_pinwheel8Tr50.npy  po_pinwheel1Tr16.npy
+FanoFactorDynamics_pc83a0t3T6xi12C0n1.npy	ff_I_alpha0.5_t3_vs_a_ff_1x.npy		       FFvsOri_g1xT3theta16Tr16.npy			     FFvsOri_omf2r19e1.npy		FFvsOri_orimapR20LSig2.npy	    FFvsOri_pinwheel9Tr50.npy  po_pinwheel1Tr50.npy
+FanoFactorDynamics_w1000.0_a0t3T6xi12C0n1.npy	ff_I_alpha0.5_t3_vs_a_ff_2x.npy		       FFvsOri_g2xf2r15e1.npy				     FFvsOri_omf2r19e1T3tr100.npy	FFvsOri_orimapR20_new.npy	    FFvsOri_rewireCheck.npy    po_pinwheel2Tr50.npy
+FanoFactorDynamics_w1000.0_pois0.npy		ffinRing.npy				       FFvsOri_g4xf2r15e1.npy				     FFvsOri_omf2r19e1T3tr16.npy	FFvsOri_orimapR40E5.npy		    FFvsOri_rewireControl.npy  po_pinwheel3Tr16.npy
+FanoFactorDynamics_w100.0_a0t3T6xi12C0n1.npy	ffMat_ffvsTheta_a0t3T3xi12.npy		       FFvsOri_gx125.npy				     FFvsOri_omf2r1e1.npy		FFvsOri_orimapr40eps5.npy	    FFvsOri_rewireEEI2Es1.npy  po_pinwheel3Tr50.npy
+FanoFactorDynamics_w100.0_pois1.npy		FFvsOri_a0t3T3xi12tr15.npy		       FFvsOri_gx15.npy					     FFvsOri_omf2r1.npy			FFvsOri_orimap_randConL2.npy	    FFvsOri_rewireEEI2Es5.npy  po_pinwheel4Tr50.npy
+FanoFactorDynamics_w1000_pois991.npy		FFvsOri_a0t3T3xi12tr15.npyff_circvar.npy       FFvsOri_gx175em1C30.npy				     FFvsOri_omf3re2e1T5tr100.npy	FFvsOri_orimaprG2xOrigParam.npy     FFvsOri_rewireEIsig1.npy   po_pinwheel5Tr50.npy
+FanoFactorDynamics_w100.0_poisTr100.npy		FFvsOri_a0T3tr16NE4NI1K2.npy		       FFvsOri_gx175.npy				     FFvsOri_omFFtuning.npy		FFvsOri_orimaprG4xFF1Em1.npy	    FFvsOri_rewireEIsig5.npy   po_pinwheel6Tr50.npy
+FanoFactorDynamics_w200_pois991.npy		FFvsOri_a0T4C100xi12Rho1em1G1x.npy	       FFvsOri_gx175_old.npy				     FFvsOri_omg2xf2r15e1R020.npy	FFvsOri_orimaprG4xOrigParam.npy     FFvsOri_rewireEIsig75.npy  po_pinwheel7Tr50.npy
+FanoFactorDynamics_w25.0_pois1.npy		FFvsOri_a0T4C100xi12Rho1em1G2x.npy	       FFvsOri_gx175Tr18C30.npy				     FFvsOri_omg2xf2r19e1.npy		FFvsOri_orimap_sig25e1.npy	    FFvsOri_rewireiisig1.npy   tcinRing.npy
+FanoFactorDynamics_w400_pois991.npy		FFvsOri_a0T4C100xi12Rho1em1G4x.npy	       FFvsOri_gx175Tr30C100.npy			     FFvsOri_omg2xf2r1.npy		FFvsOri_orimapSig2.npy		    FFvsOri_rewireiisig5.npy
+FanoFactorDynamics_w50.0_a0t3T6C0n1rg4x.npy	FFvsOri_a0T4xi12C100tr100g2x.npy	       FFvsOri_gx175tr37.npy				     FFvsOri_omg4xf2r15e1.npy		FFvsOri_orimapTestGmean.npy	    FFvsOri_rewireiisig75.npy
+FanoFactorDynamics_w50.0_pois1.npy		FFvsOri_a5t3T3xi12tr15.npy		       FFvsOri_gx185.npy				     FFvsOri_omg4xf2r2.npy		FFvsOri_ormf2r1k1e4.npy		    FFvsOri_rewiresig1.npy
+FanoFactorDynamics_w50.0_pois991.npy		FFvsOri_a5t3T3xi12tr15.npyff_circvar.npy       FFvsOri_gx25.npy					     FFvsOri_omNE4E4f2r19e1.npy		FFvsOri_ormf2r2.npy		    FFvsOri_rewiresig5.npy
+srao@pcneurophys80:~/nda/data$ ls -lht tu* | head 
+ls: cannot access tu*: No such file or directory
+srao@pcneurophys80:~/nda/data$ cd ~/db/data
+srao@pcneurophys80:~/db/data$ ls -lht t* | head 
+-rw-r--r-- 1 srao users 1,3M juin  25 13:38 tuningCurves_cff9.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:36 tuningCurves_cff3.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:27 tuningCurves_cff2.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:59 tuningCurves_cff4.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:43 tuningCurves_cff6.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff8.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff7.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:19 tuningCurves_cff5.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+srao@pcneurophys80:~/db/data$ ls -lht t*p* | head 
+-rw-r--r-- 1 srao users 1,3M juin  25 13:38 tuningCurves_cff9.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:36 tuningCurves_cff3.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:27 tuningCurves_cff2.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:59 tuningCurves_cff4.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:43 tuningCurves_cff6.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff8.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff7.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:19 tuningCurves_cff5.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+srao@pcneurophys80:~/db/data$ ls -lht t*p*
+-rw-r--r-- 1 srao users 1,3M juin  25 13:38 tuningCurves_cff9.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:36 tuningCurves_cff3.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:27 tuningCurves_cff2.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:59 tuningCurves_cff4.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:43 tuningCurves_cff6.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff8.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff7.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:19 tuningCurves_cff5.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 1,3M juin   5 12:23 tuningCurves_bidirIIa8.npy
+-rw-r--r-- 1 srao users 1,3M juin   5 12:23 tuningCurves_bidirIIa2.npy
+-rw-r--r-- 1 srao users 1,3M juin   3 09:45 tuningCurves_bidireea8g4x.npy
+-rw-r--r-- 1 srao users 1,3M juin   3 09:45 tuningCurves_bidireea2g4x.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:58 tuningCurves_bidircntrlg2x.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:25 tuningCurves_bidireea2.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 23:25 tuningCurves_bidireea8.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 20:20 tuningCurves_rewireEEI2Es5.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 18:21 tuningCurves_bidirEEa8.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 18:19 tuningCurves_bidirEEa2.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 14:22 tuningCurves_rewireEEI2Es1.npy
+-rw-r--r-- 1 srao users 1,3M juin   2 12:22 tuningCurves_rewireiisig1.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 12:00 tuningCurves_rewireiisig75.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 06:59 tuningCurves_rewireiisig5.npy
+-rw-r--r-- 1 srao users 1,3M juin   1 01:49 tuningCurves_rewireControl.npy
+-rw-r--r-- 1 srao users 1,3M mai   29 12:56 tuningCurves_rewireCheck.npy
+-rw-r--r-- 1 srao users 1,3M mai   27 20:50 tuningCurves_rewireEIsig75.npy
+-rw-r--r-- 1 srao users 1,3M mai   27 13:51 tuningCurves_rewireEIsig1.npy
+-rw-r--r-- 1 srao users 1,3M mai   20 15:56 tuningCurves_rewireEIsig5.npy
+-rw-r--r-- 1 srao users 6,2M mai   19 17:31 tuningCurves_a0T3tr16NE4NI1K2.npy
+-rw-r--r-- 1 srao users 1,3M mai   15 20:09 tuningCurves_rewiresig75.npy
+-rw-r--r-- 1 srao users 1,3M mai   14 22:45 tuningCurves_rewiresig1.npy
+-rw-r--r-- 1 srao users 1,3M mai   14 15:48 tuningCurves_rewiresig5.npy
+-rw-r--r-- 1 srao users 2,5M mai    8 18:12 tuningCurves_g1xT3theta16Tr16.npy
+-rw-r--r-- 1 srao users 2,5M mai    7 16:25 tuningCurves_gx175.npy
+-rw-r--r-- 1 srao users 313K mai    5 17:36 tuningCurves_fftuningDelThis.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 20:10 tuningCurves_crfT25K100C100.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 13:45 tuningCurves_crfT25K100C60.npy
+-rw-r--r-- 1 srao users 1,3M mai    4 12:55 tuningCurves_crfT25K100C2.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 18:12 tuningCurves_crfT25K100C1400.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:28 tuningCurves_crfT25K100C10.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:14 tuningCurves_crfT25K100C4.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:11 tuningCurves_crfT25K100C3.npy
+-rw-r--r-- 1 srao users 1,3M mai    3 16:09 tuningCurves_crfT25K100C6.npy
+-rw-r--r-- 1 srao users 1,3M mai    2 17:17 tuningCurves_crfT30K400C100.npy
+-rw-r--r-- 1 srao users 1,3M mai    2 16:32 tuningCurves_crfT30K400C2.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:46 tuningCurves_crfT30K400C30.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:28 tuningCurves_crfT30K400C10.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 23:24 tuningCurves_crfT30K400C4.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:36 tuningCurves_crfT30K400C60.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:30 tuningCurves_crfT30K400C20.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:22 tuningCurves_crfT30K400C6.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:10 tuningCurves_crfT30K400C3.npy
+-rw-r--r-- 1 srao users 1,3M mai    1 12:06 tuningCurves_crfT30K400C1400.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 19:35 tuningCurves_crfT30C1.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 19:12 tuningCurves_crfT30C2500.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 17:18 tuningCurves_crfT30C90.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 17:17 tuningCurves_crfT30C100.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:54 tuningCurves_crfT30C10.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:31 tuningCurves_crfT30C5.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 16:05 tuningCurves_crfT30C1500.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 14:17 tuningCurves_crfT30C6.npy
+-rw-r--r-- 1 srao users 1,3M avril 30 14:16 tuningCurves_crfT30C4.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 20:00 tuningCurves_crfT30C20.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:12 tuningCurves_crfT30C50.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:01 tuningCurves_crfT30C80.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 17:00 tuningCurves_crfT30C70.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:57 tuningCurves_crfT30C60.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:55 tuningCurves_crfT30C40.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:48 tuningCurves_crfT30C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 29 16:10 tuningCurves_crfT30C0.npy
+-rw-r--r-- 1 srao users 1,3M avril 28 15:26 tuningCurves_crfTheta0T30.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 26 19:06 tuningCurves_pinwheel8Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 11:49 tuningCurves_pinwheel7Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 02:54 tuningCurves_pinwheel5Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 00:50 tuningCurves_pinwheel6Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:39 tuningCurves_pinwheel2Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:07 tuningCurves_pinwheel0Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:48 tuningCurves_pinwheel1Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:31 tuningCurves_pinwheel4Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:23 tuningCurves_pinwheel3Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 12:48 tuningCurves_pinwheel4Tr16.npy
+-rw-r--r-- 1 srao users 1,3M avril 21 22:22 tuningCurves_gx175Tr18C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 21 22:10 tuningCurves_gx175Tr30C100.npy
+-rw-r--r-- 1 srao users 3,1M avril 21 19:52 tuningCurves_pinwheel2.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel3Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel1Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 21:41 tuningCurves_pinwheel0Tr16.npy
+-rw-r--r-- 1 srao users 1,3M avril 20 15:18 tuningCurves_gx175em1C30.npy
+-rw-r--r-- 1 srao users 4,0K avril 19 23:42 tuningCurves_gx175tr19C30.npy
+-rw-r--r-- 1 srao users 1,3M avril 19 17:24 tuningCurves_gx175tr37.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 15:06 tuningCurves_gx175_old.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 11:16 tuningCurves_gx15.npy
+-rw-r--r-- 1 srao users 1,3M avril 18 10:30 tuningCurves_gx2.npy
+-rw-r--r-- 1 srao users 1,3M avril 17 15:59 tuningCurves_gx25.npy
+-rw-r--r-- 1 srao users 1,3M avril 17 02:27 tuningCurves_gx185.npy
+-rw-r--r-- 1 srao users 1,3M avril 16 18:19 tuningCurves_gx125.npy
+-rw-r--r-- 1 srao users 1,3M avril 16 16:04 tuningCurves_mtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 15 19:26 tuningCurves_omFFtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 15 13:20 tuningCurves_omf2r19e1Mtuning.npy
+-rw-r--r-- 1 srao users 3,1M avril 14 15:00 tuningCurves_om2pope4i1f2r19e1.npy
+-rw-r--r-- 1 srao users 3,1M avril 13 19:07 tuningCurves_omoldgff.npy
+-rw-r--r-- 1 srao users 3,1M avril  8 08:21 tuningCurves_omoldgff_old.npy
+-rw-r--r-- 1 srao users 3,1M mars  31 14:47 tuningCurves_omoldgff_ne4ni1f2r19e1.npy
+-rw-r--r-- 1 srao users 2,5M mars  22 05:01 tuningCurves_omf2r19e1NI4e4T3tr100.npy
+-rw-r--r-- 1 srao users 2,5M mars  21 19:53 tuningCurves_omDEL.npy
+-rw-r--r-- 1 srao users 2,5M mars  20 16:55 tuningCurves_omNE4E4f2r19e1.npy
+-rw-r--r-- 1 srao users 626K mars  18 14:40 tuningCurves_omf2r19e1T3tr100.npy
+-rw-r--r-- 1 srao users 626K mars  17 19:47 tuningCurves_omf2r19e1T3tr16.npy
+-rw-r--r-- 1 srao users 626K mars  17 15:50 tuningCurves_omf2r15e1T3tr100.npy
+-rw-r--r-- 1 srao users 626K mars  17 00:05 tuningCurves_omf2r15e1T3tr16.npy
+-rw-r--r-- 1 srao users 626K mars   9 18:30 tuningCurves_omg2xf2r19e1.npy
+-rw-r--r-- 1 srao users 1,3M mars   9 12:19 tuningCurves_om2popf21r2e1T5tr100.npy
+-rw-r--r-- 1 srao users 1,3M mars   8 16:39 tuningCurves_om2popf21r2e1T5tr40.npy
+-rw-r--r-- 1 srao users 626K mars   7 19:11 tuningCurves_omf3re2e1T5tr100.npy
+-rw-r--r-- 1 srao users 626K mars   7 18:28 tuningCurves_omf21re2e1T5tr100.npy
+-rw-r--r-- 1 srao users 626K mars   6 09:33 tuningCurves_omT50f21r2e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 18:59 tuningCurves_delom.npy
+-rw-r--r-- 1 srao users 626K mars   5 16:19 tuningCurves_omf2r19e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 13:19 tuningCurves_omf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   5 13:18 tuningCurves_omg2xf2r15e1R020.npy
+-rw-r--r-- 1 srao users 626K mars   4 17:19 tuningCurves_omf2r1e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:30 tuningCurves_g4xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:26 tuningCurves_g2xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   4 12:06 tuningCurves_omg4xf2r15e1.npy
+-rw-r--r-- 1 srao users 626K mars   3 17:47 tuningCurves_f2r15e1R020.npy
+-rw-r--r-- 1 srao users 626K mars   3 15:46 tuningCurves_ormf2r1k1e4.npy
+-rw-r--r-- 1 srao users 626K mars   3 15:31 tuningCurves_ormf2r2.npy
+-rw-r--r-- 1 srao users 626K mars   3 12:37 tuningCurves_omg4xf2r2.npy
+-rw-r--r-- 1 srao users 626K mars   3 12:22 tuningCurves_om2ksig.npy
+-rw-r--r-- 1 srao users 626K mars   3 11:46 tuningCurves_omrand2k.npy
+-rw-r--r-- 1 srao users   96 mars   3 11:37 tuningCurves_omtest.npy
+-rw-r--r-- 1 srao users 626K mars   3 10:05 tuningCurves_omg2xf2r1.npy
+-rw-r--r-- 1 srao users 626K mars   3 09:54 tuningCurves_omf2r1.npy
+-rw-r--r-- 1 srao users 626K mars   2 22:34 tuningCurves_om2Ksig.npy
+-rw-r--r-- 1 srao users 626K mars   2 11:36 tuningCurves_orimaprG4xOrigParam.npy
+-rw-r--r-- 1 srao users 626K mars   2 11:32 tuningCurves_orimaprG2xOrigParam.npy
+-rw-r--r-- 1 srao users 626K févr. 28 15:44 tuningCurves_omR020a0T3Tr15.npy
+-rw-r--r-- 1 srao users 626K févr. 27 17:38 tuningCurves_orimapTestGmean.npy
+-rw-r--r-- 1 srao users 626K févr. 23 21:30 tuningCurves_orimap_randConL2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 23 12:41 tuningCurves_orimaprG4xFF1Em1.npy
+-rw-r--r-- 1 srao users 1,3M févr. 22 23:14 tuningCurves_orimapOrigParamTr15.npy
+-rw-r--r-- 1 srao users 1,3M févr. 22 19:23 tuningCurves_orimapOrigParamTr3.npy
+-rw-r--r-- 1 srao users 1,3M févr. 20 12:02 tuningCurves_orimap_origparams.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 21:38 tuningCurves_orimap_sig25e1.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 11:41 tuningCurves_orimapR20LSig2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 04:56 tuningCurves_orimapR20_new.npy
+-rw-r--r-- 1 srao users 1,3M févr. 19 00:40 tuningCurves_orimapR40E5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 18:59 tuningCurves_orimapr40eps5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 10:50 tuningCurves_orimapr20eps5.npy
+-rw-r--r-- 1 srao users 1,3M févr. 18 00:54 tuningCurves_orimapR10.npy
+-rw-r--r-- 1 srao users 1,3M févr. 17 10:56 tuningCurves_orimapSig2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 21:27 tuningCurves_orimap3.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 19:00 tuningCurves_orimap0.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 12:33 tuningCurves_orimap2.npy
+-rw-r--r-- 1 srao users 1,3M févr. 16 01:47 tuningCurves_orimap.npy
+-rw-r--r-- 1 srao users 1,3M févr. 12 17:46 tuningCurves_orimap1.npy
+-rw-r--r-- 1 srao users 1,3M févr.  6 14:17 tuningCurves_a0T4C100xi12Rho1em1G2x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  6 05:59 tuningCurves_a0T4C100xi12Rho1em1G1x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  4 15:33 tuningCurves_a0T4C100xi12Rho1em1G4x.npy
+-rw-r--r-- 1 srao users 1,3M févr.  1 15:34 tuningCurves_a0T4xi12C100tr100g2x.npy
+-rw-r--r-- 1 srao users 1,3M janv. 29 18:41 tuningCurves_allAnglesa0T4xi12C100Tr100.npy
+-rw-r--r-- 1 srao users 1,3M janv.  2 17:56 tuningCurves_bidirII_a5t3T3xi12tr15.npy
+-rw-r--r-- 1 srao users 1,3M janv.  2 17:38 tuningCurves_bidirII_a0t3T3xi12tr15.npy
+-rw-r--r-- 1 srao users 1,3M déc.  30 18:03 tuningCurves_bidirII_a0t3T3xi12.npy
+-rw-r--r-- 1 srao users 1,3M déc.  16  2014 tuningCurves_bidirII_a0t3_ff3cos.npy
+-rw-r--r-- 1 srao users 1,3M déc.  13  2014 tuningCurves_bidirII_tmp666.npy
+-rw-r--r-- 1 srao users 1,3M déc.  13  2014 tuningCurves_bidirII_t3a9_tuning.npy
+-rw-r--r-- 1 srao users 1,2M oct.   6  2014 tuningCurves_bidirEE.npy
+-rw-r--r-- 1 srao users 1,2M oct.   6  2014 tuningCurves_bidir.npy
+-rw-r--r-- 1 srao users 1,2M sept. 30  2014 tuningCurves_anatomic.npy
+-rw-r--r-- 1 srao users 626K sept. 16  2014 tuningCurves.npy
+srao@pcneurophys80:~/db/data$ ls -lht tuningCurves_p*.csv
+ls: cannot access tuningCurves_p*.csv: No such file or directory
+srao@pcneurophys80:~/db/data$ ls -lht t* | head 
+-rw-r--r-- 1 srao users 1,3M juin  25 13:38 tuningCurves_cff9.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:36 tuningCurves_cff3.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 13:27 tuningCurves_cff2.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:59 tuningCurves_cff4.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:43 tuningCurves_cff6.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff8.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:38 tuningCurves_cff7.npy
+-rw-r--r-- 1 srao users 1,3M juin  25 12:19 tuningCurves_cff5.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+srao@pcneurophys80:~/db/data$ ls -lht tuningCurves_p*.csv
+ls: cannot access tuningCurves_p*.csv: No such file or directory
+srao@pcneurophys80:~/db/data$ ls -lht tuningCurves_p*.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 26 19:06 tuningCurves_pinwheel8Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 11:49 tuningCurves_pinwheel7Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 02:54 tuningCurves_pinwheel5Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 00:50 tuningCurves_pinwheel6Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:39 tuningCurves_pinwheel2Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:07 tuningCurves_pinwheel0Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:48 tuningCurves_pinwheel1Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:31 tuningCurves_pinwheel4Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:23 tuningCurves_pinwheel3Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 12:48 tuningCurves_pinwheel4Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 21 19:52 tuningCurves_pinwheel2.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel3Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel1Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 21:41 tuningCurves_pinwheel0Tr16.npy
+srao@pcneurophys80:~/db/data$ ls  tuningCurves_p*.npy
+tuningCurves_p12.npy  tuningCurves_p18.npy  tuningCurves_p6.npy		    tuningCurves_pinwheel0Tr50.npy  tuningCurves_pinwheel2.npy	    tuningCurves_pinwheel3Tr50.npy  tuningCurves_pinwheel5Tr50.npy  tuningCurves_pinwheel8Tr50.npy
+tuningCurves_p14.npy  tuningCurves_p20.npy  tuningCurves_p8.npy		    tuningCurves_pinwheel1Tr16.npy  tuningCurves_pinwheel2Tr50.npy  tuningCurves_pinwheel4Tr16.npy  tuningCurves_pinwheel6Tr50.npy  tuningCurves_pinwheel9Tr50.npy
+tuningCurves_p16.npy  tuningCurves_p4.npy   tuningCurves_pinwheel0Tr16.npy  tuningCurves_pinwheel1Tr50.npy  tuningCurves_pinwheel3Tr16.npy  tuningCurves_pinwheel4Tr50.npy  tuningCurves_pinwheel7Tr50.npy  tuningCurves_priebe0.npy
+srao@pcneurophys80:~/db/data$ ls  tuningCurves_p*.npy
+tuningCurves_p12.npy  tuningCurves_p18.npy  tuningCurves_p6.npy		    tuningCurves_pinwheel0Tr50.npy  tuningCurves_pinwheel2.npy	    tuningCurves_pinwheel3Tr50.npy  tuningCurves_pinwheel5Tr50.npy  tuningCurves_pinwheel8Tr50.npy
+tuningCurves_p14.npy  tuningCurves_p20.npy  tuningCurves_p8.npy		    tuningCurves_pinwheel1Tr16.npy  tuningCurves_pinwheel2Tr50.npy  tuningCurves_pinwheel4Tr16.npy  tuningCurves_pinwheel6Tr50.npy  tuningCurves_pinwheel9Tr50.npy
+tuningCurves_p16.npy  tuningCurves_p4.npy   tuningCurves_pinwheel0Tr16.npy  tuningCurves_pinwheel1Tr50.npy  tuningCurves_pinwheel3Tr16.npy  tuningCurves_pinwheel4Tr50.npy  tuningCurves_pinwheel7Tr50.npy  tuningCurves_priebe0.npy
+srao@pcneurophys80:~/db/data$ ls  -lht tuningCurves_p*.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 26 19:06 tuningCurves_pinwheel8Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 11:49 tuningCurves_pinwheel7Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 02:54 tuningCurves_pinwheel5Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 00:50 tuningCurves_pinwheel6Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:39 tuningCurves_pinwheel2Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:07 tuningCurves_pinwheel0Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:48 tuningCurves_pinwheel1Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:31 tuningCurves_pinwheel4Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:23 tuningCurves_pinwheel3Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 12:48 tuningCurves_pinwheel4Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 21 19:52 tuningCurves_pinwheel2.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel3Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 22:00 tuningCurves_pinwheel1Tr16.npy
+-rw-r--r-- 1 srao users 3,1M avril 20 21:41 tuningCurves_pinwheel0Tr16.npy
+srao@pcneurophys80:~/db/data$ ls  -lht tuningCurves_p*.npy | head -20
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 26 19:06 tuningCurves_pinwheel8Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 11:49 tuningCurves_pinwheel7Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 02:54 tuningCurves_pinwheel5Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 24 00:50 tuningCurves_pinwheel6Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:39 tuningCurves_pinwheel2Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 17:07 tuningCurves_pinwheel0Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:48 tuningCurves_pinwheel1Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:31 tuningCurves_pinwheel4Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 16:23 tuningCurves_pinwheel3Tr50.npy
+-rw-r--r-- 1 srao users 3,1M avril 22 12:48 tuningCurves_pinwheel4Tr16.npy
+srao@pcneurophys80:~/db/data$ ls  -lht tuningCurves_p*.npy | head -10
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+-rw-r--r-- 1 srao users 3,4K juin  13 16:21 tuningCurves_priebe0.npy
+-rw-r--r-- 1 srao users 3,1M avril 27 23:31 tuningCurves_pinwheel9Tr50.npy
+srao@pcneurophys80:~/db/data$ ls  -lht tuningCurves_p*.npy | head -7
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+srao@pcneurophys80:~/db/data$ ls  -lht tuningCurves_p*.npy | head -8
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p16.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:11 tuningCurves_p14.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:08 tuningCurves_p12.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 16:05 tuningCurves_p8.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:28 tuningCurves_p6.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 15:05 tuningCurves_p18.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 14:15 tuningCurves_p20.npy
+-rw-r--r-- 1 srao users 1,3M juin  24 13:42 tuningCurves_p4.npy
+srao@pcneurophys80:~/db/data$ cd ~/nda
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '1' cff2 cff3 cff4 cff5 cff6 cff7 cff8 cff9  C-c C-c
+srao@pcneurophys80:~/nda$ python CompareCircVarOfDBs.py [] [] [] [] [] '0' p4 p6 p8 p12 p14 p12 p14 p16 p20

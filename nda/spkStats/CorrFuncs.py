@@ -57,10 +57,9 @@ def AvgAutoCorr(neuronsList, dbName = "tstDb", simDT = 0.025, minSpks = 0, maxTi
     downSampleBinSize = 1
     spkBins = np.arange(0, simDuration + simDT, downSampleBinSize)
     nSpkBins = len(spkBins) ;
-    #print "MEAN RATE E = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId < %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NE)
-    #print "MEAN RATE I = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId > %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NI)
+    print "MEAN RATE E = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId < %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NE)
+    print "MEAN RATE I = ", float(dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId > %s AND theta = %s", (NE, theta))) / (simDuration * 1e-3 * NI)
     avgRate = 0
-    
     for i, kNeuron in enumerate(neuronsList):
         spkTimes = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s AND theta = %s", (kNeuron, theta))
         meanRate = float(spkTimes) / float(simDuration * 1e-3)
@@ -161,28 +160,31 @@ if __name__ == "__main__":
         computeType = sys.argv[2]
     n = 5000
     useDb = sys.argv[1] #supply dbname
-    N_NEURONS = 10000
-    NE = 10000
-    NI = 10000
+    N_NEURONS = 40000
+    NE = 20000
+    NI = 20000
     IF_UNIQUE = False
     #useTheta = np.array([0, 20, 30, 40, 50, 60, 70, 80, 90, 100])
     #useTheta = np.array([10, 20, 30, 40, 50, 60, 80, 100, 120, 140, 160, 180, 200])
-    useTheta = np.arange(11)
+    #    useTheta = np.arange(11)
+#    useTheta = np.array([1000, 1022, 1045, 1067, 1090, 1112, 1135, 1157])
+    useTheta = np.array([0])
     simT = 100000
     dt = 0.05
     ne = 1
     ni = 1
-    maxLag = 2000
+    maxLag = 1000
     bins = np.arange(-500, 500, 1)
     filetag = 'after_onset_I'    
-    spkTimeStart = 3000.0
+    spkTimeStart = 2000.0
     spkTimeEnd = 100000.0
- 
     if(computeType == 'compute'):
-        neuronsList = np.unique(np.random.randint(0, N_NEURONS, size = n + 00))
+#        neuronsList = np.unique(np.random.randint(0, N_NEURONS, size = n + 00))
         acMat = np.zeros((useTheta.size, maxLag))
 #        acMat[0, :] = np.arange(0, maxLag, 1)
-        listOfneurons = np.unique(np.random.randint(NE, NE + NI, size = n + 00))
+        #listOfneurons = np.unique(np.random.randint(NE, NE + NI, size = n + 00))
+        listOfneurons = np.unique(np.random.randint(0, NE, size = n))
+        
         #listOfneurons = np.arange(NE, NE + NI)
         print '#neurons = ', len(listOfneurons)
      #   nPools = np.min(10, len(useTheta))

@@ -63,7 +63,7 @@ if __name__ == '__main__':
     thetaSigI = float(thetaSigI)
     cprob = np.zeros((NE + NI, NE + NI))
     print 'Network type: ', NetworkType
-    print 'generating connection probabilities, NE, NI, K, thetaSig', NE, NI, K, thetaSig
+    print 'generating connection probabilities, NE, NI, K, thetaSig', NE, NI, K, thetaSig, thetaSigI    
     tuningCurves = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
     po = GetPO.POofPopulation(tuningCurves)
     if NetworkType == 'uni':

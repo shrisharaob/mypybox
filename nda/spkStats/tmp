@@ -1,0 +1,5 @@
+alphaBetas = [[1, 1], [1, .8], [1, .5], [.8, .8], [.5, .5]]
+legendLabels = []
+for i in range(len(alphaBetas)):
+    legendLabels.append(r'$\alpha = %s$'%(alphaBetas[i][0]) + "\n" + r'$\beta = %s$' %(alphaBetas[i][1]))
+    print legendLabels[i]

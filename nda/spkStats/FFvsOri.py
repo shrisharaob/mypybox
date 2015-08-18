@@ -248,7 +248,7 @@ if __name__ == "__main__":
         meanFrE = np.nanmean(tcMat[plotId[plotId < NE], :], 0)
         meanFrI = np.nanmean(tcMat[plotId[plotId > NE], :], 0)
 #        kb.keyboard()
-        rotateMeanBy = 8
+        rotateMeanBy = 4
         meanE = np.roll(meanE, rotateMeanBy)
         meanI = np.roll(meanI, rotateMeanBy)
         meanFrE = np.roll(meanFrE, rotateMeanBy)

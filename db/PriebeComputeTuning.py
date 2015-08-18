@@ -22,7 +22,6 @@ def keyboard(banner=None):
     except SystemExit:
         return 
 
-
 def NspksForTheta(dbName, neuronId, discardTime, theta):
     db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
     dbCursor = db.cursor()
@@ -33,32 +32,34 @@ def NspksForTheta(dbName, neuronId, discardTime, theta):
     db.close()
     return float(nSpks)
 
-def NspksForThetaForAllTrials(dbName, neuronId, discardTime, nTrials, theta):
+def NspksForThetaForAllTrials(dbName, neuronId, nTrials, stimIdx, stimTimes, theta):
     db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
     dbCursor = db.cursor()
     db.autocommit(True)
     nSpks = 0
-    #print theta
+    thetaArray = np.arange(0, 360.0, 30)
+    allTrialLength = 0.0
     for kTrial in np.arange(nTrials):
-        kTheta = int((kTrial+1) * 1000) + int(theta)
-#kTheta = theta
-        nSpks += dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s and theta = %s and spkTimes > %s;", (neuronId, kTheta, discardTime))
-    print nSpks
+        query = np.where(np.all(stimIdx == np.array([neuronId, kTrial, np.where(thetaArray == theta)[0][0]]), axis = 1))[0]
+        if(query.size):
+            spkStartTime, spkStopTime = stimTimes[query[0], :]
+            allTrialLength += (spkStopTime - spkStartTime)
+            kTheta = int((kTrial+1) * 1000) + int(theta)
+            nSpks += dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s and theta = %s and spkTimes > %s and spkTimes < %s;", (neuronId, kTheta, spkStartTime, spkStopTime))
     dbCursor.close()
     db.close()
+    out = 0.0
+    if(allTrialLength > 0):
+        out = float(nSpks) / (allTrialLength)
     return float(nSpks)
 
-dbName = sys.argv[1] #"bidirEE" #"anatomic" #"tstDb"
-N_NEURONS = np.arange(0, 40000, 1)
-#N_NEURONS = np.arange(0, 50000, 1)
+dbName = sys.argv[1]
+N_NEURONS = np.arange(35)
 thetaStart = 0.0
-thetaStep = 22.5
-thetaEnd = 180.0
+thetaStep = 30.0
+thetaEnd = 360.0
 theta = np.arange(thetaStart, thetaEnd, thetaStep)
-#theta = np.array([0., 22.5, 45., 56.25, 67.5, 90. , 112.5, 123.75, 135., 157.5])
 theta = theta.astype('int')
-trialLength = 25.0 # in seconds
-discardTime = 1000.0 #ms
 if(len(sys.argv)> 1):
     try:
         nTrials = int(sys.argv[2])
@@ -66,31 +67,17 @@ if(len(sys.argv)> 1):
         print 'ntrials not an interetr !'
         raise
 print "nTrials = ", nTrials
-
-#db = mysql.connect(host = "localhost", user = "root", passwd = "toto123", db = dbName)
-#dbCursor = db.cursor()
-#db.autocommit(True)
 tuningCurve = np.zeros((len(N_NEURONS), len(theta)))
-trialLength = trialLength - discardTime / 1000.0
-z = trialLength * float(nTrials)
 pool = Pool(theta.size)
 print "Computing ...",
 sys.stdout.flush()
+stimTimesArray = np.loadtxt('stimtimes.csv', delimiter = ';')
+stimIdx = stimTimesArray[:, [0, 1, 2]]
+stimTimes = stimTimesArray[:, [3, 4]]
 for idx, kNeuron in enumerate(N_NEURONS):
-#    print 'NEURON - ', kNeuron, 'theta :',
-#    print kNeuron,
     sys.stdout.flush()
-#    nSpksVec = pool.map(partial(NspksForTheta, dbName, kNeuron, discardTime), theta)
-    nSpksVec = pool.map(partial(NspksForThetaForAllTrials, dbName, kNeuron, discardTime, nTrials), theta)
-    # for thetaIdx, kTheta in enumerate(theta):
-    #     print kTheta,
-    #     sys.stdout.flush()
-    #       nSpks = dbCursor.execute("SELECT spkTimes FROM spikes WHERE neuronId = %s and theta = %s and spkTimes > %s;", (kNeuron, kTheta, discardTime))
-    tuningCurve[idx, :] = np.array(nSpksVec, dtype = 'float') / z
-#    print ' '
-#dbCursor.close()
-#db.close()
-
+    nSpksVec = pool.map(partial(NspksForThetaForAllTrials, dbName, kNeuron, nTrials, stimIdx, stimTimes), theta)
+    tuningCurve[idx, :] = np.array(nSpksVec, dtype = 'float')
 pool.close()
 print "saving as: ", './data/tuningCurves_' + dbName
 np.save('./data/tuningCurves_'+dbName, tuningCurve)

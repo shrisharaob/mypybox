@@ -57,7 +57,7 @@ figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
 nPinwheels = len(sys.argv[4:])
 print '#pin wheels = ', nPinwheels
 dbNames = []
-firingThresh = 1.0 # cells with value above are selected
+firingThresh = 5.0 # cells with value above are selected
 cvThresh = 0.6 # cells with value below are selected
 if(neuronType == 'E'):
     nNeurons = NE
