@@ -1,14 +1,14 @@
-basefolder = "/homecentral/srao/Documents/code/mypybox"
+#basefolder = "/homecentral/srao/Documents/code/mypybox"
 import numpy as np
 import code, sys, os
 import pylab as plt
-sys.path.append(basefolder)
+#sys.path.append(basefolder)
 import Keyboard as kb
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
-sys.path.append(basefolder + "/nda/spkStats")
-sys.path.append(basefolder + "/utils")
+#sys.path.append(basefolder + "/nda/spkStats")
+#sys.path.append(basefolder + "/utils")
 from DefaultArgs import DefaultArgs
-from reportfig import ReportFig
+#from reportfig import ReportFig
 
 
 def Print2Pdf_Old(axHandle, figname, paperSize = [4.26, 3.26], figFormat = 'pdf', labelFontsize = 20.0, tickFontsize = 14.0):
