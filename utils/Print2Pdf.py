@@ -33,6 +33,11 @@ def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', l
     axHandle.set_ylabel(axHandle.get_ylabel(), fontsize = labelFontsize);
     yed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.yaxis.get_major_ticks()]
     xed = [tick.label.set_fontsize(tickFontsize) for tick in axHandle.xaxis.get_major_ticks()]
+    #-- REMOVE right and top enclosing lines
+    axHandle.spines['top'].set_visible(False) 
+    axHandle.spines['right'].set_visible(False)
+    axHandle.yaxis.set_ticks_position('left')
+    axHandle.xaxis.set_ticks_position('bottom')
     if(IF_ADJUST_POSITION):
 #        plt.gca().set_position(axPosition) #[0.15, 0.15, .8, .75]
          axHandle.set_position(axPosition) #[0.15, 0.15, .8, .75]

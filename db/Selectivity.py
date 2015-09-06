@@ -4,7 +4,7 @@ import sys, code
 basefolder = "/homecentral/srao/Documents/code/mypybox"
 sys.path.append(basefolder + "/utils")
 from Print2Pdf import Print2Pdf
-import Keyboard as kb
+#import Keyboard as kb
 
 def CircVar(firingRate, atTheta):
     out = np.nan

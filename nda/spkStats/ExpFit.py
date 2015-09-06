@@ -6,7 +6,7 @@ import sys
 
 def ObjFunc(x, tau0, tau1, amp0, amp1, offset):
      return amp0 * np.exp(-x / tau0) + amp1 * np.exp(-x / tau1) + offset
-    
+
 def ExponentialFit(x, y, mean):
    IF_CONVERGE = False
    varLevel = 1e-2;
