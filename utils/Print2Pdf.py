@@ -20,8 +20,6 @@ def Print2Pdf_Old(axHandle, figname, paperSize = [4.26, 3.26], figFormat = 'pdf'
     plt.draw()
     plt.savefig(figname + '.' + figFormat, format=figFormat)
 
-
-
 def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', labelFontsize = 12.0, tickFontsize = 12.0, titleSize = 12.0, IF_ADJUST_POSITION = False, axPosition = [0.125,  0.1, 0.775  ,  0.8]):
 #    plt.rcParams['figure.figsize'] = paperSize[0], paperSize[1]
  #   plt.rcParams['axes.labelsize'] = labelFontsize
@@ -36,8 +34,16 @@ def Print2Pdf(figHandle, figname, paperSize = [5.26, 4.26], figFormat = 'pdf', l
     #-- REMOVE right and top enclosing lines
     axHandle.spines['top'].set_visible(False) 
     axHandle.spines['right'].set_visible(False)
+    axHandle.spines['bottom'].set_linewidth(0.5)
+    axHandle.spines['left'].set_linewidth(0.5)
     axHandle.yaxis.set_ticks_position('left')
     axHandle.xaxis.set_ticks_position('bottom')
+    axHandle.xaxis.set_tick_params(width = 0.5, direction = 'out')
+    axHandle.yaxis.set_tick_params(width = 0.5, direction = 'out')
+    axHandle.xaxis.set_tick_params(which = 'both', direction = 'out')
+    axHandle.yaxis.set_tick_params(which = 'both', direction = 'out')    
+    # axHandle.xaxis.set_minortick_params(width = 0.5, direction = 'out')
+    # axHandle.yaxis.set_minortick_params(width = 0.5, direction = 'out')    
     if(IF_ADJUST_POSITION):
 #        plt.gca().set_position(axPosition) #[0.15, 0.15, .8, .75]
          axHandle.set_position(axPosition) #[0.15, 0.15, .8, .75]

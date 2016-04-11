@@ -55,7 +55,7 @@ def GenSparseMat(convec, rows, clmns, sparseVec, idxvec, nPostNeurons):
 
 if __name__ == '__main__':
     # NetworkType : {'uni', 'ori'}, 'uni' is for standard random network, 'ori' is to rewire depending on the distance in ori space
-    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75, ])
+    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 100, 1000, 1000, .75, 0.75, ])
     NE = int(NE)
     NI = int(NI)
     K = int(K)
@@ -181,25 +181,28 @@ if __name__ == '__main__':
 #     plt.clf()
 # #    np.save('convec', cprob.astype(np.int32))
 # #    convec[:NE, :NE] = cprob[:NE, :NE] > np.random.uniform(size = (cprob[:NE, :NE].shape))
-    figFolder = figFolder = basefolder + '/nda/spkStats/figs/rewiring/'
-    plotCon = 'I'
-    for i in range(25):
-        if(plotCon == 'E'):
-            idx = np.random.randint(0, NE, 1)[0]
-            plt.hist(poe[cprob[:NE, idx]] * 180.0 / np.pi)
-#            plt.hist(poe[cprob[idx, :NE]] * 180.0 / np.pi)
-            plt.title("PO = %s"%(poe[idx] * 180.0 / np.pi))
-            plt.waitforbuttonpress()
-            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
-            plt.clf()
-        elif(plotCon == 'I'):
-            idx = np.random.randint(NE, NE+NI, 1)[0]
-            plt.hist(po[cprob[idx, NE:]] * 180.0 / np.pi)
-            plt.title("PO = %s"%(po[idx] * 180.0 / np.pi))
-            plt.waitforbuttonpress()
-            Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
-            plt.clf()
-    kb.keyboard()
+
+
+
+#     figFolder = figFolder = basefolder + '/nda/spkStats/figs/rewiring/'
+#     plotCon = 'I'
+#     for i in range(25):
+#         if(plotCon == 'E'):
+#             idx = np.random.randint(0, NE, 1)[0]
+#             plt.hist(poe[cprob[:NE, idx]] * 180.0 / np.pi)
+# #            plt.hist(poe[cprob[idx, :NE]] * 180.0 / np.pi)
+#             plt.title("PO = %s"%(poe[idx] * 180.0 / np.pi))
+#             plt.waitforbuttonpress()
+#             Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+#             plt.clf()
+#         elif(plotCon == 'I'):
+#             idx = np.random.randint(NE, NE+NI, 1)[0]
+#             plt.hist(po[cprob[idx, NE:]] * 180.0 / np.pi)
+#             plt.title("PO = %s"%(po[idx] * 180.0 / np.pi))
+#             plt.waitforbuttonpress()
+#             Print2Pdf(plt.gcf(),  figFolder + 'rewired_input_ori_distr_fig%s'%(i), [4.6,  3.39], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.175, 0.15, .78, .75])
+#             plt.clf()
+#     kb.keyboard()
 
 
 

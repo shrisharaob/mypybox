@@ -163,3 +163,51 @@ Selectivity.py:11: RuntimeWarning: invalid value encountered in double_scalars
 ['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
 ['', '', '', '', '', '']
 /homecentral/srao/Documents/code/mypybox/db/figs/ori_cvDistr_EI_normalized_om2pope4i1f2r19e1
+./data/tuningCurves_bidirE2Erho5_xi0.8_kff800_p5.npy
+(40000, 8)
+['', '', '', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirE2Erho5_xi0.8_kff800_p5
+./data/tuningCurves_bidirE2Erho5_xi0.8_kff800_p8.npy
+(40000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirE2Erho5_xi0.8_kff800_p8
+./data/tuningCurves_bidirE2Irho5_xi0.8_kff800_p5.npy
+(40000, 8)
+['', '', '', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirE2Irho5_xi0.8_kff800_p5
+./data/tuningCurves_bidirE2Irho5_xi0.8_kff800_p8.npy
+(40000, 8)
+['', '', '', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirE2Irho5_xi0.8_kff800_p8
+./data/tuningCurves_bidirI2Irho5_xi0.8_kff800_p2.npy
+(40000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirI2Irho5_xi0.8_kff800_p2
+./data/tuningCurves_bidirI2Irho5_xi0.8_kff800_p5.npy
+(40000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirI2Irho5_xi0.8_kff800_p5
+XIO:  fatal IO error 25 (Inappropriate ioctl for device) on X server "localhost:10.0"
+      after 358 requests (358 known processed) with 2 events remaining.
+./data/tuningCurves_bidirI2Irho5_xi0.8_kff800_p8.npy
+(40000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+./data/tuningCurves_bidirI2Irho5_xi0.8_kff800_p0.npy
+(40000, 8)
+['', '', '', '', '', '']
+['0.0\nhighly tuned', '', '', '', '', '1.0\nnot selective']
+['0.0\nhighly\ntuned', '0.2', '0.4', '0.6', '0.8', '1.0\nnot\nselective']
+/homecentral/srao/cuda/data/pub/figs/ori_cvDistr_EI_normalized_bidirI2Irho5_xi0.8_kff800_p0

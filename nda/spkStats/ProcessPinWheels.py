@@ -53,10 +53,13 @@ def PlotMaskedMap(omMap, invalidNeurons, n=8500):
 
     
 figFolder = '/homecentral/srao/Documents/code/mypybox/nda/spkStats/figs/'
-[neuronType, NE, NI] = DefaultArgs(sys.argv[1:4], ['I', 40000, 10000])
-nPinwheels = len(sys.argv[4:])
+# [neuronType, NE, NI] = DefaultArgs(sys.argv[1:4], ['I', 40000, 10000])
+# nPinwheels = len(sys.argv[4:])
+# dbNames = []
+[neuronType, NE, NI, nPinwheels] = DefaultArgs(sys.argv[1:], ['I', 40000, 10000, 8])
+nPinwheels = int(nPinwheels)
 print '#pin wheels = ', nPinwheels
-dbNames = []
+dbNames = ['pinwheel%sTr50'%(x) for x in range(nPinwheels)]
 firingThresh = 5.0 # cells with value above are selected
 cvThresh = 0.6 # cells with value below are selected
 if(neuronType == 'E'):
@@ -69,8 +72,8 @@ invalidNeuronsInPool = np.empty((nNeurons, ))
 invalidNeuronsInPool[:] = False
 print '#invalid neurons in pool ', np.sum(invalidNeuronsInPool)
 for i in range(nPinwheels):
-    dbName = sys.argv[4+i]
-    dbNames.append(dbName)
+    dbName = dbNames[i] #sys.argv[4+i]
+#    dbNames.append(dbName)
     print dbName,
     tuningCurves = np.load(basefolder + '/db/data/tuningCurves_' + dbName + '.npy')
     circVar = np.load(basefolder + '/db/data/Selectivity_' + dbName + '.npy')
@@ -114,11 +117,56 @@ for i in range(nPinwheels):
 plt.colorbar(im, ax=ax[subscripts])
 #im = ax[-1].imshow(np.reshape(avgPinWheel, (np.sqrt(nNeurons), np.sqrt(nNeurons))), cmap = 'hsv')
 plt.figure()
-plt.imshow(np.reshape(avgPinWheel, (np.sqrt(nNeurons), np.sqrt(nNeurons))), cmap = 'hsv')
-plt.colorbar()
-plt.title('circular mean')
+immean = plt.imshow(np.reshape(avgPinWheel, (np.sqrt(nNeurons), np.sqrt(nNeurons))), cmap = 'hsv')
+#cb = plt.colorbar()
+cb = plt.colorbar(immean,fraction=0.03, pad=0.02)
+cb.set_ticks(np.array([0, 90, 180]))
+plt.title(neuronType)
+if neuronType == 'E':
+    circ0 = (100., 100.)
+    radius0 = 100
+    circ1 = (100., 100.)
+    radius1 = 50
+    plt.text(100, 100, '0', fontsize = 20)
+    plt.text(130, 50, '1', fontsize = 20)
+    plt.xticks(np.array([0, 100, 200]))
+    plt.yticks(np.array([0, 100, 200]))
+else:
+    circ0 = (50., 50.)
+    radius0 = 50
+    circ1 = (50., 50.)
+    radius1 = 25
+    plt.text(50, 50, '0', fontsize = 20)
+    plt.text(65, 25, '1', fontsize = 20)
+    plt.xticks(np.array([0, 50, 100]))
+    plt.yticks(np.array([0, 50, 100]))    
+circleObj = plt.Circle(circ0, radius0, color = 'w', fill = False)
+plt.gca().add_artist(circleObj)
+circleObj = plt.Circle(circ1, radius1, color = 'w', fill = False)
+plt.gca().add_artist(circleObj)
 plt.show()
-for i in range(10):
+figFormat = 'eps'
+
+paperSize = [3.5, 3.]
+axPosition = [0.1, 0.15, .6, 0.6]        
+Print2Pdf(plt.gcf(), 'mean_pinwheel_N%s_%s'%(nPinwheels, neuronType), paperSize, figFormat=figFormat, labelFontsize = 8, tickFontsize=10, titleSize = 10.0, IF_ADJUST_POSITION = True, axPosition = axPosition)
+for i in range(2):
     plt.figure()
-    PlotMaskedMap(np.reshape(avgPinWheel, (np.sqrt(nNeurons), np.sqrt(nNeurons))), invalidNeuronsInPool, 7000)
+    PlotMaskedMap(np.reshape(avgPinWheel, (np.sqrt(nNeurons), np.sqrt(nNeurons))), invalidNeuronsInPool, 10000)
+
+
+plt.figure()
+plt.hist(avgPinWheel, 8, facecolor = 'k', edgecolor='w')
+paperSize = [2., 1.6]
+axPosition = [0.3, 0.23, .6, 0.6]
+plt.xlabel('PO (deg)')
+plt.ylabel('Count')
+plt.title('%s'%(neuronType))
+plt.xticks(np.array([0, 90, 180]))
+if neuronType == 'E':
+    plt.yticks(np.array([0.0, 3000, 6000]))
+else:
+    plt.yticks(np.array([0.0, 800, 1600]))
+Print2Pdf(plt.gcf(), 'PO_hist_mean_pinwheel_N%s_%s'%(nPinwheels, neuronType), paperSize, figFormat=figFormat, labelFontsize = 10, tickFontsize=8, titleSize = 10.0, IF_ADJUST_POSITION = True, axPosition = axPosition)
+
 kb.keyboard()

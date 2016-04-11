@@ -190,13 +190,13 @@ if __name__ == "__main__":
     nTrials = 81
     nBins = spkTimeEnd - spkTimeStart + 1
     filetag = '_w%s_'%((winSize, )) 
-    if(computeType == 'mm'):
+    if(computeType == 'mm'): #mean matched
         y = np.load('FanoFactorDynamics_spkCnt_var' + filetag + dbName + '.npy')
         sc = y[:, 0, :]
         sv = y[:, 1, :]
         meanMatchedFFE = MeanMatchedFano(sc, sv, 2, 10)
 
-    if(computeType == 'ba'):
+    if(computeType == 'ba'): #before after
         neuronsList = np.arange(NE + NI)
         p = Pool(22)
         func0 = partial(FanoBeforeAndAfter, dbName, spkTimeStart, spkTimeEnd, nTrials)

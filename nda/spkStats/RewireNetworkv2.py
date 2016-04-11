@@ -55,7 +55,7 @@ def GenSparseMat(convec, rows, clmns, sparseVec, idxvec, nPostNeurons):
 
 if __name__ == '__main__':
     # NetworkType : {'uni', 'ori'}, 'uni' is for standard random network, 'ori' is to rewire depending on the distance in ori space
-    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 1000, 10000, 10000, .75, 0.75, ])
+    [dbName, NetworkType, K, NE, NI, thetaSig, thetaSigI] = DefaultArgs(sys.argv[1:], ['', 'oriE', 100, 1000, 1000, .75, 0.75, ])
     NE = int(NE)
     NI = int(NI)
     K = int(K)

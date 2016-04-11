@@ -46,6 +46,7 @@ if __name__ == "__main__":
 #    tc = np.load('tuningCurves_bidirII_a0t3T3xi12tr15.npy')
 #    dbName  = 'a0t3T3xi12tr15'
     dbName = sys.argv[1]
+    plt.ioff()
     print './data/tuningCurves_' + dbName + '.npy'
     tc = np.load('./data/tuningCurves_' + dbName + '.npy')
     print tc.shape
@@ -77,7 +78,7 @@ if __name__ == "__main__":
     filename = 'ori_cvDistr_E_' + dbName 
 #    figFolder = '/homecentral/srao/Documents/cnrs/figures/feb23/'
 #    figFolder = '/homecentral/srao/Documents/code/mypybox/db/figs/'
-    figFolder = '/homecentral/srao/cuda/data/poster/figs/'    
+    figFolder = '/homecentral/srao/cuda/data/pub/figs/'    
 #    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [5.0, 4.26])
  #   kb.keyboard()
     # labels = [item.get_text() for item in f00.gca().get_xticklabels()]
@@ -106,7 +107,7 @@ if __name__ == "__main__":
     plt.draw()
     filename = 'ori_cvDistr_EI_' + dbName
     plt.legend(loc=0)
-    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
+#  Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
     plt.clf()
     plt.plot(cvEbins[:-1], cveCnt / float(cveCnt.sum()), 'k.-', label = 'E (%.4s)'%(cvE.mean()))
     plt.plot(cvIbins[:-1], cviCnt / float(cviCnt.sum()), 'r.-', label = 'I (%.4s)'%(cvI.mean()))
@@ -139,7 +140,7 @@ if __name__ == "__main__":
     filename = 'ori_cvDistr_EI_normalized_' + dbName
 #    kb.keyboard()
 #    Print2Pdf(plt.gcf(), figFolder + filename, figFormat='png', tickFontsize=10, labelFontsize = 10, titleSize = 10,  paperSize = [8.0/1.8, 6.26/1.8])
-    Print2Pdf(plt.gcf(),  figFolder + filename,  [4.6,  4.0], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.142, 0.15, .77, .74])
+#    Print2Pdf(plt.gcf(),  figFolder + filename,  [4.6,  4.0], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.142, 0.15, .77, .74])
 
 #    pageSizePreFactore = 1.
  #   Print2Pdf(plt.gcf(),  figFolder + filename, [pageSizePreFactore*5.25,  pageSizePreFactore*4.], figFormat='png', labelFontsize = 12, tickFontsize=12, titleSize = 12.0, IF_ADJUST_POSITION = True, axPosition = [0.125, 0.15, .78, .75])

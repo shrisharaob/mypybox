@@ -60,7 +60,7 @@ NE = 40000
 NI = 10000
 patchSize = 1.0
 L = 1.0
-nRings = 3.0
+nRings = 2.0
 radii = np.arange(0, L * 0.5 + 0.001, L * 0.5 / nRings) # left limits of the set
 #theta = np.arange(0.0, 180.0, 22.5)
 theta = np.arange(-90.0, 90.0, 22.5)
@@ -68,6 +68,10 @@ ffVsOri = np.load(dataFolder + 'FFvsOri_' + dbName + '.npy')
 print ffVsOri.shape
 tc = np.load('/homecentral/srao/Documents/code/mypybox/db/data/tuningCurves_%s.npy'%((dbName, )));
 circVar = np.load('/homecentral/srao/Documents/code/mypybox/db/data/Selectivity_' + dbName + '.npy')
+#paperSize = [3.0*1.6, 3.0]
+paperSize = [2.63, 1.65]
+axPosition = [0.1, 0.15, .8, 0.75]    
+figFormat = 'eps'
 neuronType = 'I'
 if(neuronType == 'E'):
     nNeurons = NE
@@ -83,8 +87,8 @@ ffVsRadius = np.zeros((radii.size - 1, theta.size))
 firingRateVsRadius = np.zeros((radii.size - 1, theta.size))
 nNeuronsInRing = np.zeros((radii.size - 1, ))
 neuronIds = np.arange(nNeurons)
-firingThresh = 10.0
-circThresh = 0.5
+firingThresh = 0.0
+circThresh = 1.0 # 1 = no OS
 #validNeuronIdx = np.empty((neuronIds.size, )) #np.max(tc, 1) > firingThresh
 #validNeuronIdx[:] = True
 validNeuronIdx = np.max(tc, 1) > firingThresh
@@ -124,7 +128,7 @@ for kk, kRadius in enumerate(radii[:-1]):
     ffVsRadius[kk, :] = np.nanmean(tmpFF, 0) 
     firingRateVsRadius[kk, :] = np.nanmean(tmpFr, 0)
     tmpcv = np.asarray(tmpcv)
-    circVarCnt, _ = np.histogram(tmpcv[~np.isnan(tmpcv)], cvBins)
+    circVarCnt, _ = np.histogram(tmpcv[~np.isnan(tmpcv)], cvBins, density = True)
     cvInRing[kk, :] = circVarCnt
     tmpcv = []
 print "# neurons in ring: ", nValidNeuronsInRing
@@ -139,34 +143,42 @@ for kk, kRadius in enumerate(radii[:-1]):
     plt.plot(cvBinCenters, cvInRing[kk, :],'.-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
 plt.xlabel('Circular variance')
 plt.ylabel('Count')
-plt.title('Circular variance of %s neurons in ring'%((neuronType)))
-plt.legend(loc=0, prop={'size':10})
-plt.grid()
+plt.title('%s neurons'%((neuronType)))
+#plt.legend(loc=0, prop={'size':10}, frameon = False, numpoints = 1)
+#plt.grid()
 ymin, ymax = plt.ylim()
 plt.ylim((ymin - ymax/50.0, ymax))
+plt.yticks(np.arange(0.0, 1.3, 0.6))
 labels = [item.get_text() for item in f00.gca().get_xticklabels()]
-labels[0] = "0.0\nhighly tuned"
-labels[-1] = "1.0\nnot selective"
-f00.gca().set_xticklabels(labels)
+# labels[0] = "0.0\nhighly\ntuned"
+# labels[-1] = "1.0\nnot\nselective"
+# f00.gca().set_xticklabels(labels)
 plt.draw()
 ftsize = 10.0
-Print2Pdf(f00, figFolder + 'CircVarInRing_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+#paperSize = [6.26/1.2, 4.26/1.2]
+#Print2Pdf(f00, figFolder + 'CircVarInRing_NEW_' + neuronType + '_'fff  + dbName, figFormat=figFormat, paperSize=paperSize, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize, IF_ADJUST_POSITION = True, axPosition = axPosition)
+axPosition = [0.23, 0.23, .65, .65]
+Print2Pdf(f00, figFolder + 'CircVarInRing_NEW_' + neuronType + '_' + dbName, figFormat=figFormat, paperSize=paperSize, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize, IF_ADJUST_POSITION = True, axPosition = axPosition)
+#axPosition = [0.1, 0.15, .8, 0.75]    
 plt.clf()
 for kk, kRadius in enumerate(radii[:-1]):
     plt.plot(cvBinCenters, cvInRing[kk, :] / cvInRing[kk, :].sum() ,'.-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+#    plt.hist(cvInRing[kk, :], cvBinCenters, '.-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))    
 plt.xlabel('Circular variance')
 plt.ylabel('Normalized count')
-plt.title('Circular variance of %s neurons in ring'%((neuronType)))
-plt.legend(loc=0, prop={'size':10})
-plt.grid()
+plt.title('%s neurons'%((neuronType)))
+#plt.legend(loc=0, prop={'size':10}, frameon = False, numpoints = 1)
+#plt.grid()
 ymin, ymax = plt.ylim()
 plt.ylim((ymin - ymax/50.0, ymax))
-labels = [item.get_text() for item in f00.gca().get_xticklabels()]
-labels[0] = "0.0\nhighly tuned"
-labels[-1] = "1.0\nnot selective"
-f00.gca().set_xticklabels(labels)
+plt.yticks(np.arange(0, 0.13, 0.06))
+plt.xticks(np.arange(0, 1.1, 0.5))
+# labels = [item.get_text() for item in f00.gca().get_xticklabels()]
+# labels[0] = "0.0\nhighly tuned"
+# labels[-1] = "1.0\nnot selective"
+#f00.gca().set_xticklabels(labels)
 plt.draw()
-Print2Pdf(f00, figFolder + 'CircVarInRing_normalized_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+Print2Pdf(f00, figFolder + 'CircVarInRing_normalized_NEW_' + neuronType + '_'  + dbName, figFormat=figFormat, paperSize = paperSize, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize, IF_ADJUST_POSITION = True, axPosition = axPosition) #paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
 
 tmpOthers = np.empty((1, theta.size))
 for ii, iiNeuron in enumerate(neuronIds):
@@ -181,25 +193,31 @@ meanTmpOthers = np.nanmean(tmpOthers, 0)
 f0 = plt.figure()
 for kk, kRadius in enumerate(radii[:-1]):
     plt.plot(theta, np.roll(ffVsRadius[kk, :], 4), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+#    plt.plot(theta, np.roll(ffVsRadius[kk, :], 4) / np.min(ffVsRadius[kk, :]), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))    
 
+plt.xticks(np.arange(-90, 91, 90))
+plt.yticks(np.arange(0.82, 0.97, 0.07))
 plt.xlabel('stimulus orientation (deg)')
 plt.ylabel('Mean fano factor')
-plt.title('Mean Fano factor of %s neurons in ring'%((neuronType)))
-plt.legend(loc=0, prop={'size':10})
-plt.grid()
+plt.title('%s neurons'%((neuronType)))
+#plt.legend(loc=0, prop={'size':10}, frameon = False, numpoints = 1)
+#plt.grid()
 plt.draw()
-Print2Pdf(f0, figFolder + 'FFInRing_' + neuronType + '_'  + dbName, figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
-
+Print2Pdf(f0, figFolder + 'FFInRing_NEW_' + neuronType + '_'  + dbName, figFormat=figFormat, paperSize=paperSize, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize, IF_ADJUST_POSITION = True, axPosition = axPosition)#=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
 f1 = plt.figure()
 for kk, kRadius in enumerate(radii[:-1]):
-    plt.plot(theta, np.roll(firingRateVsRadius[kk, :], 4), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+    plt.plot(theta, np.roll(firingRateVsRadius[kk, :], 4) / np.max(firingRateVsRadius[kk, :]), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))    
+#    plt.plot(theta, np.roll(firingRateVsRadius[kk, :], 4), 'o-', label='ring %s (n=%s)'%(kk, nValidNeuronsInRing[kk]))
+
+plt.xticks(np.arange(-90, 91, 90))
+plt.yticks(np.arange(0, 1.1, 0.5))
 plt.xlabel('stimulus orientation (deg)')
-plt.ylabel('Firing rate (Hz)')
-plt.title('Mean firing rate of %s neurons in ring'%((neuronType)))
-plt.legend(loc=0, prop={'size':10})
-plt.grid()
+plt.ylabel('Normalized rate')
+plt.title('%s neurons'%((neuronType)))
+#plt.legend(loc=1, prop={'size':10}, frameon = False, numpoints = 1)
+#plt.grid()
 plt.draw()
-Print2Pdf(f1, figFolder + 'FiringRateInRing_' + neuronType + '_' + dbName , figFormat='png', paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
+Print2Pdf(f1, figFolder + 'FiringRateInRing_NEW_' + neuronType + '_' + dbName , figFormat=figFormat, paperSize=paperSize, labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize, IF_ADJUST_POSITION = True, axPosition = axPosition)# paperSize=[6.26/1.2, 4.26/1.2], labelFontsize = 10, tickFontsize = ftsize, titleSize = ftsize)
 
 
 plt.figure()
@@ -246,5 +264,7 @@ ffbins = np.linspace(0.0, np.nanmax(ffVsOri), 26)
 # FFdistr_vs_ori_
 #plt.imshow(tmpffm)
 
-Print2Pdf(figHdl_ffdistr, figFolder + 'FFDistrInRing_' + neuronType + '_' + dbName , figFormat='png', paperSize=[6.26, 12.3], labelFontsize = 10, tickFontsize = 8, titleSize = 12)
+Print2Pdf(figHdl_ffdistr, figFolder + 'FFDistrInRing_NEW_' + neuronType + '_' + dbName , figFormat='png', paperSize=[6.26, 12.3], labelFontsize = 10, tickFontsize = 8, titleSize = 12)
 
+
+kb.keyboard()

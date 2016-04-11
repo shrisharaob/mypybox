@@ -14,17 +14,23 @@ def RasterPlot(st, spkStart = 0, spkStop = -1, ):
     neuronIdx = np.unique(st[:, 1])
     nNeurons = np.size(neuronIdx)
     nSpks, _ = st.shape
-    vLenght = 0.5
+    totalvLength = 200.0
+    vLenght = 100.0
+    vLineOffset = (totalvLength - vLenght) * 0.5
     plt.ion()
     x = np.array([])
     y = np.array([])
     for idx, iNeuron in enumerate(neuronIdx):
         iSpkTimes = st[st[:, 1] == iNeuron, 0]
         x = np.r_[x, iSpkTimes]
-        y = np.r_[y, iNeuron * np.ones((np.size(iSpkTimes),))]
+        y = np.r_[y, totalvLength * iNeuron * np.ones((np.size(iSpkTimes),)) + vLineOffset - vLenght]
     plt.vlines(x, y, y + vLenght)
+    plt.ylim(y[0] - 1 - vLenght, y[-1] + 1 + vLenght)
+    plt.yticks(neuronIdx * totalvLength)
+    plt.gca().set_yticklabels(neuronIdx)
     plt.draw()
     plt.show()
+
 
 def SpikesInInterval(st, spkStart, spkEnd = -1):
     if(spkEnd == -1):

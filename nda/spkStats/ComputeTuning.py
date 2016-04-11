@@ -16,9 +16,10 @@ rho = '5'
 #folderbase = '/homecentral/srao/cuda/data/broadI/xi8em1/rho' + rho + '/'
 #folderbase = '/homecentral/srao/cuda/data/poster/bidir/i2i/'
 #folderbase = '/homecentral/srao/cuda/data/poster/bidir/e2e/'
+#folderbase = '/homecentral/srao/cuda/data/pub/bidir/'
 folderbase = '/homecentral/srao/cuda/data/poster/'
 #folderbase = '/homecentral/srao/cuda/data/broadI/rho' + rho + '/'
-[foldername, filetag, NE, NI, xi, nTheta, contrast, alpha, tau_syn, simDuration, nTrials] = DefaultArgs(sys.argv[1:], ['', '', 20000, 20000, '0.8', 8, 100.0, '0', 3.0, 100000, 1])
+[foldername, filetag, alpha, NE, NI, xi, nTheta, contrast,  tau_syn, simDuration, nTrials] = DefaultArgs(sys.argv[1:], ['', '', '', 20000, 20000, '0.8', 8, 100.0, 3.0, 20000, 1])
 fldr = foldername
 foldername = folderbase + foldername + '/'
 NE = int(NE)
@@ -37,7 +38,7 @@ plt.ion()
 
 #np.save(basefolder + '/db/data/tuningCurves_' + filetag + 'rho' + rho + '_xi'+xi + '_tau'+tau_syn, tuningCurves)
 
-np.save(basefolder + '/db/data/tuningCurves_' + filetag + 'rho' + rho + '_xi'+xi, tuningCurves)
+np.save(basefolder + '/db/data/tuningCurves_bidir' + filetag + 'rho' + rho + '_xi' + xi + '_kff800_p%s'%(int(alpha), ), tuningCurves)
 
 
 
